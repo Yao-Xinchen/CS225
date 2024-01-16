@@ -1,0 +1,6 @@
+/home/xinchen/Dev/CS225_test/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/xinchen/Dev/CS225_test/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/xinchen/Dev/CS225_test/cmake-build-debug/lab_intro/CMakeFiles/lab_intro.dir
+/home/xinchen/Dev/CS225_test/cmake-build-debug/lab_intro/CMakeFiles/test.dir
+/home/xinchen/Dev/CS225_test/cmake-build-debug/lab_intro/CMakeFiles/edit_cache.dir
+/home/xinchen/Dev/CS225_test/cmake-build-debug/lab_intro/CMakeFiles/rebuild_cache.dir

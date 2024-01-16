@@ -1,0 +1,11 @@
+project(CS225)
+
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/mp10)
+
+add_executable(lab_intro
+        main.cpp lab_intro.cpp cs225/PNG.cpp cs225/HSLAPixel.cpp cs225/lodepng/lodepng.cpp)
+target_include_directories(lab_intro PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+
+add_executable(test tests/basic.cpp
+        lab_intro.cpp cs225/PNG.cpp cs225/HSLAPixel.cpp cs225/lodepng/lodepng.cpp)
+target_include_directories(test PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})

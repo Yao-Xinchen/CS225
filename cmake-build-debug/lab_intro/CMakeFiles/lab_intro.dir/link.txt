@@ -1,0 +1,1 @@
+/usr/bin/c++  -std=c++1y -g -O0 -Wall -Wextra -pedantic -g  -std=c++1y -lpng -lpthread -lm CMakeFiles/lab_intro.dir/main.cpp.o CMakeFiles/lab_intro.dir/lab_intro.cpp.o CMakeFiles/lab_intro.dir/cs225/PNG.cpp.o CMakeFiles/lab_intro.dir/cs225/HSLAPixel.cpp.o CMakeFiles/lab_intro.dir/cs225/lodepng/lodepng.cpp.o -o ../../lab_intro/mp10/lab_intro 
