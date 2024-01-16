@@ -6,6 +6,6 @@ add_executable(lab_intro
         main.cpp lab_intro.cpp cs225/PNG.cpp cs225/HSLAPixel.cpp cs225/lodepng/lodepng.cpp)
 target_include_directories(lab_intro PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
-add_executable(test tests/basic.cpp
+add_executable(lab_intro_test tests/basic.cpp
         lab_intro.cpp cs225/PNG.cpp cs225/HSLAPixel.cpp cs225/lodepng/lodepng.cpp)
-target_include_directories(test PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(lab_intro_test PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})

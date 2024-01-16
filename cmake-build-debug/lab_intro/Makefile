@@ -131,18 +131,18 @@ lab_intro/fast:
 .PHONY : lab_intro/fast
 
 # Convenience name for target.
-lab_intro/CMakeFiles/test.dir/rule:
-	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 lab_intro/CMakeFiles/test.dir/rule
-.PHONY : lab_intro/CMakeFiles/test.dir/rule
+lab_intro/CMakeFiles/lab_intro_test.dir/rule:
+	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 lab_intro/CMakeFiles/lab_intro_test.dir/rule
+.PHONY : lab_intro/CMakeFiles/lab_intro_test.dir/rule
 
 # Convenience name for target.
-test: lab_intro/CMakeFiles/test.dir/rule
-.PHONY : test
+lab_intro_test: lab_intro/CMakeFiles/lab_intro_test.dir/rule
+.PHONY : lab_intro_test
 
 # fast build rule for target.
-test/fast:
-	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/test.dir/build.make lab_intro/CMakeFiles/test.dir/build
-.PHONY : test/fast
+lab_intro_test/fast:
+	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/lab_intro_test.dir/build.make lab_intro/CMakeFiles/lab_intro_test.dir/build
+.PHONY : lab_intro_test/fast
 
 cs225/HSLAPixel.o: cs225/HSLAPixel.cpp.o
 .PHONY : cs225/HSLAPixel.o
@@ -150,7 +150,7 @@ cs225/HSLAPixel.o: cs225/HSLAPixel.cpp.o
 # target to build an object file
 cs225/HSLAPixel.cpp.o:
 	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/lab_intro.dir/build.make lab_intro/CMakeFiles/lab_intro.dir/cs225/HSLAPixel.cpp.o
-	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/test.dir/build.make lab_intro/CMakeFiles/test.dir/cs225/HSLAPixel.cpp.o
+	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/lab_intro_test.dir/build.make lab_intro/CMakeFiles/lab_intro_test.dir/cs225/HSLAPixel.cpp.o
 .PHONY : cs225/HSLAPixel.cpp.o
 
 cs225/HSLAPixel.i: cs225/HSLAPixel.cpp.i
@@ -159,7 +159,7 @@ cs225/HSLAPixel.i: cs225/HSLAPixel.cpp.i
 # target to preprocess a source file
 cs225/HSLAPixel.cpp.i:
 	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/lab_intro.dir/build.make lab_intro/CMakeFiles/lab_intro.dir/cs225/HSLAPixel.cpp.i
-	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/test.dir/build.make lab_intro/CMakeFiles/test.dir/cs225/HSLAPixel.cpp.i
+	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/lab_intro_test.dir/build.make lab_intro/CMakeFiles/lab_intro_test.dir/cs225/HSLAPixel.cpp.i
 .PHONY : cs225/HSLAPixel.cpp.i
 
 cs225/HSLAPixel.s: cs225/HSLAPixel.cpp.s
@@ -168,7 +168,7 @@ cs225/HSLAPixel.s: cs225/HSLAPixel.cpp.s
 # target to generate assembly for a file
 cs225/HSLAPixel.cpp.s:
 	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/lab_intro.dir/build.make lab_intro/CMakeFiles/lab_intro.dir/cs225/HSLAPixel.cpp.s
-	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/test.dir/build.make lab_intro/CMakeFiles/test.dir/cs225/HSLAPixel.cpp.s
+	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/lab_intro_test.dir/build.make lab_intro/CMakeFiles/lab_intro_test.dir/cs225/HSLAPixel.cpp.s
 .PHONY : cs225/HSLAPixel.cpp.s
 
 cs225/PNG.o: cs225/PNG.cpp.o
@@ -177,7 +177,7 @@ cs225/PNG.o: cs225/PNG.cpp.o
 # target to build an object file
 cs225/PNG.cpp.o:
 	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/lab_intro.dir/build.make lab_intro/CMakeFiles/lab_intro.dir/cs225/PNG.cpp.o
-	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/test.dir/build.make lab_intro/CMakeFiles/test.dir/cs225/PNG.cpp.o
+	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/lab_intro_test.dir/build.make lab_intro/CMakeFiles/lab_intro_test.dir/cs225/PNG.cpp.o
 .PHONY : cs225/PNG.cpp.o
 
 cs225/PNG.i: cs225/PNG.cpp.i
@@ -186,7 +186,7 @@ cs225/PNG.i: cs225/PNG.cpp.i
 # target to preprocess a source file
 cs225/PNG.cpp.i:
 	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/lab_intro.dir/build.make lab_intro/CMakeFiles/lab_intro.dir/cs225/PNG.cpp.i
-	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/test.dir/build.make lab_intro/CMakeFiles/test.dir/cs225/PNG.cpp.i
+	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/lab_intro_test.dir/build.make lab_intro/CMakeFiles/lab_intro_test.dir/cs225/PNG.cpp.i
 .PHONY : cs225/PNG.cpp.i
 
 cs225/PNG.s: cs225/PNG.cpp.s
@@ -195,7 +195,7 @@ cs225/PNG.s: cs225/PNG.cpp.s
 # target to generate assembly for a file
 cs225/PNG.cpp.s:
 	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/lab_intro.dir/build.make lab_intro/CMakeFiles/lab_intro.dir/cs225/PNG.cpp.s
-	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/test.dir/build.make lab_intro/CMakeFiles/test.dir/cs225/PNG.cpp.s
+	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/lab_intro_test.dir/build.make lab_intro/CMakeFiles/lab_intro_test.dir/cs225/PNG.cpp.s
 .PHONY : cs225/PNG.cpp.s
 
 cs225/lodepng/lodepng.o: cs225/lodepng/lodepng.cpp.o
@@ -204,7 +204,7 @@ cs225/lodepng/lodepng.o: cs225/lodepng/lodepng.cpp.o
 # target to build an object file
 cs225/lodepng/lodepng.cpp.o:
 	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/lab_intro.dir/build.make lab_intro/CMakeFiles/lab_intro.dir/cs225/lodepng/lodepng.cpp.o
-	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/test.dir/build.make lab_intro/CMakeFiles/test.dir/cs225/lodepng/lodepng.cpp.o
+	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/lab_intro_test.dir/build.make lab_intro/CMakeFiles/lab_intro_test.dir/cs225/lodepng/lodepng.cpp.o
 .PHONY : cs225/lodepng/lodepng.cpp.o
 
 cs225/lodepng/lodepng.i: cs225/lodepng/lodepng.cpp.i
@@ -213,7 +213,7 @@ cs225/lodepng/lodepng.i: cs225/lodepng/lodepng.cpp.i
 # target to preprocess a source file
 cs225/lodepng/lodepng.cpp.i:
 	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/lab_intro.dir/build.make lab_intro/CMakeFiles/lab_intro.dir/cs225/lodepng/lodepng.cpp.i
-	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/test.dir/build.make lab_intro/CMakeFiles/test.dir/cs225/lodepng/lodepng.cpp.i
+	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/lab_intro_test.dir/build.make lab_intro/CMakeFiles/lab_intro_test.dir/cs225/lodepng/lodepng.cpp.i
 .PHONY : cs225/lodepng/lodepng.cpp.i
 
 cs225/lodepng/lodepng.s: cs225/lodepng/lodepng.cpp.s
@@ -222,7 +222,7 @@ cs225/lodepng/lodepng.s: cs225/lodepng/lodepng.cpp.s
 # target to generate assembly for a file
 cs225/lodepng/lodepng.cpp.s:
 	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/lab_intro.dir/build.make lab_intro/CMakeFiles/lab_intro.dir/cs225/lodepng/lodepng.cpp.s
-	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/test.dir/build.make lab_intro/CMakeFiles/test.dir/cs225/lodepng/lodepng.cpp.s
+	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/lab_intro_test.dir/build.make lab_intro/CMakeFiles/lab_intro_test.dir/cs225/lodepng/lodepng.cpp.s
 .PHONY : cs225/lodepng/lodepng.cpp.s
 
 lab_intro.o: lab_intro.cpp.o
@@ -231,7 +231,7 @@ lab_intro.o: lab_intro.cpp.o
 # target to build an object file
 lab_intro.cpp.o:
 	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/lab_intro.dir/build.make lab_intro/CMakeFiles/lab_intro.dir/lab_intro.cpp.o
-	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/test.dir/build.make lab_intro/CMakeFiles/test.dir/lab_intro.cpp.o
+	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/lab_intro_test.dir/build.make lab_intro/CMakeFiles/lab_intro_test.dir/lab_intro.cpp.o
 .PHONY : lab_intro.cpp.o
 
 lab_intro.i: lab_intro.cpp.i
@@ -240,7 +240,7 @@ lab_intro.i: lab_intro.cpp.i
 # target to preprocess a source file
 lab_intro.cpp.i:
 	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/lab_intro.dir/build.make lab_intro/CMakeFiles/lab_intro.dir/lab_intro.cpp.i
-	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/test.dir/build.make lab_intro/CMakeFiles/test.dir/lab_intro.cpp.i
+	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/lab_intro_test.dir/build.make lab_intro/CMakeFiles/lab_intro_test.dir/lab_intro.cpp.i
 .PHONY : lab_intro.cpp.i
 
 lab_intro.s: lab_intro.cpp.s
@@ -249,7 +249,7 @@ lab_intro.s: lab_intro.cpp.s
 # target to generate assembly for a file
 lab_intro.cpp.s:
 	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/lab_intro.dir/build.make lab_intro/CMakeFiles/lab_intro.dir/lab_intro.cpp.s
-	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/test.dir/build.make lab_intro/CMakeFiles/test.dir/lab_intro.cpp.s
+	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/lab_intro_test.dir/build.make lab_intro/CMakeFiles/lab_intro_test.dir/lab_intro.cpp.s
 .PHONY : lab_intro.cpp.s
 
 main.o: main.cpp.o
@@ -281,7 +281,7 @@ tests/basic.o: tests/basic.cpp.o
 
 # target to build an object file
 tests/basic.cpp.o:
-	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/test.dir/build.make lab_intro/CMakeFiles/test.dir/tests/basic.cpp.o
+	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/lab_intro_test.dir/build.make lab_intro/CMakeFiles/lab_intro_test.dir/tests/basic.cpp.o
 .PHONY : tests/basic.cpp.o
 
 tests/basic.i: tests/basic.cpp.i
@@ -289,7 +289,7 @@ tests/basic.i: tests/basic.cpp.i
 
 # target to preprocess a source file
 tests/basic.cpp.i:
-	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/test.dir/build.make lab_intro/CMakeFiles/test.dir/tests/basic.cpp.i
+	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/lab_intro_test.dir/build.make lab_intro/CMakeFiles/lab_intro_test.dir/tests/basic.cpp.i
 .PHONY : tests/basic.cpp.i
 
 tests/basic.s: tests/basic.cpp.s
@@ -297,7 +297,7 @@ tests/basic.s: tests/basic.cpp.s
 
 # target to generate assembly for a file
 tests/basic.cpp.s:
-	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/test.dir/build.make lab_intro/CMakeFiles/test.dir/tests/basic.cpp.s
+	cd /home/xinchen/Dev/CS225_test/cmake-build-debug && $(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/lab_intro_test.dir/build.make lab_intro/CMakeFiles/lab_intro_test.dir/tests/basic.cpp.s
 .PHONY : tests/basic.cpp.s
 
 # Help Target
@@ -309,7 +309,7 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... lab_intro"
-	@echo "... test"
+	@echo "... lab_intro_test"
 	@echo "... cs225/HSLAPixel.o"
 	@echo "... cs225/HSLAPixel.i"
 	@echo "... cs225/HSLAPixel.s"

@@ -130,17 +130,17 @@ lab_intro/fast:
 .PHONY : lab_intro/fast
 
 #=============================================================================
-# Target rules for targets named test
+# Target rules for targets named lab_intro_test
 
 # Build rule for target.
-test: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test
-.PHONY : test
+lab_intro_test: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 lab_intro_test
+.PHONY : lab_intro_test
 
 # fast build rule for target.
-test/fast:
-	$(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/test.dir/build.make lab_intro/CMakeFiles/test.dir/build
-.PHONY : test/fast
+lab_intro_test/fast:
+	$(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/lab_intro_test.dir/build.make lab_intro/CMakeFiles/lab_intro_test.dir/build
+.PHONY : lab_intro_test/fast
 
 # Help Target
 help:
@@ -151,7 +151,7 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... lab_intro"
-	@echo "... test"
+	@echo "... lab_intro_test"
 .PHONY : help
 
 

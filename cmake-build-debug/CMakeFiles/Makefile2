@@ -79,7 +79,7 @@ clean: lab_intro/clean
 
 # Recursive "all" directory target.
 lab_intro/all: lab_intro/CMakeFiles/lab_intro.dir/all
-lab_intro/all: lab_intro/CMakeFiles/test.dir/all
+lab_intro/all: lab_intro/CMakeFiles/lab_intro_test.dir/all
 .PHONY : lab_intro/all
 
 # Recursive "preinstall" directory target.
@@ -88,7 +88,7 @@ lab_intro/preinstall:
 
 # Recursive "clean" directory target.
 lab_intro/clean: lab_intro/CMakeFiles/lab_intro.dir/clean
-lab_intro/clean: lab_intro/CMakeFiles/test.dir/clean
+lab_intro/clean: lab_intro/CMakeFiles/lab_intro_test.dir/clean
 .PHONY : lab_intro/clean
 
 #=============================================================================
@@ -118,30 +118,30 @@ lab_intro/CMakeFiles/lab_intro.dir/clean:
 .PHONY : lab_intro/CMakeFiles/lab_intro.dir/clean
 
 #=============================================================================
-# Target rules for target lab_intro/CMakeFiles/test.dir
+# Target rules for target lab_intro/CMakeFiles/lab_intro_test.dir
 
 # All Build rule for target.
-lab_intro/CMakeFiles/test.dir/all:
-	$(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/test.dir/build.make lab_intro/CMakeFiles/test.dir/depend
-	$(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/test.dir/build.make lab_intro/CMakeFiles/test.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xinchen/Dev/CS225_test/cmake-build-debug/CMakeFiles --progress-num=7,8,9,10,11,12 "Built target test"
-.PHONY : lab_intro/CMakeFiles/test.dir/all
+lab_intro/CMakeFiles/lab_intro_test.dir/all:
+	$(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/lab_intro_test.dir/build.make lab_intro/CMakeFiles/lab_intro_test.dir/depend
+	$(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/lab_intro_test.dir/build.make lab_intro/CMakeFiles/lab_intro_test.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xinchen/Dev/CS225_test/cmake-build-debug/CMakeFiles --progress-num=7,8,9,10,11,12 "Built target lab_intro_test"
+.PHONY : lab_intro/CMakeFiles/lab_intro_test.dir/all
 
 # Build rule for subdir invocation for target.
-lab_intro/CMakeFiles/test.dir/rule: cmake_check_build_system
+lab_intro/CMakeFiles/lab_intro_test.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xinchen/Dev/CS225_test/cmake-build-debug/CMakeFiles 6
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 lab_intro/CMakeFiles/test.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 lab_intro/CMakeFiles/lab_intro_test.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xinchen/Dev/CS225_test/cmake-build-debug/CMakeFiles 0
-.PHONY : lab_intro/CMakeFiles/test.dir/rule
+.PHONY : lab_intro/CMakeFiles/lab_intro_test.dir/rule
 
 # Convenience name for target.
-test: lab_intro/CMakeFiles/test.dir/rule
-.PHONY : test
+lab_intro_test: lab_intro/CMakeFiles/lab_intro_test.dir/rule
+.PHONY : lab_intro_test
 
 # clean rule for target.
-lab_intro/CMakeFiles/test.dir/clean:
-	$(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/test.dir/build.make lab_intro/CMakeFiles/test.dir/clean
-.PHONY : lab_intro/CMakeFiles/test.dir/clean
+lab_intro/CMakeFiles/lab_intro_test.dir/clean:
+	$(MAKE) $(MAKESILENT) -f lab_intro/CMakeFiles/lab_intro_test.dir/build.make lab_intro/CMakeFiles/lab_intro_test.dir/clean
+.PHONY : lab_intro/CMakeFiles/lab_intro_test.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.
