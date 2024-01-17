@@ -19,9 +19,9 @@ PNG grayscale(PNG image)
 {
     /// This function is already written for you so you can see how to
     /// interact with our PNG class.
-    for (unsigned x = 0; x < image.width(); x++)
+    for (auto x = 0; x < static_cast<int>(image.width()); x++)
     {
-        for (unsigned y = 0; y < image.height(); y++)
+        for (auto y = 0; y < static_cast<int>(image.height()); y++)
         {
             HSLAPixel* pixel = image.getPixel(x, y);
 
@@ -56,8 +56,26 @@ PNG grayscale(PNG image)
  *
  * @return The image with a spotlight.
  */
-PNG createSpotlight(PNG image, int centerX, int centerY)
+PNG createSpotlight(PNG image, const int centerX, const int centerY)
 {
+    auto dist = [](const int x1, const int y1, const int x2, const int y2) -> double
+    {
+        return std::sqrt(std::pow(x1 - x2, 2) + std::pow(y2 - y1, 2));
+    };
+
+    auto lumi = [](const double l, const double d) -> double
+    {
+        return l * std::max(1 - d * 0.005, 0.0);
+    };
+
+    for (auto x = 0; x < static_cast<int>(image.width()); x++)
+    {
+        for (auto y = 0; y < static_cast<int>(image.height()); y++)
+        {
+            const auto pixel = image.getPixel(x, y);
+            pixel->l = lumi(pixel->l, dist(x, y, centerX, centerY));
+        }
+    }
     return image;
 }
 
@@ -74,6 +92,24 @@ PNG createSpotlight(PNG image, int centerX, int centerY)
 **/
 PNG illinify(PNG image)
 {
+    for (int x = 0; x < static_cast<int>(image.width()); x++)
+    {
+        for (int y = 0; y < static_cast<int>(image.height()); y++)
+        {
+            constexpr double max_hue = 360;
+            constexpr double blue_hue = 216;
+            constexpr double orange_hue = 11;
+
+            HSLAPixel* pixel = image.getPixel(x, y);
+            const double hue = pixel->h;
+
+            double orange_diff = std::min(std::abs(hue - orange_hue), max_hue - std::abs(hue - orange_hue));
+            double blue_diff = std::min(std::abs(hue - blue_hue), max_hue - std::abs(hue - blue_hue));
+
+            pixel->h = orange_diff < blue_diff ? orange_hue : blue_hue;
+        }
+    }
+
     return image;
 }
 
@@ -92,5 +128,18 @@ PNG illinify(PNG image)
 */
 PNG watermark(PNG firstImage, PNG secondImage)
 {
+    for (auto x = 0; x < static_cast<int>(firstImage.width()); x++)
+    {
+        for (auto y = 0; y < static_cast<int>(firstImage.height()); y++)
+        {
+            HSLAPixel* firstPixel = firstImage.getPixel(x, y);
+            const HSLAPixel* secondPixel = secondImage.getPixel(x, y);
+
+            if (secondPixel->l == 1.0)
+            {
+                firstPixel->l = std::min(firstPixel->l + 0.2, 1.0);
+            }
+        }
+    }
     return firstImage;
 }
