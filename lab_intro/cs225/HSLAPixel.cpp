@@ -1,5 +1,5 @@
 //
-// Created by Xinch on 2024/1/16.
+// Created by Xinchen on 2024/1/16.
 //
 
 #include "HSLAPixel.h"
