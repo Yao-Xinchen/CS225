@@ -1,7 +1,3 @@
-//
-// Created by Xinch on 2024/1/16.
-//
-
 #ifndef HSLAPIXEL_H
 #define HSLAPIXEL_H
 
