@@ -8,6 +8,7 @@ set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -std=c++1y -lpng -lpthread
 set(SUBDIR
         lab_intro
         lab_debug
+        lab_inheritance
         mp1
         mp2
 )
