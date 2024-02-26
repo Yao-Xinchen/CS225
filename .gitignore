@@ -1,3 +1,8 @@
+# Unix-based executables
+*
+!/**/
+!*.*
+
 # Prerequisites
 *.d
 
