@@ -8,7 +8,9 @@ set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -std=c++1y -lpng -lpthread
 set(SUBDIR
         lab_intro
         lab_debug
-        mp1)
+        mp1
+        mp2
+)
 
 foreach (subdir ${SUBDIR})
     add_subdirectory(${subdir})
