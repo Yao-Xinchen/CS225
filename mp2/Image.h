@@ -5,11 +5,10 @@
 #ifndef CS225_IMAGE_H
 #define CS225_IMAGE_H
 
-#include "PNG.h"
+#include "cs225/PNG.h"
 
 namespace cs225
 {
-
     class Image : public PNG
     {
     public:
@@ -26,6 +25,9 @@ namespace cs225
         void illinify();
         void scale(double factor);
         void scale(unsigned w, unsigned h);
+
+    private:
+        void iterate_with(const std::function<void(HSLAPixel* pixel)>& f);
     };
 }
 

@@ -141,9 +141,6 @@ TEST_CASE("Image scale(0.5) scales pixel data in a reasonable way", "[weight=1][
   REQUIRE( result.getPixel(100, 20)->h < 220 );
 }
 
-
-/*
-
 // Part 2 Testing:
 #include "../StickerSheet.h"
 
@@ -162,5 +159,3 @@ TEST_CASE("A basic StickerSheet works", "[weight=5][part=2]") {
 
   REQUIRE( sheet.render() == expected );
 }
-
-*/
