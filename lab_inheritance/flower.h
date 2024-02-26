@@ -13,16 +13,17 @@
 
 class Flower : public Drawable
 {
-  private:
-    Shape stem;
-    Shape pistil; // center piece of flower
-    Shape leaf;
+private:
+    std::unique_ptr<Shape> stem;
+    std::unique_ptr<Shape> pistil; // center piece of flower
+    std::unique_ptr<Shape> leaf;
 
-    void drawPetals(PNG* canvas, const Vector2& center, int x, int y) const;
+    void drawPetals(PNG *canvas, const Vector2 &center, int x, int y) const;
 
-  public:
-    Flower(const Vector2& center);
-    void draw(PNG* canvas) const;
+public:
+    Flower(const Vector2 &center);
+
+    void draw(PNG *canvas) const;
 };
 
 #endif // FLOWER_H_

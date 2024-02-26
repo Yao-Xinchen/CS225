@@ -19,13 +19,13 @@
  */
 class Shape : public Drawable
 {
-  protected:
+protected:
     Vector2 center_;
 
-  private:
+private:
     HSLAPixel color_;
 
-  public:
+public:
     /**
      * @brief Constructs a new Shape with a default color and center
      */
@@ -37,9 +37,9 @@ class Shape : public Drawable
      * @param center Vector2 of the new Shape
      * @param color of the new Shape
      */
-    Shape(const Vector2& center, const HSLAPixel& color);
+    Shape(const Vector2 &center, const HSLAPixel &color);
 
-    ~Shape()
+    virtual ~Shape()
     { /* Nothing */
     }
 
@@ -48,14 +48,14 @@ class Shape : public Drawable
      *
      * @return the area (in pixels) of the Shape
      */
-    int area() const;
+    virtual int area() const;
 
     /**
      * @brief Computes and returns the perimeter of the Shape in pixels
      *
      * @return the perimeter (in pixels) of the Shape
      */
-    int perimeter() const;
+    virtual int perimeter() const;
 
     /**
      * @brief Checks to see if the Vector2 p is contained inside of the Shape
@@ -64,7 +64,7 @@ class Shape : public Drawable
      *
      * @return true if Vector2 p is inside of the Shape
      */
-    bool contains(const Vector2& p) const;
+    bool contains(const Vector2 &p) const;
 
     /**
      * @brief Gets the center Vector2 of the Shape
@@ -78,7 +78,7 @@ class Shape : public Drawable
      *
      * @param center the new center Vector2 of the Shape
      */
-    virtual void set_center(const Vector2& center);
+    virtual void set_center(const Vector2 &center);
 
     /**
      * @brief Gets the color of the Shape
@@ -87,7 +87,7 @@ class Shape : public Drawable
      */
     HSLAPixel color() const;
 
-    void draw(PNG* canvas) const;
+    void draw(PNG *canvas) const override;
 };
 
 #endif // SHAPE_H_
