@@ -6,6 +6,7 @@
 #define CS225_IMAGE_H
 
 #include "cs225/PNG.h"
+#include <functional>
 
 namespace cs225
 {

@@ -3,7 +3,7 @@
 //
 
 #include "Image.h"
-#include <functional>
+#include <cmath>
 
 void cs225::Image::lighten()
 {

@@ -10,6 +10,7 @@
 #define FLOWER_H_
 
 #include "shape.h"
+#include <memory>
 
 class Flower : public Drawable
 {

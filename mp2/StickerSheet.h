@@ -6,6 +6,8 @@
 #define CS225_STICKERSHEET_H
 
 #include "Image.h"
+#include <vector>
+#include <memory>
 
 namespace cs225
 {
