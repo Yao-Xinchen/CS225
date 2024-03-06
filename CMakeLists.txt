@@ -9,6 +9,7 @@ set(SUBDIR
         lab_intro
         lab_debug
         lab_inheritance
+        lab_gdb2
         mp1
         mp2
 )
