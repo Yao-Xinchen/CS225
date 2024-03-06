@@ -14,7 +14,7 @@ add_executable(mp2
         cs225/HSLAPixel.cpp
         cs225/lodepng/lodepng.cpp)
 
-add_executable(mp2-1
+add_executable(mp2_part1
         mp2-1.cpp
         Image.cpp
         cs225/PNG.cpp
