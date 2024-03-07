@@ -27,51 +27,49 @@ class SkipPointer;
 /**
  * A node of our SkipList class, with layers of next and prev pointers.
  */
-class SkipNode 
+class SkipNode
 {
-
-    public:
-
-        /**
-         * Default constructs a SkipNode. Initializes the node to height one, with both pointers set to NULL.
-         */   
-        SkipNode();
+public:
+    /**
+     * Default constructs a SkipNode. Initializes the node to height one, with both pointers set to NULL.
+     */
+    SkipNode();
 
 
-        /**
-         * Constructs a SkipNode with the given parameters
-         * Do not edit this function!
-         *
-         * @param key The key to associate with this Node
-         * @param value The pixel value to associate with this node
-         * @param height The height of this node; aka how many layers of forward and prev pointers it has
-         */
-        SkipNode(int key, HSLAPixel value,
-                int height); 
+    /**
+     * Constructs a SkipNode with the given parameters
+     * Do not edit this function!
+     *
+     * @param key The key to associate with this Node
+     * @param value The pixel value to associate with this node
+     * @param height The height of this node; aka how many layers of forward and prev pointers it has
+     */
+    SkipNode(int key, HSLAPixel value,
+             int height);
 
 
-        /**
-         * Copy constructor for a SkipNode.
-         * Do not edit this function!
-         *
-         * @param other the SkipNode to copy into this one
-         */
-        SkipNode(const SkipNode &other); // leave iff statements wrong
+    /**
+     * Copy constructor for a SkipNode.
+     * Do not edit this function!
+     *
+     * @param other the SkipNode to copy into this one
+     */
+    SkipNode(const SkipNode &other); // leave iff statements wrong
 
-        /**
-         * The key of this node
-         */
-        int key;
+    /**
+     * The key of this node
+     */
+    int key;
 
-        /**
-         * The current value stored in this node
-         */
-        HSLAPixel value;
+    /**
+     * The current value stored in this node
+     */
+    HSLAPixel value;
 
-        /**
-         * A vector containing each level of next and previous pointers.
-         */
-        vector<SkipPointer > nodePointers;
+    /**
+     * A vector containing each level of next and previous pointers.
+     */
+    vector<SkipPointer> nodePointers;
 };
 
 /**
@@ -79,12 +77,12 @@ class SkipNode
  */
 class SkipPointer
 {
-    public:
-        SkipNode* next;
-        SkipNode* prev;
+public:
+    SkipNode *next;
+    SkipNode *prev;
 
-        SkipPointer() : next(NULL), prev(NULL) {}
-        SkipPointer(SkipNode* n, SkipNode* p) : next(n), prev(p) {}
+    SkipPointer() : next(NULL), prev(NULL) {}
+    SkipPointer(SkipNode *n, SkipNode *p) : next(n), prev(p) {}
 };
 
 #endif

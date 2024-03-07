@@ -4,60 +4,65 @@ using namespace std;
 
 struct node
 {
-	int val;
-	node * prev;
-	node * next;
+    int val;
+    node *prev;
+    node *next;
 };
-
 
 
 class List
 {
 public:
-	node * head;
+    node *head;
 
-	List(){
-		head=NULL;
-	}
-	~List(){
-		node * temp=head;
-		while(head!=NULL){
-			head=head->next;
-			delete temp;
-			temp=head;
-		}
-		head=NULL;
-	}
+    List()
+    {
+        head = nullptr;
+    }
 
-	void insert(int val){
-		if(head==NULL){
-			head=new node;
-			head->val=val;
-			head->next=NULL;
-			head->prev=NULL;
-		}
-		else {
+    ~List()
+    {
+        node *temp = head;
+        while (head != nullptr)
+        {
+            head = head->next;
+            delete temp;
+            temp = head;
+        }
+        head = nullptr;
+    }
 
-			node * temp =new node;
-			temp->val=val;
-			temp->next=head;
-			head->prev=temp;
-			temp->prev=NULL;
-			head=temp;
-		}
+    void insert(int val)
+    {
+        if (head == nullptr)
+        {
+            head = new node;
+            head->val = val;
+            head->next = nullptr;
+            head->prev = nullptr;
+        } else
+        {
+            node *temp = new node;
+            temp->val = val;
+            temp->next = head;
+            head->prev = temp;
+            temp->prev = nullptr;
+            head = temp;
+        }
+    }
 
-	}
-	void oddprint(){
-		cout<<endl;
-		node * temp=head;
-		while(temp!=NULL){
-			temp=temp->next->next;
-			cout<<temp->val<<" ";
-			
-		}
-		cout<<endl;
-	}
-
+    void oddprint() const
+    {
+        cout << endl;
+        node *temp = head;
+        while (temp != nullptr && temp->next != nullptr)
+        {
+            temp = temp->next->next;
+            if (temp != nullptr)
+                cout << temp->val << " ";
+        }
+        cout << endl;
+    }
 };
 
 
@@ -66,14 +71,13 @@ public:
 *
 */
 
-int main (){
-	List list;
+int main()
+{
+    List list;
 
-	for (int i = 0; i < 10; ++i)
-	{
-		list.insert(i);
-	}
-	list.oddprint();
-
+    for (int i = 0; i < 10; ++i)
+    {
+        list.insert(i);
+    }
+    list.oddprint();
 }
-

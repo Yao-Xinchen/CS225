@@ -9,11 +9,10 @@
 */
 
 void recurse(int index, int length) {
-//
-    if(index == 0)
-        return;
+	if(index > length)
+		return;
 
-	for(int q=1; q<index; q++)
+	for(int q=1; q<=index; q++)
 		std::cout<<'*';
 	std::cout<<std::endl;
 

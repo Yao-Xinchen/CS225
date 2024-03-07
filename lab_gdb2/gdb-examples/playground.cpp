@@ -2,69 +2,67 @@
 using namespace std;
 
 
-
 // pbv
-void fooval(int x) {
-	x = x * 2;
-	
+void fooval(int x)
+{
+    x = x * 2;
 }
+
 // pbp
-void fooval(int * x) {
-	*x = *x * 2;
+void fooval(int *x)
+{
+    *x = *x * 2;
 }
 
 // pbr
-void fooval1(int & x) {
-	x = x * 2;
+void fooval1(int &x)
+{
+    x = x * 2;
 }
-// pbp
-void bar(int * z) {
-	cout<<" address of z: "<<&z<<endl;
 
-	cout<<"z: "<<z<<endl;
-	z = new int(5);
-	cout<<"z: "<<z<<endl;
+// pbp
+void bar(int *z)
+{
+    cout << " address of z: " << &z << endl;
+
+    cout << "z: " << z << endl;
+    z = new int(5);
+    cout << "z: " << z << endl;
 }
 
 // pbpbp
-void bar2(int  *  &z) {
-	int x=5;
-	z = &x;
-	
+void bar2(int *&z)
+{
+    z = new int(5);
 }
 
 // pbr pointer
 
-int main () {
-	int *q =NULL;
+int main()
+{
+    int *q = new int(10);
 
-	cout<<*q<<endl;
-	// int x=10;	
+    cout << *q << endl;
+    // int x=10;
 
-	// cout<<"x: "<<x<<endl;
+    // cout<<"x: "<<x<<endl;
 
-	// fooval(&x);
+    // fooval(&x);
 
-	// cout<<"x: "<<x<<endl;
+    // cout<<"x: "<<x<<endl;
 
-	// fooval1(x);
+    // fooval1(x);
 
-	// cout<<"x: "<<x<<endl;
-	int * y=(int *)10;
-
-
-	cout<<"y: "<<y<<endl;
-
-	bar2(y);
-
-	cout<<"y: "<<y<<endl;
+    // cout<<"x: "<<x<<endl;
+    int *y = (int *) 10;
 
 
-	delete y;
+    cout << "y: " << y << endl;
 
+    bar2(y);
+
+    cout << "y: " << y << endl;
+
+    delete q;
+    delete y;
 }
-
-
-
-
-

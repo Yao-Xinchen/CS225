@@ -8,20 +8,20 @@
 */
 
 
-int main (int argc, char * argv[]) {
-//Please enter the numbers you want to swap
-if (argc<3)
+int main(int argc, char *argv[])
 {
-	std::cout<<"./swap num1 num2"<<std::endl;
-	return 0;
-}
-int i=0;
-int a = std::atoi(argv[1]);
-int b = std::atoi(argv[2]);
+    //Please enter the numbers you want to swap
+    if (argc < 3) {
+        std::cout << "./swap num1 num2" << std::endl;
+        return 0;
+    }
 
-a=b;
-b=a;
+    int a = std::atoi(argv[1]);
+    int b = std::atoi(argv[2]);
 
-std::cout<<"A: "<<a<<" B: "<<a<<std::endl;
+    const auto temp = a;
+    a = b;
+    b = temp;
 
+    std::cout << "A: " << a << " B: " << b << std::endl;
 }

@@ -51,7 +51,7 @@ SkipList::SkipList(int key, HSLAPixel value, int probability, int maxlevel) : Sk
  */
 SkipList::SkipList(int key, HSLAPixel value) : SkipList()
 {
-    insert(key, value);      
+    insert(key, value);
 }
 
 /**
@@ -59,7 +59,7 @@ SkipList::SkipList(int key, HSLAPixel value) : SkipList()
  * @param other The SkipList to copy
  * @see copy()
  */
-SkipList::SkipList(const SkipList & other)
+SkipList::SkipList(const SkipList &other)
 {
     copy(other);
 }
@@ -68,39 +68,39 @@ SkipList::SkipList(const SkipList & other)
  * The copy() helper method - used in the copy constructor and assignment= operator.
  * @param other The SkipList to copy into ourselves
  */
-void SkipList::copy(const SkipList & other)
+void SkipList::copy(const SkipList &other)
 {
     head = NULL;
     tail = NULL;
     listHeight = 1;
     length = other.length;
 
-    std::map<SkipNode*, SkipNode*> pointerMap;
+    std::map<SkipNode *, SkipNode *> pointerMap;
     pointerMap[NULL] = NULL;
 
-    SkipNode* curr = other.head;
+    SkipNode *curr = other.head;
 
     // populate our map of old pointers to new pointers
-    while(curr != NULL)
+    while (curr != NULL)
     {
-        SkipNode * currCopy = new SkipNode(*curr);
+        SkipNode *currCopy = new SkipNode(*curr);
         pointerMap[curr] = currCopy;
 
-        if(head == NULL)
+        if (head == NULL)
             head = currCopy;
 
-        if(curr->nodePointers[0].next == NULL)
+        if (curr->nodePointers[0].next == NULL)
             tail = currCopy;
 
         curr = curr->nodePointers[0].next;
-    }	
+    }
 
     curr = head;
 
     // change all old pointers to new pointers
-    while(curr != NULL)
+    while (curr != NULL)
     {
-        for(auto & p : curr->nodePointers)
+        for (auto &p: curr->nodePointers)
         {
             p.next = pointerMap[p.next];
             p.prev = pointerMap[p.prev];
@@ -117,9 +117,9 @@ void SkipList::copy(const SkipList & other)
  * The destructor for SkipList.
  * @see clear()
  */
-SkipList::~SkipList() 
+SkipList::~SkipList()
 {
-    clear();   
+    clear();
 }
 
 /**
@@ -127,8 +127,8 @@ SkipList::~SkipList()
  */
 void SkipList::clear()
 {
-    SkipNode * temp = head;
-    SkipNode * prev = head;
+    SkipNode *temp = head;
+    SkipNode *prev = head;
     while (temp != NULL)
     {
         prev = temp;
@@ -151,6 +151,7 @@ int SkipList::levelGenerator()
     }
     return retLevel;
 }
+
 /**
  * Makes and returns an image showing how degenerate the list is.
  * The less degenerate the faster and more efficient the skip list will be.
@@ -178,28 +179,28 @@ PNG SkipList::makeImage(int imgSize, HSLAPixel fg, HSLAPixel bg)
     counter = abs(absolutelyNotDegenerate - counter);
 
     PNG colors(imgSize, imgSize);
-    vector<pair <int,int> > coordinates;
+    vector<pair<int, int>> coordinates;
 
     for (int i = 0; i < imgSize; i++)
     {
         for (int j = 0; j < imgSize; j++)
         {
             *colors.getPixel(i, j) = bg;
-            
-            coordinates.push_back(make_pair(i,j));
+
+            coordinates.push_back(make_pair(i, j));
         }
     }
 
-    random_shuffle(coordinates.begin(), coordinates.end());	
-    int x=0,y=0;
-   	while (counter != -1)
+    random_shuffle(coordinates.begin(), coordinates.end());
+    int x = 0, y = 0;
+    while (counter != -1)
     {
-        if((size_t)counter < coordinates.size())
+        if ((size_t) counter < coordinates.size())
         {
             x = coordinates[counter].first;
             y = coordinates[counter].second;
             *colors.getPixel(x, y) = fg;
-        }       
+        }
         counter--;
     }
 
@@ -212,13 +213,13 @@ PNG SkipList::makeImage(int imgSize, HSLAPixel fg, HSLAPixel bg)
  */
 void SkipList::printKeys()
 {
-    SkipNode * listPrintingTraverser = head->nodePointers[0].next;
+    SkipNode *listPrintingTraverser = head->nodePointers[0].next;
 
-    cout << "< " ;
+    cout << "< ";
 
     while (listPrintingTraverser != tail)
     {
-        SkipNode * t = listPrintingTraverser->nodePointers[0].next;
+        SkipNode *t = listPrintingTraverser->nodePointers[0].next;
 
         cout << listPrintingTraverser->key << (t == tail ? " " : ", ");
 
@@ -243,19 +244,18 @@ void SkipList::printKeysReverse()
  * @param curr The current node we are printing
  * @see printKeysReverse()
  */
-void SkipList::printKeysReverse(SkipNode * curr)
+void SkipList::printKeysReverse(SkipNode *curr)
 {
-    if(curr == head) return;
+    if (curr == head) return;
 
     // print out the rest of the list
     printKeysReverse(curr->nodePointers[0].prev);
 
-    SkipNode * t = curr->nodePointers[0].next;
+    SkipNode *t = curr->nodePointers[0].next;
 
     // then print us, so that it looks the same as a normal forward print
     cout << curr->key << (t == tail ? " " : ", ");
 }
-
 
 
 /**
@@ -276,9 +276,9 @@ vector<int> SkipList::traverseReverse()
  * @param curr The current node
  * @param out The vector we are adding to
  */
-void SkipList::traverseReverse(SkipNode * curr, vector<int> & out)
+void SkipList::traverseReverse(SkipNode *curr, vector<int> &out)
 {
-    if(curr == NULL) return;
+    if (curr == NULL) return;
 
     // add the rest of the list first
     traverseReverse(curr->nodePointers[0].prev, out);
@@ -297,19 +297,19 @@ void SkipList::traverseReverse(SkipNode * curr, vector<int> & out)
  */
 PNG SkipList::toPNG(int maxHeight, HSLAPixel fg, HSLAPixel bg) const
 {
-    PNG ret(length + 2, maxHeight);     // the length doesn't include the sentinels
+    PNG ret(length + 2, maxHeight); // the length doesn't include the sentinels
 
-    SkipNode* curr = head;
+    SkipNode *curr = head;
     size_t x = 0;
 
     while (curr)
     {
-        int height = (double)curr->nodePointers.size() / maxLevel * maxHeight;
+        int height = (double) curr->nodePointers.size() / maxLevel * maxHeight;
 
         // fill in our height
-        for(int y = 0; y < height; y++)
+        for (int y = 0; y < height; y++)
             *ret.getPixel(x, maxHeight - y - 1) = fg;
-        for(int y = height; y < maxHeight; y++)
+        for (int y = height; y < maxHeight; y++)
             *ret.getPixel(x, maxHeight - y - 1) = bg;
 
         curr = curr->nodePointers[0].next;
@@ -327,7 +327,7 @@ PNG SkipList::toPNG(int maxHeight, HSLAPixel fg, HSLAPixel bg) const
  * @param index The level of the node to get a SkipPointer for
  * @return A copy of the SkipPointer in node's index-th level
  */
-SkipPointer SkipList::gdbGetPointer(SkipNode * node, size_t index) const
+SkipPointer SkipList::gdbGetPointer(SkipNode *node, size_t index) const
 {
     return node->nodePointers[index];
 }
@@ -338,7 +338,7 @@ SkipPointer SkipList::gdbGetPointer(SkipNode * node, size_t index) const
  * Note that this doesn't work well if you are using layour src
  * @param node The node to print out
  */
-void SkipList::gdbPrintNode(SkipNode * node) const
+void SkipList::gdbPrintNode(SkipNode *node) const
 {
     cout << gdbGetNode(node) << endl;
 }
@@ -349,38 +349,38 @@ void SkipList::gdbPrintNode(SkipNode * node) const
  * @param node The node to get out
  * @return A string representing the node
  */
-string SkipList::gdbGetNode(SkipNode * node) const
+string SkipList::gdbGetNode(SkipNode *node) const
 {
     // first calculate how wide each number needs to be
     int width = 1;
-    for(SkipPointer & p : node->nodePointers)
+    for (SkipPointer &p: node->nodePointers)
     {
-        if(p.next != NULL && to_string(p.next->key).size() > (size_t)width)
+        if (p.next != NULL && to_string(p.next->key).size() > (size_t) width)
             width = to_string(p.next->key).size();
 
-        if(p.prev != NULL && to_string(p.prev->key).size() > (size_t)width)
+        if (p.prev != NULL && to_string(p.prev->key).size() > (size_t) width)
             width = to_string(p.prev->key).size();
     }
-    if(to_string(node->key).size() > (size_t)width)
+    if (to_string(node->key).size() > (size_t) width)
         width = to_string(node->key).size();
 
     string ret;
-    char* s = new char[(9 + 22)](); // allocate enough memory for 9 chars + 2 11digit large numbers
+    char *s = new char[(9 + 22)](); // allocate enough memory for 9 chars + 2 11digit large numbers
 
     for (int i = node->nodePointers.size() - 1; i >= 0; i--)
     {
         string n = node->nodePointers[i].next ? to_string(node->nodePointers[i].next->key) : "NULL";
         string p = node->nodePointers[i].prev ? to_string(node->nodePointers[i].prev->key) : "NULL";
-        sprintf(s, "[ %*s | %*s ]\n", width, p.c_str(), width, n.c_str());   // need that formatting
+        sprintf(s, "[ %*s | %*s ]\n", width, p.c_str(), width, n.c_str()); // need that formatting
         ret += string(s);
-        sprintf(s, "| %*s | %*s |\n", width, "", width, "");   
+        sprintf(s, "| %*s | %*s |\n", width, "", width, "");
         ret += string(s);
     }
-    sprintf(s, "| %*s %d %*s |\n", (int)(width-to_string(node->key).size()/2), "", node->key, (int)(width-(to_string(node->key).size()-1)/2), "");
+    sprintf(s, "| %*s %d %*s |\n", (int) (width - to_string(node->key).size() / 2), "", node->key,
+            (int) (width - (to_string(node->key).size() - 1) / 2), "");
     ret += string(s);
 
-    delete [] s ;
+    delete [] s;
 
     return ret;
 }
-
