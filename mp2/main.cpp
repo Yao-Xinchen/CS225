@@ -5,47 +5,18 @@ using namespace cs225;
 
 int main()
 {
-    const auto base = []()
-    {
-        Image base_;
-        base_.readFromFile("resource/mygo.png");
-        return base_;
-    }();
+    auto get_image = [](const std::string &path) {
+        Image image;
+        image.readFromFile(path);
+        return image;
+    };
 
-    auto rana = []()
-    {
-        Image sticker_;
-        sticker_.readFromFile("resource/kaname_rana.png");
-        return sticker_;
-    }();
-
-    auto soyo = []()
-    {
-        Image sticker_;
-        sticker_.readFromFile("resource/nagasaki_soyo.png");
-        return sticker_;
-    }();
-
-    auto tomori = []()
-    {
-        Image sticker_;
-        sticker_.readFromFile("resource/takamatsu_tomori.png");
-        return sticker_;
-    }();
-
-    auto anon = []()
-    {
-        Image sticker_;
-        sticker_.readFromFile("resource/chihaya_anon.png");
-        return sticker_;
-    }();
-
-    auto taki = []()
-    {
-        Image sticker_;
-        sticker_.readFromFile("resource/shiina_taki.png");
-        return sticker_;
-    }();
+    const auto base = get_image("resource/mygo.png");
+    auto rana = get_image("resource/kaname_rana.png");
+    auto soyo = get_image("resource/nagasaki_soyo.png");
+    auto tomori = get_image("resource/takamatsu_tomori.png");
+    auto anon = get_image("resource/chihaya_anon.png");
+    auto taki = get_image("resource/shiina_taki.png");
 
     auto sheet = StickerSheet(base, 5);
     sheet.addSticker(rana, 435, 1800);
