@@ -8,7 +8,7 @@ using namespace cs225;
 
 StickerSheet::StickerSheet(const Image& picture, unsigned int max)
 {
-    this->base = make_shared<Image>(picture);
+    this->base = make_unique<Image>(picture);
     this->stickers = std::vector<Sticker>(max);
 }
 
@@ -17,7 +17,7 @@ StickerSheet::~StickerSheet() = default;
 StickerSheet::StickerSheet(const StickerSheet& other)
 {
     // copy base
-    this->base = make_shared<Image>(*other.base);
+    this->base = make_unique<Image>(*other.base);
 
     // copy stickers
     this->stickers = std::vector<Sticker>(other.stickers.size());
@@ -35,7 +35,7 @@ const StickerSheet& StickerSheet::operator=(const StickerSheet& other)
     if (this != &other)
     {
         // copy base
-        this->base = make_shared<Image>(*other.base);
+        this->base = make_unique<Image>(*other.base);
 
         // copy stickers
         this->stickers = std::vector<Sticker>(other.stickers.size());
@@ -64,7 +64,7 @@ int StickerSheet::addSticker(Image& sticker, unsigned int x, unsigned int y)
         {
             stickers[i].x = x;
             stickers[i].y = y;
-            stickers[i].image = std::make_shared<Image>(sticker);
+            stickers[i].image = std::make_unique<Image>(sticker);
             return static_cast<int>(i);
         }
     }
@@ -73,14 +73,11 @@ int StickerSheet::addSticker(Image& sticker, unsigned int x, unsigned int y)
 
 bool StickerSheet::translate(unsigned int index, unsigned int x, unsigned int y)
 {
-    for (size_t i = 0; i < stickers.size(); i++)
+    if (index < stickers.size() || stickers[index].image != nullptr)
     {
-        if (i == index)
-        {
-            stickers[i].x = x;
-            stickers[i].y = y;
-            return true;
-        }
+        stickers[index].x = x;
+        stickers[index].y = y;
+        return true;
     }
     return false;
 }
@@ -140,7 +137,7 @@ StickerSheet::Sticker::Sticker() : x(0), y(0)
 
 StickerSheet::Sticker::Sticker(const Sticker& other) : x(other.x), y(other.y)
 {
-    this->image = std::make_shared<Image>(*other.image);
+    this->image = std::make_unique<Image>(*other.image);
 }
 
 StickerSheet::Sticker& StickerSheet::Sticker::operator=(const Sticker& other)
@@ -149,7 +146,7 @@ StickerSheet::Sticker& StickerSheet::Sticker::operator=(const Sticker& other)
     {
         this->x = other.x;
         this->y = other.y;
-        this->image = std::make_shared<Image>(*other.image);
+        this->image = std::make_unique<Image>(*other.image);
     }
     return *this;
 }

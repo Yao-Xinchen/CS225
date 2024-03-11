@@ -30,14 +30,14 @@ namespace cs225
         {
             uint x;
             uint y;
-            std::shared_ptr<Image> image;
+            std::unique_ptr<Image> image;
 
             Sticker();
             Sticker(const Sticker& other);
             Sticker& operator=(const Sticker& other);
         };
 
-        std::shared_ptr<Image> base;
+        std::unique_ptr<Image> base;
         std::vector<Sticker> stickers;
     };
 } // cs225
