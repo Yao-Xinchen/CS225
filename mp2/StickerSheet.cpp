@@ -84,7 +84,7 @@ bool StickerSheet::translate(unsigned int index, unsigned int x, unsigned int y)
 
 void StickerSheet::removeSticker(unsigned int index)
 {
-    stickers.erase(stickers.begin() + index);
+    stickers[index].image = nullptr;
 }
 
 Image* StickerSheet::getSticker(unsigned int index)
