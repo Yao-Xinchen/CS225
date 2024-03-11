@@ -7,18 +7,20 @@
  * Destroys the current List. This function should ensure that
  * memory does not leak on destruction of a list.
  */
-template <class T>
-List<T>::~List() {
-  /// @todo Graded in MP3.1
+template<class T>
+List<T>::~List()
+{
+    /// @todo Graded in MP3.1
 }
 
 /**
  * Destroys all dynamically allocated memory associated with the current
  * List class.
  */
-template <class T>
-void List<T>::clear() {
-  /// @todo Graded in MP3.1
+template<class T>
+void List<T>::clear()
+{
+    /// @todo Graded in MP3.1
 }
 
 /**
@@ -27,9 +29,10 @@ void List<T>::clear() {
  *
  * @param ndata The data to be inserted.
  */
-template <class T>
-void List<T>::insertFront(T const& ndata) {
-  /// @todo Graded in MP3.1
+template<class T>
+void List<T>::insertFront(T const &ndata)
+{
+    /// @todo Graded in MP3.1
 }
 
 /**
@@ -38,17 +41,19 @@ void List<T>::insertFront(T const& ndata) {
  *
  * @param ndata The data to be inserted.
  */
-template <class T>
-void List<T>::insertBack(const T& ndata) {
-  /// @todo Graded in MP3.1
+template<class T>
+void List<T>::insertBack(const T &ndata)
+{
+    /// @todo Graded in MP3.1
 }
 
 /**
  * Reverses the current List.
  */
-template <class T>
-void List<T>::reverse() {
-  reverse(head_, tail_);
+template<class T>
+void List<T>::reverse()
+{
+    reverse(head_, tail_);
 }
 
 /**
@@ -62,8 +67,9 @@ void List<T>::reverse() {
  * @param endPoint A pointer reference to the last node in the sequence to
  *  be reversed.
  */
-template <class T>
-void List<T>::reverse(ListNode*& startPoint, ListNode*& endPoint) {
+template<class T>
+void List<T>::reverse(ListNode *&startPoint, ListNode *&endPoint)
+{
     /// @todo Graded in MP3.1
 }
 
@@ -73,9 +79,10 @@ void List<T>::reverse(ListNode*& startPoint, ListNode*& endPoint) {
  *
  * @param n The size of the blocks in the List to be reversed.
  */
-template <class T>
-void List<T>::reverseNth(int n) {
-  /// @todo Graded in MP3.1
+template<class T>
+void List<T>::reverseNth(int n)
+{
+    /// @todo Graded in MP3.1
 }
 
 /**
@@ -87,9 +94,10 @@ void List<T>::reverseNth(int n) {
  * Note that since the tail should be continuously updated, some nodes will
  * be moved more than once.
  */
-template <class T>
-void List<T>::waterfall() {
-  /// @todo Graded in MP3.1
+template<class T>
+void List<T>::waterfall()
+{
+    /// @todo Graded in MP3.1
 }
 
 /**
@@ -98,23 +106,26 @@ void List<T>::waterfall() {
  * @param splitPoint Point at which the list should be split into two.
  * @return The second list created from the split.
  */
-template <class T>
-List<T> List<T>::split(int splitPoint) {
+template<class T>
+List<T> List<T>::split(int splitPoint)
+{
     if (splitPoint > length_)
         return List<T>();
 
     if (splitPoint < 0)
         splitPoint = 0;
 
-    ListNode* secondHead = split(head_, splitPoint);
+    ListNode *secondHead = split(head_, splitPoint);
 
     int oldLength = length_;
-    if (secondHead == head_) {
+    if (secondHead == head_)
+    {
         // current list is going to be empty
         head_ = NULL;
         tail_ = NULL;
         length_ = 0;
-    } else {
+    } else
+    {
         // set up current list
         tail_ = head_;
         while (tail_->next != NULL)
@@ -126,7 +137,8 @@ List<T> List<T>::split(int splitPoint) {
     List<T> ret;
     ret.head_ = secondHead;
     ret.tail_ = secondHead;
-    if (ret.tail_ != NULL) {
+    if (ret.tail_ != NULL)
+    {
         while (ret.tail_->next != NULL)
             ret.tail_ = ret.tail_->next;
     }
@@ -147,9 +159,11 @@ List<T> List<T>::split(int splitPoint) {
  * @param splitPoint The number of steps to walk before splitting.
  * @return The starting node of the sequence that was split off.
  */
-template <class T>
-typename List<T>::ListNode* List<T>::split(ListNode* start, int splitPoint) {
+template<class T>
+typename List<T>::ListNode *List<T>::split(ListNode *start, int splitPoint)
+{
     /// @todo Graded in MP3.2
+    return {};
 }
 
 /**
@@ -157,14 +171,16 @@ typename List<T>::ListNode* List<T>::split(ListNode* start, int splitPoint) {
  *
  * @param otherList List to be merged into the current list.
  */
-template <class T>
-void List<T>::mergeWith(List<T>& otherList) {
+template<class T>
+void List<T>::mergeWith(List<T> &otherList)
+{
     // set up the current list
     head_ = merge(head_, otherList.head_);
     tail_ = head_;
 
     // make sure there is a node in the new list
-    if (tail_ != NULL) {
+    if (tail_ != NULL)
+    {
         while (tail_->next != NULL)
             tail_ = tail_->next;
     }
@@ -187,16 +203,19 @@ void List<T>::mergeWith(List<T>& otherList) {
  * @param second The starting node of the second sequence.
  * @return The starting node of the resulting, sorted sequence.
  */
-template <class T>
-typename List<T>::ListNode* List<T>::merge(ListNode* first, ListNode* second) {
-  /// @todo Graded in MP3.2
+template<class T>
+typename List<T>::ListNode *List<T>::merge(ListNode *first, ListNode *second)
+{
+    /// @todo Graded in MP3.2
+    return {};
 }
 
 /**
  * Sorts the current list by applying the Mergesort algorithm.
  */
-template <class T>
-void List<T>::sort() {
+template<class T>
+void List<T>::sort()
+{
     if (empty())
         return;
     head_ = mergesort(head_, length_);
@@ -214,7 +233,9 @@ void List<T>::sort() {
  * @param chainLength Size of the chain to be sorted.
  * @return A pointer to the beginning of the now sorted chain.
  */
-template <class T>
-typename List<T>::ListNode* List<T>::mergesort(ListNode* start, int chainLength) {
+template<class T>
+typename List<T>::ListNode *List<T>::mergesort(ListNode *start, int chainLength)
+{
     /// @todo Graded in MP3.2
+    return {};
 }

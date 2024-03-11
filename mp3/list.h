@@ -19,16 +19,18 @@ using namespace std;
  * you will find it helpful to add your own helper functions to this class,
  * and are encouraged to add to it.
  */
-template <class T>
-class List {
-  private:
+template<class T>
+class List
+{
+private:
     /**
      * The ListNode class is private to the List class via the principle of
      * encapsulation---the end user does not need to know our node-based
      * implementation details.
      */
-    class ListNode {
-      public:
+    class ListNode
+    {
+    public:
         /**
          * Default ListNode constructor.
          * Implemented for you.
@@ -41,19 +43,19 @@ class List {
          * Implemented for you.
          * @see list_given.cpp
          */
-        ListNode(const T& ndata);
+        ListNode(const T &ndata);
 
         /**
          * A pointer to the next node in the list. May be NULL
          * if one does not exist.
          */
-        ListNode* next;
+        ListNode *next;
 
         /**
          * A pointer to the previous node in the list. May be NULL if
          * one does not exist.
          */
-        ListNode* prev;
+        ListNode *prev;
 
         /**
          * The data contained in this node. We do not allow you to
@@ -62,7 +64,7 @@ class List {
         const T data;
     };
 
-  public:
+public:
     /**
      * Default List constructor.
      * Creates an empty List. Implemented for you.
@@ -78,7 +80,7 @@ class List {
      *
      * @param other The list we are copying.
      */
-    List(const List<T>& other);
+    List(const List<T> &other);
 
     /**
      * Overloaded assignment operator for Lists.
@@ -88,7 +90,7 @@ class List {
      *
      * @param rhs The right hand side of the assignment statement.
      */
-    List<T>& operator=(const List<T>& rhs);
+    List<T> &operator=(const List<T> &rhs);
 
     /**
      * Gets the size of the List.
@@ -107,7 +109,7 @@ class List {
      *
      * @param os Output stream to print the list to (e.g. cout)
      */
-    void print(ostream& os) const;
+    void print(ostream &os) const;
 
     /**
      * Determines if the current List is empty.
@@ -132,7 +134,7 @@ class List {
      *
      * @param ndata The data to be inserted.
      */
-    void insertFront(const T& ndata);
+    void insertFront(const T &ndata);
 
     /**
      * Inserts a new node at the back of the List.
@@ -140,7 +142,7 @@ class List {
      *
      * @param ndata The data to be inserted.
      */
-    void insertBack(const T& ndata);
+    void insertBack(const T &ndata);
 
     /**
      * Reverses the current List.
@@ -182,7 +184,7 @@ class List {
      *
      * @param otherList List to be merged into the current list.
      */
-    void mergeWith(List<T>& otherList);
+    void mergeWith(List<T> &otherList);
 
     /**
      * Sorts the current list by applying the Mergesort algorithm.
@@ -190,9 +192,9 @@ class List {
     void sort();
 
     // Provided Iterator Functions, don't remove
-    #include "list-iter.h"
+#include "list-iter.h"
 
-  private:
+private:
     /*
      * Private member variables.
      *
@@ -203,12 +205,12 @@ class List {
     /**
      * The head of the List. May be NULL if the List is empty.
      */
-    ListNode* head_;
+    ListNode *head_;
 
     /**
      * The tail of the list. May be NULL if the List is empty.
      */
-    ListNode* tail_;
+    ListNode *tail_;
 
     /**
      * The length of the current List. Do not forget to update it!
@@ -227,7 +229,7 @@ class List {
      * @see list_given.cpp
      * @param other The List to be copied.
      */
-    void copy(const List<T>& other); // implemented in list_given.cpp
+    void copy(const List<T> &other); // implemented in list_given.cpp
 
     /**
      * Destroys all dynamically allocated memory associated with the
@@ -247,7 +249,7 @@ class List {
      * @param endPoint A pointer reference to the last node in the
      *  sequence to be reversed.
      */
-    void reverse(ListNode*& startPoint, ListNode*& endPoint);
+    void reverse(ListNode *&startPoint, ListNode *&endPoint);
 
     /**
      * Helper function to split a sequence of linked memory at the node
@@ -262,7 +264,7 @@ class List {
      * @param splitPoint The number of steps to walk before splitting.
      * @return The starting node of the sequence that was split off.
      */
-    ListNode* split(ListNode* start, int splitPoint);
+    ListNode *split(ListNode *start, int splitPoint);
 
     /**
      * Helper function to merge two **sorted** and **independent**
@@ -275,7 +277,7 @@ class List {
      * @param second The starting node of the second sequence.
      * @return The starting node of the resulting, sorted sequence.
      */
-    ListNode* merge(ListNode* first, ListNode* second);
+    ListNode *merge(ListNode *first, ListNode *second);
 
     /**
      * Sorts a chain of linked memory given a start node and a size.
@@ -286,7 +288,7 @@ class List {
      * @param chainLength Size of the chain to be sorted.
      * @return A pointer to the beginning of the now sorted chain.
      */
-    ListNode* mergesort(ListNode* start, int chainLength);
+    ListNode *mergesort(ListNode *start, int chainLength);
 };
 
 // needed for template instantiation
