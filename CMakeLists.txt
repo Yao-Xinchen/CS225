@@ -12,6 +12,7 @@ set(SUBDIR
         lab_gdb2
         mp1
         mp2
+        mp3
 )
 
 foreach (subdir ${SUBDIR})
