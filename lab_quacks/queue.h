@@ -1,6 +1,8 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
+// this file is renamed from `queue` to `queue.h` to avoid conflict with the standard library's queue
+
 #include <queue> // use a partial full path so we don't recursively include this file
 
 namespace cs225 {

@@ -4,11 +4,15 @@
  *  stacks and queues portion of the lab.
  */
 
-#include "stack.h"
-#include "queue.h"
-
+// remove these when copying to the svn directory
+// {
+#include "stack.h" // renamed from `stack`
+#include "queue.h" // renamed from `queue`
 using cs225::queue;
 using cs225::stack;
+// }
+
+#include <utility>
 
 namespace QuackFun
 {

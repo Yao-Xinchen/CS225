@@ -1,5 +1,7 @@
 #ifndef MY_STACK_H
 #define MY_STACK_H
+
+// this file is renamed from `stack` to `stack.h` to avoid conflict with the standard library's stack
  
 #include <deque>
 #include <stack>
