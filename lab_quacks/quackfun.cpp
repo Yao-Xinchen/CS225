@@ -4,11 +4,15 @@
  *  stacks and queues portion of the lab.
  */
 
-#include "stack.h"
-#include "queue.h"
-
+// remove these when copying to the svn directory
+// {
+#include "stack.h" // renamed from `stack`
+#include "queue.h" // renamed from `queue`
 using cs225::queue;
 using cs225::stack;
+// }
+
+#include <utility>
 
 namespace QuackFun
 {
@@ -31,10 +35,16 @@ namespace QuackFun
     template<typename T>
     T sum(stack<T> &s)
     {
-        // Your code here
-        return T(); // stub return value (0 for primitive types). Change this!
-        // Note: T() is the default value for objects, and 0 for
-        // primitive types
+        if (s.empty()) return T();
+
+        auto last = s.top();
+        s.pop();
+
+        auto result = last + sum(s);
+
+        s.push(last);
+
+        return result;
     }
 
     /**
@@ -52,10 +62,40 @@ namespace QuackFun
     template<typename T>
     void scramble(queue<T> &q)
     {
-        stack<T> s;
-        // optional: queue<T> q2;
+        if (q.empty()) return;
 
-        // Your code here
+        stack<T> s{};
+        queue<T> q2{};
+
+        int block = 1;
+
+        while (!q.empty())
+        {
+            // for each block
+            if (block % 2 == 0) // even, reverse
+            {
+                for (int i = 0; i < block && !q.empty(); i++)
+                {
+                    s.push(q.front());
+                    q.pop();
+                }
+
+                while (!s.empty())
+                {
+                    q2.push(s.top());
+                    s.pop();
+                }
+            }
+            else { // odd, keep
+                for (int i = 0; i < block && !q.empty(); i++)
+                {
+                    q2.push(q.front());
+                    q.pop();
+                }
+            }
+            block++;
+        }
+        q = std::move(q2);
     }
 
     /**
@@ -75,9 +115,29 @@ namespace QuackFun
     template<typename T>
     bool verifySame(stack<T> &s, queue<T> &q)
     {
-        bool retval = true; // optional
-        //T temp1; // rename me
-        //T temp2; // rename :)
+        // 1. pop all but the last elements from the stack by recursing to the base case
+        // 2. compare the last element with the front of the queue
+        // 3. restore one element of the stack, move the front of the queue to the back
+        // 4. repeat until the recursion ends
+
+        // base case
+        if (s.empty()) return true;
+
+        // tear down the stack
+        const T &temp = s.top();
+        s.pop();
+
+        // recurse
+        bool retval = verifySame<T>(s, q);
+
+        // compare the top with the front
+        retval &= temp == q.front();
+
+        // cycle the queue
+        q.push(q.front());
+        q.pop();
+        // restore the stack
+        s.push(temp);
 
         return retval;
     }
