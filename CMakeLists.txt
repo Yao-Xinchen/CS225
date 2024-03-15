@@ -10,6 +10,7 @@ set(SUBDIR
         lab_debug
         lab_inheritance
         lab_gdb2
+        lab_quacks
         mp1
         mp2
         mp3
