@@ -1,8 +1,8 @@
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
 
-#include "../stack"
-#include "../queue"
+#include "../stack.h"
+#include "../queue.h"
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -15,7 +15,7 @@ using std::stringstream;
 using std::string;
 using std::cout;
 using std::endl;
-using cs225::Stack;
+using cs225::stack;
 using cs225::queue;
  
 TEST_CASE("RecursionExercises::sumDigits"){
@@ -41,34 +41,34 @@ TEST_CASE("RecursionExercises::triangle"){
 }
  
 TEST_CASE("SUM"){
-	Stack<int> s;
+	stack<int> s;
 	for (int i = 0; i <= 16; i++)
 		s.push(i);
-	Stack<int> s2 = s;
+	stack<int> s2 = s;
 	SECTION("Sum is correct") {
 		REQUIRE(QuackFun::sum(s) == 136);
 	}
-	SECTION("Stack is unchanged") {
+	SECTION("stack is unchanged") {
 		REQUIRE(s == s2);
 	}
  
-	Stack<double> s3;
+	stack<double> s3;
     for (int i = 0; i <= 10; i++)
         s3.push(2.1+4.5*i);
-    Stack<double> s4 = s3;
+    stack<double> s4 = s3;
 
-    Stack<double>::_ctor_count = 0;
+    stack<double>::_ctor_count = 0;
     double sumFloat = QuackFun::sum<double>(s3);
 
     SECTION("Float sum is correct") {
     	if (sumFloat > 270.61 || sumFloat < 270.59)
     		FAIL("Expected sum = 270.6; Actual = " + to_string(sumFloat));
     }
-    SECTION("Stack is unchanged"){
+    SECTION("stack is unchanged"){
     	REQUIRE(s3 == s4);
     }
     SECTION("Did not make any additional stack objects"){
-    	REQUIRE(Stack<double>::_ctor_count == 0);
+    	REQUIRE(stack<double>::_ctor_count == 0);
     }
 }
 
@@ -121,7 +121,7 @@ TEST_CASE("scramble 9") {
 TEST_CASE("QuackFun::verifySame results") {
 	// Test different
 	{
-		Stack<int> s;
+		stack<int> s;
 		queue<int> q;
 		for (int i = 2; i < 7; i++)
 		{
@@ -135,7 +135,7 @@ TEST_CASE("QuackFun::verifySame results") {
 			s.push(i);
 			q.push(i);
 		}
-		Stack<int> sb = s;
+		stack<int> sb = s;
 		queue<int> qb = q;
 
 		SECTION("Result for different stack and queue is false") {
@@ -144,7 +144,7 @@ TEST_CASE("QuackFun::verifySame results") {
 		}
 		SECTION("Data structures are unmodified") {
 			if (s != sb)
-				FAIL("Stack was modified");
+				FAIL("stack was modified");
 			else if (q != qb)
 				FAIL("Queue was modified");
 		}	
@@ -152,14 +152,14 @@ TEST_CASE("QuackFun::verifySame results") {
 
 	// Test the same
 	{
-		Stack<int> s;
+		stack<int> s;
 		queue<int> q;
 		for (int i = 2; i < 7; i++)
 		{
 			s.push(i);
 			q.push(i);
 		}
-		Stack<int> sb = s;
+		stack<int> sb = s;
 		queue<int> qb = q;
  
 		SECTION("Result for same stack and queue is true") {
@@ -168,7 +168,7 @@ TEST_CASE("QuackFun::verifySame results") {
 		}
 		SECTION("Data structures are unmodified") {
 			if (s != sb)
-				FAIL("Stack was modified");
+				FAIL("stack was modified");
 			else if (q != qb)
 				FAIL("Queue was modified");
 		}
@@ -178,7 +178,7 @@ TEST_CASE("QuackFun::verifySame results") {
 TEST_CASE ("QuackFun::verifySame structures unmodified (EXTRA CREDIT)") {
 	// Test different
     {
-        Stack<int> s;
+        stack<int> s;
         queue<int> q;
         for (int i = 2; i < 7; i++)
         {
@@ -192,10 +192,10 @@ TEST_CASE ("QuackFun::verifySame structures unmodified (EXTRA CREDIT)") {
             s.push(i);
             q.push(i);
         }
-        Stack<int> sb = s;
+        stack<int> sb = s;
         queue<int> qb = q;
  
-        Stack<int>::_ctor_count = 0;
+        stack<int>::_ctor_count = 0;
         queue<int>::_ctor_count = 0;
         SECTION("Result for different stack and queue is different") {
 			bool result = QuackFun::verifySame(s, q);
@@ -203,12 +203,12 @@ TEST_CASE ("QuackFun::verifySame structures unmodified (EXTRA CREDIT)") {
 		}
 		SECTION("Data structures are unmodified") {
 			if (s != sb)
-				FAIL("Stack was modified");
+				FAIL("stack was modified");
 			else if (q != qb)
 				FAIL("Queue was modified");
 		}
 		SECTION("No new stacks or queues are made") {
-			if (Stack<int>::_ctor_count != 0)
+			if (stack<int>::_ctor_count != 0)
             	FAIL("You may not make a second stack object");
         	if (queue<int>::_ctor_count != 0)
             	FAIL("You may not make a second queue object");
@@ -217,17 +217,17 @@ TEST_CASE ("QuackFun::verifySame structures unmodified (EXTRA CREDIT)") {
  
     // Test the same
     {
-        Stack<int> s;
+        stack<int> s;
         queue<int> q;
         for (int i = 2; i < 7; i++)
         {
             s.push(i);
             q.push(i);
         }
-        Stack<int> sb = s;
+        stack<int> sb = s;
         queue<int> qb = q;
  
-        Stack<int>::_ctor_count = 0;
+        stack<int>::_ctor_count = 0;
         queue<int>::_ctor_count = 0;
         SECTION("Result for same stack and queue is the same") {
 			bool result = QuackFun::verifySame(s, q);
@@ -235,12 +235,12 @@ TEST_CASE ("QuackFun::verifySame structures unmodified (EXTRA CREDIT)") {
 		}
 		SECTION("Data structures are unmodified") {
 			if (s != sb)
-				FAIL("Stack was modified");
+				FAIL("stack was modified");
 			else if (q != qb)
 				FAIL("Queue was modified");
 		}
 		SECTION("No new stacks or queues are made") {
-			if (Stack<int>::_ctor_count != 0)
+			if (stack<int>::_ctor_count != 0)
             	FAIL("You may not make a second stack object");
         	if (queue<int>::_ctor_count != 0)
             	FAIL("You may not make a second queue object");
