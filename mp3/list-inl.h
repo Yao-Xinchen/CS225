@@ -10,7 +10,7 @@
 template<class T>
 List<T>::~List()
 {
-    /// @todo Graded in MP3.1
+    this->clear();
 }
 
 /**
@@ -20,7 +20,14 @@ List<T>::~List()
 template<class T>
 void List<T>::clear()
 {
-    /// @todo Graded in MP3.1
+    while (head_ != NULL)
+    {
+        ListNode *temp = head_->next;
+        delete head_;
+        head_ = temp;
+    }
+    tail_ = NULL;
+    length_ = 0;
 }
 
 /**
@@ -32,7 +39,18 @@ void List<T>::clear()
 template<class T>
 void List<T>::insertFront(T const &ndata)
 {
-    /// @todo Graded in MP3.1
+    auto newNode = new ListNode(ndata);
+    if (head_ == nullptr)
+    {
+        head_ = newNode;
+        tail_ = newNode;
+    } else
+    {
+        newNode->next = head_;
+        head_->prev = newNode;
+        head_ = newNode;
+    }
+    length_++;
 }
 
 /**
@@ -44,7 +62,18 @@ void List<T>::insertFront(T const &ndata)
 template<class T>
 void List<T>::insertBack(const T &ndata)
 {
-    /// @todo Graded in MP3.1
+    auto newNode = new ListNode(ndata);
+    if (head_ == nullptr)
+    {
+        head_ = newNode;
+        tail_ = newNode;
+    } else
+    {
+        newNode->prev = tail_;
+        tail_->next = newNode;
+        tail_ = newNode;
+    }
+    length_++;
 }
 
 /**
@@ -70,7 +99,59 @@ void List<T>::reverse()
 template<class T>
 void List<T>::reverse(ListNode *&startPoint, ListNode *&endPoint)
 {
-    /// @todo Graded in MP3.1
+    if (startPoint == nullptr || endPoint == nullptr || startPoint == endPoint)
+        return;
+
+    // back up the pointers, because startPoint and endPoint will be changed
+    auto start = startPoint;
+    auto end = endPoint;
+
+    // start with the second node
+    auto prev = start;
+    auto cur = start->next;
+
+    auto next_of_start = start->next;
+    auto prev_of_end = end->prev;
+
+    while (cur != end)
+    {
+        auto next = cur->next;
+
+        // reverse the pointers of cur
+        cur->next = prev;
+        cur->prev = next;
+
+        // move to the next node
+        prev = cur;
+        cur = next;
+    }
+
+    if (start != head_)
+    {
+        const auto front = start->prev;
+
+        front->next = end;
+        end->prev = front;
+    } else
+    {
+        head_ = end; // this would change startPoint
+        end->prev = nullptr;
+    }
+
+    if (end != tail_)
+    {
+        const auto back = end->next;
+
+        back->prev = start;
+        start->next = back;
+    } else
+    {
+        tail_ = start; // this would change endPoint
+        start->next = nullptr;
+    }
+
+    end->next = prev_of_end;
+    start->prev = next_of_start;
 }
 
 /**
@@ -82,7 +163,37 @@ void List<T>::reverse(ListNode *&startPoint, ListNode *&endPoint)
 template<class T>
 void List<T>::reverseNth(int n)
 {
-    /// @todo Graded in MP3.1
+    if (n <= 0) return;
+
+    auto start = head_;
+    auto end = head_;
+    bool go_on = true;
+
+    while (go_on)
+    {
+        // find the end
+        for (int i = 0; i < n - 1; i++)
+        {
+            if (end == nullptr)
+            {
+                go_on = false;
+                break;
+            }
+            end = end->next;
+        }
+
+        // reverse accordingly
+        if (go_on)
+        {
+            auto next_start = end->next;
+            reverse(start, end);
+            start = next_start;
+            end = start;
+        } else
+        {
+            reverse(start, tail_);
+        }
+    }
 }
 
 /**
@@ -162,7 +273,25 @@ List<T> List<T>::split(int splitPoint)
 template<class T>
 typename List<T>::ListNode *List<T>::split(ListNode *start, int splitPoint)
 {
-    /// @todo Graded in MP3.2
+    if (splitPoint == 0)
+        return start;
+
+    // find the split point
+    for (int i = 0; i < splitPoint - 1; i++)
+    {
+        if (start == nullptr)
+            return nullptr;
+        start = start->next;
+    }
+
+    // split
+    if (start == nullptr)
+        return nullptr;
+
+    start->prev->next = nullptr;
+    tail_ = start->prev;
+    start->prev = nullptr;
+
     return {};
 }
 
