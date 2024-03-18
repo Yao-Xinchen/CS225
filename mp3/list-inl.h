@@ -1,3 +1,6 @@
+#ifndef LIST_INL_H
+#define LIST_INL_H
+
 /**
  * @file list.cpp
  * Doubly Linked List (MP 3).
@@ -208,7 +211,27 @@ void List<T>::reverseNth(int n)
 template<class T>
 void List<T>::waterfall()
 {
-    /// @todo Graded in MP3.1
+    if (head_ == nullptr || head_->next == nullptr)
+        return;
+
+    auto cur = head_;
+    while (cur->next != nullptr && cur->next->next != nullptr)
+    {
+        const auto next = cur->next;
+
+        // point the next node to the node after the next node
+        cur->next = next->next;
+        next->next->prev = cur;
+
+        // move the next node to the end
+        tail_->next = next;
+        next->prev = tail_;
+        tail_ = next;
+        tail_->next = nullptr;
+
+        // move to the next node
+        cur = cur->next;
+    }
 }
 
 /**
@@ -277,7 +300,7 @@ typename List<T>::ListNode *List<T>::split(ListNode *start, int splitPoint)
         return start;
 
     // find the split point
-    for (int i = 0; i < splitPoint - 1; i++)
+    for (int i = 0; i < splitPoint; i++)
     {
         if (start == nullptr)
             return nullptr;
@@ -292,7 +315,7 @@ typename List<T>::ListNode *List<T>::split(ListNode *start, int splitPoint)
     tail_ = start->prev;
     start->prev = nullptr;
 
-    return {};
+    return start;
 }
 
 /**
@@ -335,8 +358,54 @@ void List<T>::mergeWith(List<T> &otherList)
 template<class T>
 typename List<T>::ListNode *List<T>::merge(ListNode *first, ListNode *second)
 {
-    /// @todo Graded in MP3.2
-    return {};
+    // if one of the lists is empty, return the other
+    if (first == nullptr)
+        return second;
+    if (second == nullptr)
+        return first;
+
+    // choose the head of the new list
+    ListNode *newHead;
+    if (first->data < second->data)
+    {
+        newHead = first;
+        first = first->next;
+    } else
+    {
+        newHead = second;
+        second = second->next;
+    }
+
+    // merge the two lists
+    ListNode *cur = newHead;
+    while (first != nullptr && second != nullptr)
+    {
+        if (first->data < second->data)
+        {
+            cur->next = first;
+            first->prev = cur;
+            first = first->next;
+        } else
+        {
+            cur->next = second;
+            second->prev = cur;
+            second = second->next;
+        }
+        cur = cur->next;
+    }
+
+    // append the remaining list
+    if (first != nullptr)
+    {
+        cur->next = first;
+        first->prev = cur;
+    } else
+    {
+        cur->next = second;
+        second->prev = cur;
+    }
+
+    return newHead;
 }
 
 /**
@@ -365,6 +434,20 @@ void List<T>::sort()
 template<class T>
 typename List<T>::ListNode *List<T>::mergesort(ListNode *start, int chainLength)
 {
-    /// @todo Graded in MP3.2
-    return {};
+    // base case
+    if (chainLength <= 1)
+        return start;
+
+    // split the list into two halves
+    const int half = chainLength / 2;
+    auto mid = split(start, half);
+
+    // sort the two halves
+    start = mergesort(start, half);
+    mid = mergesort(mid, chainLength - half);
+
+    // merge the two halves
+    return merge(start, mid);
 }
+
+#endif // LIST_INL_H
