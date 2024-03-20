@@ -110,6 +110,11 @@ public:
      */
     void mirror();
 
+    /**
+     * Flips the subtree over a vertical axis, modifying the tree itself
+     * @param subRoot The current node in the recursion
+     */
+    void mirror(Node *subRoot);
 
     /**
      * @return True if an in-order traversal of the tree would produce a
@@ -117,6 +122,14 @@ public:
      *  criterion for a binary tree to be a binary search tree.
      */
     bool isOrdered() const;
+
+    /**
+     * @return True if an in-order traversal of the tree would produce a
+     *  nondecreasing list output values, and false otherwise. This is also the
+     *  criterion for a binary tree to be a binary search tree.
+     * @param subRoot The current node in the recursion
+     */
+    bool isOrdered(Node *subRoot) const;
 
     /**
      * creates vectors of all the possible paths from the root of the tree to any leaf
@@ -129,6 +142,17 @@ public:
     void printPaths(vector<vector<T>> &paths) const;
 
     /**
+     * creates vectors of all the possible paths from the root of the tree to any leaf
+     * node and adds it to another vector.
+     * Path is, all sequences starting at the root node and continuing
+     * downwards, ending at a leaf node. Paths ending in a left node should be
+     * added before paths ending in a node further to the right.
+     * @param subRoot The current node in the recursion
+     * @param paths vector of vectors that contains path of nodes
+     */
+    void printPaths(Node *subRoot, vector<vector<T>> &paths) const;
+
+    /**
      * Each node in a tree has a distance from the root node - the depth of that
      * node, or the number of edges along the path from that node to the root.
      * This function returns the sum of the distances of all nodes to the root
@@ -137,6 +161,18 @@ public:
      * @return The sum of the distances of all nodes to the root
      */
     int sumDistances() const;
+
+    /**
+     * Each node in a tree has a distance from the root node - the depth of that
+     * node, or the number of edges along the path from that node to the root.
+     * This function returns the sum of the distances of all nodes to the root
+     * node (the sum of the depths of all the nodes). Your solution should take
+     * O(n) time, where n is the number of nodes in the tree.
+     * @param subRoot The current node in the recursion
+     * @param depth The depth of the current node
+     * @return The sum of the distances of all nodes to the root
+     */
+    int sumDistances(Node *subRoot, int depth) const;
 
     /**
       *  Uses vector to store values of the nodes of a binary tree in order.

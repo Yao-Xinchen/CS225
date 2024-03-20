@@ -27,7 +27,7 @@ template<typename T>
 int BinaryTree<T>::height(const Node *subRoot) const
 {
     // Base case
-    if (subRoot == NULL)
+    if (subRoot == nullptr)
         return -1;
 
     // Recursive definition
@@ -58,7 +58,7 @@ template<typename T>
 void BinaryTree<T>::printLeftToRight(const Node *subRoot) const
 {
     // Base case - null node
-    if (subRoot == NULL)
+    if (subRoot == nullptr)
         return;
 
     // Print left subtree
@@ -78,7 +78,23 @@ void BinaryTree<T>::printLeftToRight(const Node *subRoot) const
 template<typename T>
 void BinaryTree<T>::mirror()
 {
-    //your code here
+    this->mirror(root);
+}
+
+/**
+ * Flips the subtree over a vertical axis, modifying the tree itself
+ * @param subRoot The current node in the recursion
+ */
+template<typename T>
+void BinaryTree<T>::mirror(Node *subRoot)
+{
+    if (subRoot == nullptr)
+        return;
+
+    mirror(subRoot->left);
+    mirror(subRoot->right);
+
+    std::swap(subRoot->left, subRoot->right);
 }
 
 /**
@@ -89,8 +105,28 @@ void BinaryTree<T>::mirror()
 template<typename T>
 bool BinaryTree<T>::isOrdered() const
 {
-    // your code here
-    return false;
+    return isOrdered(root);
+}
+
+/**
+ * @return True if an in-order traversal of the tree would produce a
+ *  nondecreasing list output values, and false otherwise. This is also the
+ *  criterion for a binary tree to be a binary search tree.
+ * @param subRoot The current node in the recursion
+ */
+template<typename T>
+bool BinaryTree<T>::isOrdered(Node *subRoot) const
+{
+    if (subRoot == nullptr)
+        return true;
+
+    if (subRoot->left != nullptr && subRoot->left->elem > subRoot->elem)
+        return false;
+
+    if (subRoot->right != nullptr && subRoot->right->elem < subRoot->elem)
+        return false;
+
+    return isOrdered(subRoot->left) && isOrdered(subRoot->right);
 }
 
 
@@ -105,7 +141,47 @@ bool BinaryTree<T>::isOrdered() const
 template<typename T>
 void BinaryTree<T>::printPaths(vector<vector<T>> &paths) const
 {
-    // your code here
+    printPaths(root, paths);
+}
+
+/**
+ * creates vectors of all the possible paths from the root of the tree to any leaf
+ * node and adds it to another vector.
+ * Path is, all sequences starting at the root node and continuing
+ * downwards, ending at a leaf node. Paths ending in a left node should be
+ * added before paths ending in a node further to the right.
+ * @param subRoot The current node in the recursion
+ * @param paths vector of vectors that contains path of nodes
+ */
+template<typename T>
+void BinaryTree<T>::printPaths(Node *subRoot, vector<vector<T>> &paths) const
+{
+    if (subRoot == nullptr)
+    {
+        paths = {};
+        return;
+    }
+
+    // If it's a leaf node, add the path to paths
+    if (subRoot->left == nullptr && subRoot->right == nullptr)
+    {
+        paths.push_back(vector<T>{subRoot->elem});
+        return;
+    }
+
+    vector<vector<T>> right_paths;
+
+    printPaths(subRoot->left, paths);
+    printPaths(subRoot->right, right_paths);
+
+    // combine left and right paths
+    paths.insert(paths.end(), right_paths.begin(), right_paths.end());
+
+    for (auto &path: paths)
+    {
+        // insert the current node to the beginning of each path
+        path.insert(path.begin(), subRoot->elem);
+    }
 }
 
 
@@ -120,6 +196,26 @@ void BinaryTree<T>::printPaths(vector<vector<T>> &paths) const
 template<typename T>
 int BinaryTree<T>::sumDistances() const
 {
-    // your code here
-    return -1;
+    return sumDistances(root, 0);
+}
+
+/**
+ * Each node in a tree has a distance from the root node - the depth of that
+ * node, or the number of edges along the path from that node to the root. This
+ * function returns the sum of the distances of all nodes to the root node (the
+ * sum of the depths of all the nodes). Your solution should take O(n) time,
+ * where n is the number of nodes in the tree.
+ * @param subRoot The current node in the recursion
+ * @param depth The depth of the current node
+ * @return The sum of the distances of all nodes to the root
+ */
+template<typename T>
+int BinaryTree<T>::sumDistances(Node *subRoot, int depth) const
+{
+    if (subRoot == nullptr)
+        return 0;
+
+    return sumDistances(subRoot->left, depth + 1)
+           + sumDistances(subRoot->right, depth + 1)
+           + depth;
 }
