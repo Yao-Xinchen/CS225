@@ -11,7 +11,7 @@
  *  tree is just the length of the longest path from the root to a leaf, and
  *  that the height of an empty tree is -1.
  */
-template <typename T>
+template<typename T>
 int BinaryTree<T>::height() const
 {
     // Call recursive helper function on root
@@ -23,8 +23,8 @@ int BinaryTree<T>::height() const
  * @param subRoot
  * @return The height of the subtree
  */
-template <typename T>
-int BinaryTree<T>::height(const Node* subRoot) const
+template<typename T>
+int BinaryTree<T>::height(const Node *subRoot) const
 {
     // Base case
     if (subRoot == NULL)
@@ -40,7 +40,7 @@ int BinaryTree<T>::height(const Node* subRoot) const
  * node itself, and everything to the right of a node will be printed out after
  * that node.
  */
-template <typename T>
+template<typename T>
 void BinaryTree<T>::printLeftToRight() const
 {
     // Call recursive helper function on the root
@@ -54,8 +54,8 @@ void BinaryTree<T>::printLeftToRight() const
  * Private helper function for the public printLeftToRight function.
  * @param subRoot
  */
-template <typename T>
-void BinaryTree<T>::printLeftToRight(const Node* subRoot) const
+template<typename T>
+void BinaryTree<T>::printLeftToRight(const Node *subRoot) const
 {
     // Base case - null node
     if (subRoot == NULL)
@@ -75,7 +75,7 @@ void BinaryTree<T>::printLeftToRight(const Node* subRoot) const
  * Flips the tree over a vertical axis, modifying the tree itself
  *  (not creating a flipped copy).
  */
-template <typename T>
+template<typename T>
 void BinaryTree<T>::mirror()
 {
     //your code here
@@ -86,7 +86,7 @@ void BinaryTree<T>::mirror()
  *  nondecreasing list output values, and false otherwise. This is also the
  *  criterion for a binary tree to be a binary search tree.
  */
-template <typename T>
+template<typename T>
 bool BinaryTree<T>::isOrdered() const
 {
     // your code here
@@ -102,8 +102,8 @@ bool BinaryTree<T>::isOrdered() const
  * added before paths ending in a node further to the right.
  * @param paths vector of vectors that contains path of nodes
  */
-template <typename T>
-void BinaryTree<T>::printPaths(vector<vector<T> > &paths) const
+template<typename T>
+void BinaryTree<T>::printPaths(vector<vector<T>> &paths) const
 {
     // your code here
 }
@@ -117,7 +117,7 @@ void BinaryTree<T>::printPaths(vector<vector<T> > &paths) const
  * where n is the number of nodes in the tree.
  * @return The sum of the distances of all nodes to the root
  */
-template <typename T>
+template<typename T>
 int BinaryTree<T>::sumDistances() const
 {
     // your code here

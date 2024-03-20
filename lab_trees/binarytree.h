@@ -19,30 +19,31 @@ using namespace std;
  * The BinaryTree class represents a templated linked-memory tree data
  * structure.
  */
-template <typename T>
+template<typename T>
 class BinaryTree
 {
-  private:
+private:
     /**
      * Represents a tree node; that is, an element in a BinaryTree.
      * It has a data element and pointers to its left and right children.
      */
-    struct Node {
+    struct Node
+    {
         T elem;
-        Node* left;
-        Node* right;
+        Node *left;
+        Node *right;
 
         /**
          * Node element constructor; sets children to point to NULL.
          * @param element The templated data element that the constructed
          *  node will hold.
          */
-        Node(const T& element) : elem(element), left(NULL), right(NULL)
+        Node(const T &element) : elem(element), left(NULL), right(NULL)
         { /* nothing */
         }
     };
 
-  public:
+public:
     /**
      * Constructor to create an empty tree.
      */
@@ -51,7 +52,7 @@ class BinaryTree
     /**
      * Copy constructor.
      */
-    BinaryTree(const BinaryTree& other);
+    BinaryTree(const BinaryTree &other);
 
     /**
      * Destructor; frees all nodes associated by this tree.
@@ -63,7 +64,7 @@ class BinaryTree
      * @param rhs The tree to make a copy of
      * @return A reference to the current tree
      */
-    const BinaryTree& operator=(const BinaryTree& rhs);
+    const BinaryTree &operator=(const BinaryTree &rhs);
 
     /**
      * Frees all nodes associated with this tree and sets it to be empty.
@@ -77,7 +78,7 @@ class BinaryTree
      *  element takes a pseudo-random path to a leaf where it is inserted. If
      *  true, the insert function will act like it does in a BST.
      */
-    void insert(const T& elem, bool sorted = false);
+    void insert(const T &elem, bool sorted = false);
 
     /**
      * Prints the contents of the tree to stdout.
@@ -109,6 +110,7 @@ class BinaryTree
      */
     void mirror();
 
+
     /**
      * @return True if an in-order traversal of the tree would produce a
      *  nondecreasing list output values, and false otherwise. This is also the
@@ -124,7 +126,7 @@ class BinaryTree
      * added before paths ending in a node further to the right.
      * @param paths vector of vectors that contains path of nodes
      */
-    void printPaths(vector<vector<T> > &paths) const;
+    void printPaths(vector<vector<T>> &paths) const;
 
     /**
      * Each node in a tree has a distance from the root node - the depth of that
@@ -143,10 +145,10 @@ class BinaryTree
       * after that node.
       * @param treeVector stores nodes in order
      */
-    void inOrder(vector <T>& treeVector );
+    void inOrder(vector<T> &treeVector);
 
-  private:
-    Node* root;
+private:
+    Node *root;
 
     /**
      * Put your own private helper functions here.
@@ -159,13 +161,13 @@ class BinaryTree
      * @param subRoot The current node in the recursion
      * @return The height of the subtree
      */
-    int height(const Node* subRoot) const;
+    int height(const Node *subRoot) const;
 
     /**
      * Private helper function for the public printLeftToRight function.
      * @param subRoot The current node in the recursion
      */
-    void printLeftToRight(const Node* subRoot) const;
+    void printLeftToRight(const Node *subRoot) const;
 
 
     /**
@@ -176,26 +178,26 @@ class BinaryTree
      *  element takes a pseudo-random path to a leaf where it is inserted. If
      *  true, the insert function will act like it does in a BST.
      */
-    void insert(Node*& node, const T& elem, bool sorted);
+    void insert(Node *&node, const T &elem, bool sorted);
 
     /**
      * Helper function for operator= and cctor.
      * @param subRoot The current node in the recursion
      */
-    Node* copy(const Node* subRoot);
+    Node *copy(const Node *subRoot);
 
     /**
      * Private helper function for clear that clears beneath the parameter node.
      * @param subRoot The current node in the recursion
      */
-    void clear(Node* subRoot);
+    void clear(Node *subRoot);
 
     /**
      * Private helper function for the public inOrder function.
      * @param subRoot The current node in the recursion
      * @param treeVector stores nodes in order
      */
-    void inOrder(Node *subRoot, vector<T>& treeVector);
+    void inOrder(Node *subRoot, vector<T> &treeVector);
 };
 
 #include "binarytree_given.cpp"
