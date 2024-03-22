@@ -7,12 +7,13 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/cs225)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/cs225/lodepng)
 
-file(GLOB SOURCES "cs225/*.cpp" "cs225/lodepng/*.cpp" "main.cpp")
-
-add_executable(mp3 ${SOURCES})
+set(SOURCES
+        cs225/lodepng/lodepng.cpp
+        cs225/PNG.cpp
+        cs225/HSLAPixel.cpp
+)
+add_executable(mp3 main.cpp ${SOURCES})
 
 file(GLOB TEST_SOURCES "tests/*.cpp")
-list(REMOVE_ITEM TEST_SOURCES "main.cpp")
 
-add_executable(mp3_test ${TEST_SOURCES})
-target_link_libraries(mp3_test pthread)
+add_executable(mp3_test ${SOURCES} ${TEST_SOURCES})

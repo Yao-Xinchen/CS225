@@ -112,7 +112,7 @@ TEST_CASE("List::sort #1", "[weight=1][part=2]") {
 
   int d = 60;
   vector<int> v = buildVector(b, d);
-  std::random_shuffle(v.begin(), v.end());
+  std::shuffle(v.begin(), v.end(), std::mt19937(std::random_device()()));
 
   List<int> img_srt(v.begin(), v.end());
   img_srt.sort();
@@ -135,7 +135,7 @@ TEST_CASE("List::sort #2", "[weight=1][part=2]") {
 
   int d = 1;
   vector<int> v = buildVector(b, d);
-  random_shuffle(v.begin(), v.end());
+  shuffle(v.begin(), v.end(), std::mt19937(std::random_device()()));
 
   List<int> img_srt(v.begin(), v.end());
   img_srt.sort();
