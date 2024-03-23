@@ -6,6 +6,8 @@
 
 #include "binarytree.h"
 
+using namespace std;
+
 /**
  * @return The height of the binary tree. Recall that the height of a binary
  *  tree is just the length of the longest path from the root to a leaf, and
@@ -94,7 +96,7 @@ void BinaryTree<T>::mirror(Node *subRoot)
     mirror(subRoot->left);
     mirror(subRoot->right);
 
-    std::swap(subRoot->left, subRoot->right);
+    swap(subRoot->left, subRoot->right);
 }
 
 /**
@@ -105,28 +107,75 @@ void BinaryTree<T>::mirror(Node *subRoot)
 template<typename T>
 bool BinaryTree<T>::isOrdered() const
 {
-    return isOrdered(root);
+    return get<0>(isOrdered(root));
 }
 
 /**
- * @return True if an in-order traversal of the tree would produce a
- *  nondecreasing list output values, and false otherwise. This is also the
- *  criterion for a binary tree to be a binary search tree.
+ * @return <result, min, max>, where result is true if the
+ * subtree is ordered, and false otherwise. min and max are the minimum and
+ * maximum values in the subtree, respectively.
  * @param subRoot The current node in the recursion
  */
 template<typename T>
-bool BinaryTree<T>::isOrdered(Node *subRoot) const
+tuple<bool, T, T> BinaryTree<T>::isOrdered(Node *subRoot) const
 {
-    if (subRoot == nullptr)
-        return true;
+    // NOT SUPPORTED BY CPP11
+    // if (subRoot->left == nullptr && subRoot->right == nullptr) // leaf node
+    //     return {true, subRoot->elem, subRoot->elem};
+    //
+    // if (subRoot->left == nullptr) // left is empty
+    // {
+    //     auto [r_result, r_min, r_max] = isOrdered(subRoot->right);
+    //     return {r_result && subRoot->elem < r_min, min(subRoot->elem, r_min), max(subRoot->elem, r_max)};
+    // }
+    //
+    // if (subRoot->right == nullptr) // right is empty
+    // {
+    //     auto [l_result, l_min, l_max] = isOrdered(subRoot->left);
+    //     return {l_result && l_max < subRoot->elem, min(subRoot->elem, l_min), max(subRoot->elem, l_max)};
+    // }
+    //
+    // auto [l_result, l_min, l_max] = isOrdered(subRoot->left);
+    // auto [r_result, r_min, r_max] = isOrdered(subRoot->right);
+    //
+    // return {
+    //     l_result && r_result && l_max < subRoot->elem && subRoot->elem < r_min,
+    //     min({subRoot->elem, l_min, r_min}),
+    //     max({subRoot->elem, l_max, r_max})
+    // };
 
-    if (subRoot->left != nullptr && subRoot->left->elem > subRoot->elem)
-        return false;
+    if (subRoot->left == nullptr && subRoot->right == nullptr) // leaf node
+        return {true, subRoot->elem, subRoot->elem};
 
-    if (subRoot->right != nullptr && subRoot->right->elem < subRoot->elem)
-        return false;
+    if (subRoot->left == nullptr) // left is empty
+    {
+        auto right_tuple = isOrdered(subRoot->right);
+        return {
+            get<0>(right_tuple) && subRoot->elem < get<1>(right_tuple),
+            min(subRoot->elem, get<1>(right_tuple)),
+            max(subRoot->elem, get<2>(right_tuple))
+        };
+    }
 
-    return isOrdered(subRoot->left) && isOrdered(subRoot->right);
+    if (subRoot->right == nullptr) // right is empty
+    {
+        auto left_tuple = isOrdered(subRoot->left);
+        return {
+            get<0>(left_tuple) && get<2>(left_tuple) < subRoot->elem,
+            min(subRoot->elem, get<1>(left_tuple)),
+            max(subRoot->elem, get<2>(left_tuple))
+        };
+    }
+
+    auto left_tuple = isOrdered(subRoot->left);
+    auto right_tuple = isOrdered(subRoot->right);
+
+    return {
+        get<0>(left_tuple) && get<0>(right_tuple)
+        && get<2>(left_tuple) < subRoot->elem && subRoot->elem < get<1>(right_tuple),
+        min({subRoot->elem, get<1>(left_tuple), get<1>(right_tuple)}),
+        max({subRoot->elem, get<2>(left_tuple), get<2>(right_tuple)})
+    };
 }
 
 

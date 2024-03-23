@@ -12,6 +12,7 @@
 #include <vector>
 #include <sstream>
 #include "random.h"
+#include <tuple>
 
 using namespace std;
 
@@ -124,12 +125,12 @@ public:
     bool isOrdered() const;
 
     /**
-     * @return True if an in-order traversal of the tree would produce a
-     *  nondecreasing list output values, and false otherwise. This is also the
-     *  criterion for a binary tree to be a binary search tree.
+     * @return std::tuple<bool, T, T> <result, min, max>, where result is true if the
+     * subtree is ordered, and false otherwise. min and max are the minimum and
+     * maximum values in the subtree, respectively.
      * @param subRoot The current node in the recursion
      */
-    bool isOrdered(Node *subRoot) const;
+    std::tuple<bool, T, T> isOrdered(Node *subRoot) const;
 
     /**
      * creates vectors of all the possible paths from the root of the tree to any leaf
