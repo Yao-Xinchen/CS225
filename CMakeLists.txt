@@ -12,6 +12,7 @@ set(SUBDIR
         lab_gdb2
         lab_quacks
         lab_trees
+        lab_huffman
         mp1
         mp2
         mp3
