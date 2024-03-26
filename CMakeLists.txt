@@ -16,6 +16,7 @@ set(SUBDIR
         mp1
         mp2
         mp3
+        mp4
 )
 
 foreach (subdir ${SUBDIR})
