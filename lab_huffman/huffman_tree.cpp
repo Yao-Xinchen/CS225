@@ -53,7 +53,7 @@ const HuffmanTree& HuffmanTree::operator=(const HuffmanTree& rhs)
 
 void HuffmanTree::clear(TreeNode* current)
 {
-    if (current == NULL)
+    if (current == nullptr)
         return;
     clear(current->left);
     clear(current->right);
@@ -67,8 +67,8 @@ void HuffmanTree::copy(const HuffmanTree& rhs)
 
 HuffmanTree::TreeNode* HuffmanTree::copy(const TreeNode* current)
 {
-    if (current == NULL)
-        return NULL;
+    if (current == nullptr)
+        return nullptr;
     TreeNode* node = new TreeNode(current->freq);
     node->left = copy(current->left);
     node->right = copy(current->right);
@@ -89,7 +89,7 @@ HuffmanTree::removeSmallest(queue<TreeNode*>& singleQueue,
      * the queues. Return this item after removing it from its queue.
      */
 
-    TreeNode* smallest = NULL;
+    TreeNode* smallest = nullptr;
     // your code!
     return smallest;
 }
@@ -185,16 +185,16 @@ HuffmanTree::TreeNode* HuffmanTree::readTree(BinaryFileReader& bfile)
      *      3. If we read a 0 bit, create a new internal node (with
      *         frequency 0, since we are ignoring them now, and set its left
      *         child and right children to be the subtrees built recursively.
-     *      4. Your function should return the TreeNode it creates, or NULL
+     *      4. Your function should return the TreeNode it creates, or nullptr
      *         if it did not create one.
      */
-    return NULL; // replaceme!
+    return nullptr; // replaceme!
 }
 
 void HuffmanTree::buildMap(TreeNode* current, vector<bool>& path)
 {
     // Base case: leaf node.
-    if (current->left == NULL && current->right == NULL) {
+    if (current->left == nullptr && current->right == nullptr) {
         bitsMap_[current->freq.getCharacter()] = path;
         return;
     }
@@ -218,7 +218,7 @@ void HuffmanTree::printInOrder() const
 
 void HuffmanTree::printInOrder(const TreeNode* current) const
 {
-    if (current == NULL)
+    if (current == nullptr)
         return;
     printInOrder(current->left);
     cout << current->freq.getCharacter() << ":" << current->freq.getFrequency()
@@ -277,7 +277,7 @@ class HuffmanTreeNodeDescriptor
 
     bool isNull() const
     {
-        return subRoot_ == NULL;
+        return subRoot_ == nullptr;
     }
     HuffmanTreeNodeDescriptor left() const
     {
@@ -294,7 +294,7 @@ class HuffmanTreeNodeDescriptor
 
 int HuffmanTree::height(const TreeNode* subRoot) const
 {
-    if (subRoot == NULL)
+    if (subRoot == nullptr)
         return -1;
     return 1 + std::max(height(subRoot->left), height(subRoot->right));
 }

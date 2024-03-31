@@ -31,7 +31,7 @@
  */
 class HuffmanTree
 {
-  public:
+public:
     /**
      * Creates a HuffmanTree from a given set of Frequency objects.
      *
@@ -46,14 +46,14 @@ class HuffmanTree
      * @param bfile The binary file to read our compressed tree
      *	information from
      */
-    HuffmanTree(BinaryFileReader& bfile);
+    HuffmanTree(BinaryFileReader &bfile);
 
     /**
      * Copy constructor for Huffman Trees.
      *
      * @param other The HuffmanTree to copy.
      */
-    HuffmanTree(const HuffmanTree& other);
+    HuffmanTree(const HuffmanTree &other);
 
     /**
      * Destructor for Huffman Trees.
@@ -66,7 +66,7 @@ class HuffmanTree
      * @param rhs The right hand side of the assignment statement.
      * @return A reference for performing chained assignments.
      */
-    const HuffmanTree& operator=(const HuffmanTree& rhs);
+    const HuffmanTree &operator=(const HuffmanTree &rhs);
 
     /**
      * Decodes a given file into its string contents.
@@ -74,7 +74,7 @@ class HuffmanTree
      * @param bfile BinaryFileReader to read bits from.
      * @return The decoded contents of the file.
      */
-    std::string decodeFile(BinaryFileReader& bfile);
+    std::string decodeFile(BinaryFileReader &bfile);
 
     /**
      * Writes a string of data to the binary file using Huffman coding.
@@ -82,7 +82,7 @@ class HuffmanTree
      * @param data The string to be written.
      * @param bfile The binary file to write the string to.
      */
-    void writeToFile(const std::string& data, BinaryFileWriter& bfile);
+    void writeToFile(const std::string &data, BinaryFileWriter &bfile);
 
     /**
      * Writes a signle character to the binary file using Huffman
@@ -91,14 +91,14 @@ class HuffmanTree
      * @param c The character to be written.
      * @param bfile The binary file to write the character to.
      */
-    void writeToFile(char c, BinaryFileWriter& bfile);
+    void writeToFile(char c, BinaryFileWriter &bfile);
 
     /**
      * Writes a compressed version of the tree to the file.
      *
      * @param bfile The binary file to be written to.
      */
-    void writeTree(BinaryFileWriter& bfile);
+    void writeTree(BinaryFileWriter &bfile);
 
     /**
      * Prints each element in the tree in an in-order traversal.
@@ -109,21 +109,21 @@ class HuffmanTree
      * Prints the tree to a stream.
      * @param out The stream to print to
      */
-    void print(std::ostream& out) const;
+    void print(std::ostream &out) const;
 
-  private:
+private:
     /**
      * TreeNode class: internal representation of the Huffman tree.
      * Done using linked memory.
      */
     class TreeNode
     {
-      public:
+    public:
         Frequency
-            freq;        /**< Data for this TreeNode: contains a
+        freq; /**< Data for this TreeNode: contains a
                                   character and a frquency count. */
-        TreeNode* left;  /**< Left child of this TreeNode. */
-        TreeNode* right; /**< Right child of this TreeNode. */
+        TreeNode *left; /**< Left child of this TreeNode. */
+        TreeNode *right; /**< Right child of this TreeNode. */
 
         /**
          * Builds a new TreeNode with the given frequency as data.
@@ -153,7 +153,7 @@ class HuffmanTree
      *
      * @param other The HuffmanTree to be copied.
      */
-    void copy(const HuffmanTree& other);
+    void copy(const HuffmanTree &other);
 
     /**
      * Recursive, private helper function that copies a given subtree
@@ -163,7 +163,7 @@ class HuffmanTree
      *	to be copied.
      * @return A pointer to the root of the new, copied subtree.
      */
-    TreeNode* copy(const TreeNode* current);
+    TreeNode *copy(const TreeNode *current);
 
     /**
      * Recursive, private helper function that frees all memory
@@ -171,7 +171,7 @@ class HuffmanTree
      *
      * @param current The root of the subtree to free data from.
      */
-    void clear(TreeNode* current);
+    void clear(TreeNode *current);
 
     /**
      * Helper function used by the constructor to build a HuffmanTree
@@ -182,7 +182,7 @@ class HuffmanTree
      * @param frequencies The set of Frequency objects to build the
      *	tree with.
      */
-    void buildTree(const std::vector<Frequency>& frequencies);
+    void buildTree(const std::vector<Frequency> &frequencies);
 
     /**
      * Helper function used by the constructor to build a HuffmanTree
@@ -191,7 +191,7 @@ class HuffmanTree
      * @param bfile The binary file we are reading.
      * @return A pointer to the root of the subtree built.
      */
-    TreeNode* readTree(BinaryFileReader& bfile);
+    TreeNode *readTree(BinaryFileReader &bfile);
 
     /**
      * Recursive helper function used by the constructor to build a map
@@ -202,13 +202,13 @@ class HuffmanTree
      * @param path The current path we have taken to get to this node.
      *	Used to store the encoded value for the characters of the tree.
      */
-    void buildMap(TreeNode* current, std::vector<bool>& path);
+    void buildMap(TreeNode *current, std::vector<bool> &path);
 
     /**
      * Private helper for printing a tree in order.
      * @param current The current subRoot
      */
-    void printInOrder(const TreeNode* current) const;
+    void printInOrder(const TreeNode *current) const;
 
     /**
      * Helper function: finds the smallest element on the two queues
@@ -220,8 +220,8 @@ class HuffmanTree
      * @return A pointer to the smallest TreeNode that used to be at
      *	the front of one of the queues.
      */
-    TreeNode* removeSmallest(std::queue<TreeNode*>& singleQueue,
-                             std::queue<TreeNode*>& mergeQueue);
+    TreeNode *removeSmallest(std::queue<TreeNode *> &singleQueue,
+                             std::queue<TreeNode *> &mergeQueue);
 
     /**
      * Determines the encoded value for a given character.
@@ -239,7 +239,7 @@ class HuffmanTree
      *	output string.
      * @param bfile The binary file we are decoding.
      */
-    void decode(std::stringstream& ss, BinaryFileReader& bfile);
+    void decode(std::stringstream &ss, BinaryFileReader &bfile);
 
     /**
      * Helper function to write the tree out to a binary file in a
@@ -248,14 +248,14 @@ class HuffmanTree
      * @param current The root of the subtree we are currently writing.
      * @param bfile The fiel we are writing to.
      */
-    void writeTree(TreeNode* current, BinaryFileWriter& bfile);
+    void writeTree(TreeNode *current, BinaryFileWriter &bfile);
 
     /**
      * Private helper to get the height of the HuffmanTree.
      * @param subRoot Where we're currently at.
      * @return the height of the tree
      */
-    int height(const TreeNode* subRoot) const;
+    int height(const TreeNode *subRoot) const;
 
     /**
      * Maximum height of trees to enable printing for
@@ -266,11 +266,11 @@ class HuffmanTree
     /**
      * Root of the HuffmanTree.
      */
-    TreeNode* root_;                            
+    TreeNode *root_;
 
     /**
      * Standard map that maps characters to their encoded values.
      */
-    std::map<char, std::vector<bool>> bitsMap_; 
+    std::map<char, std::vector<bool>> bitsMap_;
 };
 #endif
