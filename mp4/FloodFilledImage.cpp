@@ -16,8 +16,9 @@ using namespace cs225;
  * 
  * @param png The starting image of a FloodFilledImage
  */
-FloodFilledImage::FloodFilledImage(const PNG & png) {
-  /** @todo [Part 2] */
+FloodFilledImage::FloodFilledImage(const PNG &png)
+{
+    /** @todo [Part 2] */
 }
 
 /**
@@ -27,8 +28,9 @@ FloodFilledImage::FloodFilledImage(const PNG & png) {
  * @param traversal ImageTraversal used for this FloodFill operation.
  * @param colorPicker ColorPicker used for this FloodFill operation.
  */
-void FloodFilledImage::addFloodFill(ImageTraversal & traversal, ColorPicker & colorPicker) {
-  /** @todo [Part 2] */
+void FloodFilledImage::addFloodFill(ImageTraversal &traversal, ColorPicker &colorPicker)
+{
+    /** @todo [Part 2] */
 }
 
 /**
@@ -49,9 +51,10 @@ void FloodFilledImage::addFloodFill(ImageTraversal & traversal, ColorPicker & co
  *   - Then after the 8th pixel has been filled
  *   - ...
  *   - The final frame, after all pixels have been filed)
- */ 
-Animation FloodFilledImage::animate(unsigned frameInterval) const {
-  Animation animation;
-  /** @todo [Part 2] */
-  return animation;
+ */
+Animation FloodFilledImage::animate(unsigned frameInterval) const
+{
+    Animation animation;
+    /** @todo [Part 2] */
+    return animation;
 }

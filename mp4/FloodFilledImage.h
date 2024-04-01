@@ -13,14 +13,16 @@
 
 using namespace cs225;
 
-class FloodFilledImage {
+class FloodFilledImage
+{
 public:
-  FloodFilledImage(const PNG & png);
-  void addFloodFill(ImageTraversal & traversal, ColorPicker & colorPicker);
-  Animation animate(unsigned frameInterval) const;
+    FloodFilledImage(const PNG &png);
+
+    void addFloodFill(ImageTraversal &traversal, ColorPicker &colorPicker);
+
+    Animation animate(unsigned frameInterval) const;
 
 private:
-
 };
 
 #endif

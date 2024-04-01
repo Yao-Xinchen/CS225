@@ -1,4 +1,3 @@
-
 #include "cs225/PNG.h"
 #include "FloodFilledImage.h"
 #include "Animation.h"
@@ -14,18 +13,18 @@
 
 using namespace cs225;
 
-int main() {
+int main()
+{
+    // @todo [Part 3]
+    // - The code below assumes you have an Animation called `animation`
+    // - The code provided below produces the `myFloodFill.png` file you must
+    //   submit Part 3 of this assignment -- uncomment it when you're ready.
 
-  // @todo [Part 3]
-  // - The code below assumes you have an Animation called `animation`
-  // - The code provided below produces the `myFloodFill.png` file you must
-  //   submit Part 3 of this assignment -- uncomment it when you're ready.
-  
-  /*
-  PNG lastFrame = animation.getFrame( animation.frameCount() - 1 );
-  lastFrame.writeToFile("myFloodFill.png");
-  animation.write("myFloodFill.gif");
-  */
+    /*
+    PNG lastFrame = animation.getFrame( animation.frameCount() - 1 );
+    lastFrame.writeToFile("myFloodFill.png");
+    animation.write("myFloodFill.gif");
+    */
 
-  return 0;
+    return 0;
 }
