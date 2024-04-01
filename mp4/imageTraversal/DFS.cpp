@@ -17,6 +17,8 @@ using namespace cs225;
  */
 DFS::DFS(const PNG &png, const Point &start, double tolerance)
 {
+    auto mentioned = std::vector<std::vector<bool>>(png.width(), std::vector<bool>(png.height(), false));
+
     stack<Point> to_visit;
     to_visit.push(start);
 
@@ -26,22 +28,21 @@ DFS::DFS(const PNG &png, const Point &start, double tolerance)
         // get the next point to visit
         const auto current = to_visit.top(); // not reference
         to_visit.pop();
+        mentioned[current.x][current.y] = true;
 
         // visit the current point
         const auto neighbors = find_neighbors(png, current, tolerance);
         for (const auto &neighbor: neighbors)
         {
-            if (std::find(points.begin(), points.end(), neighbor) == points.end())
-            { // not visited
+            if (!mentioned[neighbor.x][neighbor.y])
+            { // neither visited nor to be visited
                 to_visit.push(neighbor);
+                mentioned[neighbor.x][neighbor.y] = true;
             }
         }
 
         // move the current point to the visited list
-        if (std::find(points.begin(), points.end(), current) == points.end())
-        { // not visited
-            points.push_back(current);
-        }
+        points.push_back(current);
     }
 }
 
