@@ -9,13 +9,40 @@
 #include "ImageTraversal.h"
 #include "DFS.h"
 
+using namespace cs225;
+
 /**
  * Initializes a depth-first ImageTraversal on a given `png` image,
  * starting at `start`, and with a given `tolerance`.
  */
 DFS::DFS(const PNG &png, const Point &start, double tolerance)
 {
-    /** @todo [Part 1] */
+    stack<Point> to_visit;
+    to_visit.push(start);
+
+    // keep visiting until there are no more points to visit
+    while (!to_visit.empty())
+    {
+        // get the next point to visit
+        const auto current = to_visit.top(); // not reference
+        to_visit.pop();
+
+        // visit the current point
+        const auto neighbors = find_neighbors(png, current, tolerance);
+        for (const auto &neighbor: neighbors)
+        {
+            if (std::find(points.begin(), points.end(), neighbor) == points.end())
+            { // not visited
+                to_visit.push(neighbor);
+            }
+        }
+
+        // move the current point to the visited list
+        if (std::find(points.begin(), points.end(), current) == points.end())
+        { // not visited
+            points.push_back(current);
+        }
+    }
 }
 
 /**
@@ -23,8 +50,7 @@ DFS::DFS(const PNG &png, const Point &start, double tolerance)
  */
 ImageTraversal::Iterator DFS::begin()
 {
-    /** @todo [Part 1] */
-    return ImageTraversal::Iterator();
+    return Iterator(points.begin());
 }
 
 /**
@@ -32,8 +58,7 @@ ImageTraversal::Iterator DFS::begin()
  */
 ImageTraversal::Iterator DFS::end()
 {
-    /** @todo [Part 1] */
-    return ImageTraversal::Iterator();
+    return Iterator(points.end());
 }
 
 /**
@@ -41,7 +66,7 @@ ImageTraversal::Iterator DFS::end()
  */
 void DFS::add(const Point &point)
 {
-    /** @todo [Part 1] */
+    points.push_back(point);
 }
 
 /**
@@ -49,8 +74,9 @@ void DFS::add(const Point &point)
  */
 Point DFS::pop()
 {
-    /** @todo [Part 1] */
-    return Point(0, 0);
+    const Point p = points.back();
+    points.pop_back();
+    return p;
 }
 
 /**
@@ -58,8 +84,7 @@ Point DFS::pop()
  */
 Point DFS::peek() const
 {
-    /** @todo [Part 1] */
-    return Point(0, 0);
+    return points.back();
 }
 
 /**
@@ -67,6 +92,10 @@ Point DFS::peek() const
  */
 bool DFS::empty() const
 {
-    /** @todo [Part 1] */
-    return true;
+    return points.empty();
+}
+
+Point &DFS::operator[](const std::size_t index)
+{
+    return points[index];
 }

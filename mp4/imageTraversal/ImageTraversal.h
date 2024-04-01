@@ -20,6 +20,8 @@ using namespace cs225;
 class ImageTraversal
 {
 public:
+    virtual ~ImageTraversal() = default;
+
     /**
      * A forward iterator through an ImageTraversal.
      */
@@ -28,6 +30,8 @@ public:
     public:
         Iterator();
 
+        explicit Iterator(const std::vector<Point>::iterator &it);
+
         Iterator &operator++();
 
         Point operator*();
@@ -35,6 +39,7 @@ public:
         bool operator!=(const Iterator &other);
 
     private:
+        std::vector<Point>::iterator it;
     };
 
 
@@ -50,8 +55,13 @@ public:
 
     virtual bool empty() const = 0;
 
+    virtual Point &operator[](std::size_t index) = 0;
+
 private:
     static double calculateDelta(const HSLAPixel &p1, const HSLAPixel &p2);
+
+protected:
+    static std::vector<Point> find_neighbors(const PNG &png, const Point &point, double tolerance);
 };
 
 

@@ -28,12 +28,53 @@ double ImageTraversal::calculateDelta(const HSLAPixel &p1, const HSLAPixel &p2)
     return sqrt((h * h) + (s * s) + (l * l));
 }
 
+std::vector<Point> ImageTraversal::find_neighbors(const PNG &png, const Point &point, double tolerance)
+{
+    auto within = [point, tolerance, png](const unsigned x, const unsigned y) {
+        const auto center = png.getPixel(point.x, point.y);
+        const auto p = png.getPixel(x, y);
+        return calculateDelta(*center, *p) <= tolerance;
+    };
+
+    std::vector<Point> neighbors;
+    // right
+    if (point.x + 1 < png.width()
+        && within(point.x + 1, point.y))
+    {
+        neighbors.emplace_back(point.x + 1, point.y);
+    }
+    // below
+    if (point.y + 1 < png.height()
+        && within(point.x, point.y + 1))
+    {
+        neighbors.emplace_back(point.x, point.y + 1);
+    }
+    // left
+    if (point.x > 0
+        && within(point.x - 1, point.y))
+    {
+        neighbors.emplace_back(point.x - 1, point.y);
+    }
+    // above
+    if (point.y > 0
+        && within(point.x, point.y - 1))
+    {
+        neighbors.emplace_back(point.x, point.y - 1);
+    }
+    return neighbors;
+}
+
 /**
  * Default iterator constructor.
  */
 ImageTraversal::Iterator::Iterator()
 {
-    /** @todo [Part 1] */
+    it = std::vector<Point>::iterator();
+}
+
+ImageTraversal::Iterator::Iterator(const std::vector<Point>::iterator &it)
+{
+    this->it = it;
 }
 
 /**
@@ -43,7 +84,7 @@ ImageTraversal::Iterator::Iterator()
  */
 ImageTraversal::Iterator &ImageTraversal::Iterator::operator++()
 {
-    /** @todo [Part 1] */
+    ++it;
     return *this;
 }
 
@@ -54,8 +95,7 @@ ImageTraversal::Iterator &ImageTraversal::Iterator::operator++()
  */
 Point ImageTraversal::Iterator::operator*()
 {
-    /** @todo [Part 1] */
-    return Point(0, 0);
+    return *it;
 }
 
 /**
@@ -65,6 +105,5 @@ Point ImageTraversal::Iterator::operator*()
  */
 bool ImageTraversal::Iterator::operator!=(const ImageTraversal::Iterator &other)
 {
-    /** @todo [Part 1] */
-    return false;
+    return it != other.it;
 }

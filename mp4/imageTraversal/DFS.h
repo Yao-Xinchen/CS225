@@ -21,19 +21,22 @@ class DFS : public ImageTraversal
 public:
     DFS(const PNG &png, const Point &start, double tolerance);
 
-    ImageTraversal::Iterator begin();
+    Iterator begin() override;
 
-    ImageTraversal::Iterator end();
+    Iterator end() override;
 
-    void add(const Point &point);
+    void add(const Point &point) override;
 
-    Point pop();
+    Point pop() override;
 
-    Point peek() const;
+    Point peek() const override;
 
-    bool empty() const;
+    bool empty() const override;
+
+    Point &operator[](std::size_t index) override;
 
 private:
+    vector<Point> points;
 };
 
 #endif
