@@ -6,6 +6,8 @@
 #include "../cs225/PNG.h"
 #include "../Point.h"
 
+#include <deque>
+
 using namespace cs225;
 
 /**
@@ -30,7 +32,7 @@ public:
     public:
         Iterator();
 
-        explicit Iterator(const std::vector<Point>::iterator &it);
+        explicit Iterator(const std::deque<Point>::iterator &it);
 
         Iterator &operator++();
 
@@ -39,7 +41,7 @@ public:
         bool operator!=(const Iterator &other);
 
     private:
-        std::vector<Point>::iterator it;
+        std::deque<Point>::iterator it;
     };
 
 

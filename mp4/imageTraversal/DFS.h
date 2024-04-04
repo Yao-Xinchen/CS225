@@ -36,7 +36,7 @@ public:
     Point &operator[](std::size_t index) override;
 
 private:
-    vector<Point> points;
+    deque<Point> points;
 };
 
 #endif

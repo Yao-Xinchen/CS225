@@ -69,10 +69,10 @@ std::vector<Point> ImageTraversal::find_neighbors(const PNG &png, const Point &p
  */
 ImageTraversal::Iterator::Iterator()
 {
-    it = std::vector<Point>::iterator();
+    it = deque<Point>::iterator();
 }
 
-ImageTraversal::Iterator::Iterator(const std::vector<Point>::iterator &it)
+ImageTraversal::Iterator::Iterator(const deque<Point>::iterator &it)
 {
     this->it = it;
 }
