@@ -17,6 +17,8 @@ using namespace cs225;
  */
 BFS::BFS(const PNG& png, const Point& start, double tolerance)
 {
+    this->start = *png.getPixel(start.x, start.y);
+
     auto mentioned = std::vector<std::vector<bool>>(png.width(), std::vector<bool>(png.height(), false));
 
     queue<Point> to_visit;

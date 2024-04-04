@@ -17,6 +17,8 @@ using namespace cs225;
  */
 DFS::DFS(const PNG& png, const Point& start, double tolerance)
 {
+    this->start = *png.getPixel(start.x, start.y);
+
     auto visited = std::vector<std::vector<bool>>(png.width(), std::vector<bool>(png.height(), false));
 
     stack<Point> to_visit;

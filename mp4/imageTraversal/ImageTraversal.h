@@ -60,12 +60,14 @@ public:
     virtual Point& operator[](std::size_t index) = 0;
 
 private:
-    static bool within(const PNG& png, const Point& point, unsigned x, unsigned y, double tolerance);
+    bool within(const PNG& png, unsigned x, unsigned y, double tolerance);
 
     static double calculateDelta(const HSLAPixel& p1, const HSLAPixel& p2);
 
 protected:
-    static std::vector<Point> find_neighbors(const PNG& png, const Point& point, double tolerance);
+    std::vector<Point> find_neighbors(const PNG& png, const Point& point, double tolerance);
+
+    HSLAPixel start;
 };
 
 
