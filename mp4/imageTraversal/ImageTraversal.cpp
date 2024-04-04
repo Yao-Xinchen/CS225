@@ -28,36 +28,37 @@ double ImageTraversal::calculateDelta(const HSLAPixel& p1, const HSLAPixel& p2)
     return sqrt((h * h) + (s * s) + (l * l));
 }
 
-std::vector<Point> ImageTraversal::find_neighbors(const PNG& png, const Point& point, double tolerance)
+bool ImageTraversal::within(const PNG& png, const Point& point, unsigned x, unsigned y, const double tolerance)
 {
-    static auto within = [point, tolerance, png](const unsigned x, const unsigned y) {
-        const auto center = png.getPixel(point.x, point.y);
-        const auto p = png.getPixel(x, y);
-        return calculateDelta(*center, *p) < tolerance;
-    };
+    const auto center = png.getPixel(point.x, point.y);
+    const auto p = png.getPixel(x, y);
+    return calculateDelta(*center, *p) < tolerance;
+}
 
+std::vector<Point> ImageTraversal::find_neighbors(const PNG& png, const Point& point, const double tolerance)
+{
     std::vector<Point> neighbors;
     // right
     if (point.x + 1 < png.width()
-        && within(point.x + 1, point.y))
+        && within(png, point, point.x + 1, point.y, tolerance))
     {
         neighbors.emplace_back(point.x + 1, point.y);
     }
     // below
     if (point.y + 1 < png.height()
-        && within(point.x, point.y + 1))
+        && within(png, point, point.x, point.y + 1, tolerance))
     {
         neighbors.emplace_back(point.x, point.y + 1);
     }
     // left
     if (point.x > 0
-        && within(point.x - 1, point.y))
+        && within(png, point, point.x - 1, point.y, tolerance))
     {
         neighbors.emplace_back(point.x - 1, point.y);
     }
     // above
     if (point.y > 0
-        && within(point.x, point.y - 1))
+        && within(png, point, point.x, point.y - 1, tolerance))
     {
         neighbors.emplace_back(point.x, point.y - 1);
     }

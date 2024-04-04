@@ -32,13 +32,13 @@ public:
     public:
         Iterator();
 
-        explicit Iterator(const std::deque<Point>::iterator &it);
+        explicit Iterator(const std::deque<Point>::iterator& it);
 
-        Iterator &operator++();
+        Iterator& operator++();
 
         Point operator*();
 
-        bool operator!=(const Iterator &other);
+        bool operator!=(const Iterator& other);
 
     private:
         std::deque<Point>::iterator it;
@@ -49,7 +49,7 @@ public:
 
     virtual Iterator end() = 0;
 
-    virtual void add(const Point &t) = 0;
+    virtual void add(const Point& t) = 0;
 
     virtual Point pop() = 0;
 
@@ -57,13 +57,15 @@ public:
 
     virtual bool empty() const = 0;
 
-    virtual Point &operator[](std::size_t index) = 0;
+    virtual Point& operator[](std::size_t index) = 0;
 
 private:
-    static double calculateDelta(const HSLAPixel &p1, const HSLAPixel &p2);
+    static bool within(const PNG& png, const Point& point, unsigned x, unsigned y, double tolerance);
+
+    static double calculateDelta(const HSLAPixel& p1, const HSLAPixel& p2);
 
 protected:
-    static std::vector<Point> find_neighbors(const PNG &png, const Point &point, double tolerance);
+    static std::vector<Point> find_neighbors(const PNG& png, const Point& point, double tolerance);
 };
 
 
