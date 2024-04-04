@@ -15,9 +15,9 @@ using namespace cs225;
  * Initializes a depth-first ImageTraversal on a given `png` image,
  * starting at `start`, and with a given `tolerance`.
  */
-DFS::DFS(const PNG &png, const Point &start, double tolerance)
+DFS::DFS(const PNG& png, const Point& start, double tolerance)
 {
-    auto mentioned = std::vector<std::vector<bool>>(png.width(), std::vector<bool>(png.height(), false));
+    auto visited = std::vector<std::vector<bool>>(png.width(), std::vector<bool>(png.height(), false));
 
     stack<Point> to_visit;
     to_visit.push(start);
@@ -28,21 +28,23 @@ DFS::DFS(const PNG &png, const Point &start, double tolerance)
         // get the next point to visit
         const auto current = to_visit.top(); // not reference
         to_visit.pop();
-        mentioned[current.x][current.y] = true;
 
         // visit the current point
         const auto neighbors = find_neighbors(png, current, tolerance);
-        for (const auto &neighbor: neighbors)
+        for (const auto& neighbor: neighbors)
         {
-            if (!mentioned[neighbor.x][neighbor.y])
-            { // neither visited nor to be visited
+            if (!visited[neighbor.x][neighbor.y])
+            {
                 to_visit.push(neighbor);
-                mentioned[neighbor.x][neighbor.y] = true;
             }
         }
 
         // move the current point to the visited list
-        points.push_back(current);
+        if (!visited[current.x][current.y])
+        {
+            points.push_back(current);
+        }
+        visited[current.x][current.y] = true;
     }
 }
 
@@ -65,7 +67,7 @@ ImageTraversal::Iterator DFS::end()
 /**
  * Adds a Point for the traversal to visit at some point in the future.
  */
-void DFS::add(const Point &point)
+void DFS::add(const Point& point)
 {
     points.push_back(point);
 }
@@ -96,7 +98,7 @@ bool DFS::empty() const
     return points.empty();
 }
 
-Point &DFS::operator[](const std::size_t index)
+Point& DFS::operator[](const std::size_t index)
 {
     return points[index];
 }

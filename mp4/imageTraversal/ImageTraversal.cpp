@@ -15,7 +15,7 @@
  * @param p1 First pixel
  * @param p2 Second pixel
  */
-double ImageTraversal::calculateDelta(const HSLAPixel &p1, const HSLAPixel &p2)
+double ImageTraversal::calculateDelta(const HSLAPixel& p1, const HSLAPixel& p2)
 {
     double h = fabs(p1.h - p2.h);
     double s = p1.s - p2.s;
@@ -28,12 +28,12 @@ double ImageTraversal::calculateDelta(const HSLAPixel &p1, const HSLAPixel &p2)
     return sqrt((h * h) + (s * s) + (l * l));
 }
 
-std::vector<Point> ImageTraversal::find_neighbors(const PNG &png, const Point &point, double tolerance)
+std::vector<Point> ImageTraversal::find_neighbors(const PNG& png, const Point& point, double tolerance)
 {
-    auto within = [point, tolerance, png](const unsigned x, const unsigned y) {
+    static auto within = [point, tolerance, png](const unsigned x, const unsigned y) {
         const auto center = png.getPixel(point.x, point.y);
         const auto p = png.getPixel(x, y);
-        return calculateDelta(*center, *p) <= tolerance;
+        return calculateDelta(*center, *p) < tolerance;
     };
 
     std::vector<Point> neighbors;
@@ -72,7 +72,7 @@ ImageTraversal::Iterator::Iterator()
     it = deque<Point>::iterator();
 }
 
-ImageTraversal::Iterator::Iterator(const deque<Point>::iterator &it)
+ImageTraversal::Iterator::Iterator(const deque<Point>::iterator& it)
 {
     this->it = it;
 }
@@ -82,7 +82,7 @@ ImageTraversal::Iterator::Iterator(const deque<Point>::iterator &it)
  *
  * Advances the traversal of the image.
  */
-ImageTraversal::Iterator &ImageTraversal::Iterator::operator++()
+ImageTraversal::Iterator& ImageTraversal::Iterator::operator++()
 {
     ++it;
     return *this;
@@ -103,7 +103,7 @@ Point ImageTraversal::Iterator::operator*()
  * 
  * Determines if two iterators are not equal.
  */
-bool ImageTraversal::Iterator::operator!=(const ImageTraversal::Iterator &other)
+bool ImageTraversal::Iterator::operator!=(const ImageTraversal::Iterator& other)
 {
     return it != other.it;
 }

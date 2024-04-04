@@ -1,8 +1,5 @@
-/**
-* @file FloodFilledImage.h
- * Definition for a class to do flood fill on an image
- */
-#pragma once
+#ifndef FLOODFILLEDIMAGE_H
+#define FLOODFILLEDIMAGE_H
 
 #include "cs225/PNG.h"
 #include <list>
@@ -32,3 +29,5 @@ private:
     vector<ImageTraversal*> traversals;
     vector<ColorPicker*> pickers;
 };
+
+#endif // FLOODFILLEDIMAGE_H

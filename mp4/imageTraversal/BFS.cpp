@@ -15,7 +15,7 @@ using namespace cs225;
  * Initializes a breadth-first ImageTraversal on a given `png` image,
  * starting at `start`, and with a given `tolerance`.
  */
-BFS::BFS(const PNG &png, const Point &start, double tolerance)
+BFS::BFS(const PNG& png, const Point& start, double tolerance)
 {
     auto mentioned = std::vector<std::vector<bool>>(png.width(), std::vector<bool>(png.height(), false));
 
@@ -32,7 +32,7 @@ BFS::BFS(const PNG &png, const Point &start, double tolerance)
 
         // visit the current point
         const auto neighbors = find_neighbors(png, current, tolerance);
-        for (const auto &neighbor: neighbors)
+        for (const auto& neighbor: neighbors)
         {
             if (!mentioned[neighbor.x][neighbor.y])
             { // neither visited nor to be visited
@@ -65,7 +65,7 @@ ImageTraversal::Iterator BFS::end()
 /**
  * Adds a Point for the traversal to visit at some point in the future.
  */
-void BFS::add(const Point &point)
+void BFS::add(const Point& point)
 {
     points.push_back(point);
 }
@@ -96,7 +96,7 @@ bool BFS::empty() const
     return points.empty();
 }
 
-Point &BFS::operator[](const std::size_t index)
+Point& BFS::operator[](const std::size_t index)
 {
     return points[index];
 }
