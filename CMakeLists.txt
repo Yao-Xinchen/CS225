@@ -13,6 +13,7 @@ set(SUBDIR
         lab_quacks
         lab_trees
         lab_huffman
+        lab_avl
         mp1
         mp2
         mp3

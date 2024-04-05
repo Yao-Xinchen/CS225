@@ -33,7 +33,6 @@
 
 # Executables
 *.exe
-*.out
 *.app
 
 dev/.build
