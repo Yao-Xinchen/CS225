@@ -4,20 +4,21 @@
  * You'll need to modify this file.
  */
 
-template <class K, class V>
+template<class K, class V>
 V AVLTree<K, V>::find(const K& key) const
 {
     return find(root, key);
 }
 
-template <class K, class V>
+template<class K, class V>
 V AVLTree<K, V>::find(Node* subtree, const K& key) const
 {
-    if (subtree == NULL)
+    if (subtree == nullptr)
         return V();
     else if (key == subtree->key)
         return subtree->value;
-    else {
+    else
+    {
         if (key < subtree->key)
             return find(subtree->left, key);
         else
@@ -25,14 +26,14 @@ V AVLTree<K, V>::find(Node* subtree, const K& key) const
     }
 }
 
-template <class K, class V>
+template<class K, class V>
 void AVLTree<K, V>::rotateLeft(Node*& t)
 {
     functionCalls.push_back("rotateLeft"); // Stores the rotation name (don't remove this)
     // your code here
 }
 
-template <class K, class V>
+template<class K, class V>
 void AVLTree<K, V>::rotateLeftRight(Node*& t)
 {
     functionCalls.push_back("rotateLeftRight"); // Stores the rotation name (don't remove this)
@@ -41,62 +42,68 @@ void AVLTree<K, V>::rotateLeftRight(Node*& t)
     rotateRight(t);
 }
 
-template <class K, class V>
+template<class K, class V>
 void AVLTree<K, V>::rotateRight(Node*& t)
 {
     functionCalls.push_back("rotateRight"); // Stores the rotation name (don't remove this)
     // your code here
 }
 
-template <class K, class V>
+template<class K, class V>
 void AVLTree<K, V>::rotateRightLeft(Node*& t)
 {
     functionCalls.push_back("rotateRightLeft"); // Stores the rotation name (don't remove this)
     // your code here
 }
 
-template <class K, class V>
+template<class K, class V>
 void AVLTree<K, V>::rebalance(Node*& subtree)
 {
     // your code here
 }
 
-template <class K, class V>
-void AVLTree<K, V>::insert(const K & key, const V & value)
+template<class K, class V>
+void AVLTree<K, V>::insert(const K& key, const V& value)
 {
     insert(root, key, value);
 }
 
-template <class K, class V>
+template<class K, class V>
 void AVLTree<K, V>::insert(Node*& subtree, const K& key, const V& value)
 {
     // your code here
 }
 
-template <class K, class V>
+template<class K, class V>
 void AVLTree<K, V>::remove(const K& key)
 {
     remove(root, key);
 }
 
-template <class K, class V>
+template<class K, class V>
 void AVLTree<K, V>::remove(Node*& subtree, const K& key)
 {
-    if (subtree == NULL)
+    if (subtree == nullptr)
         return;
 
-    if (key < subtree->key) {
+    if (key < subtree->key)
+    {
         // your code here
-    } else if (key > subtree->key) {
+    } else if (key > subtree->key)
+    {
         // your code here
-    } else {
-        if (subtree->left == NULL && subtree->right == NULL) {
+    } else
+    {
+        if (subtree->left == nullptr && subtree->right == nullptr)
+        {
             /* no-child remove */
             // your code here
-        } else if (subtree->left != NULL && subtree->right != NULL) {
+        } else if (subtree->left != nullptr && subtree->right != nullptr)
+        {
             /* two-child remove */
             // your code here
-        } else {
+        } else
+        {
             /* one-child remove */
             // your code here
         }

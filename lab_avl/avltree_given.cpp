@@ -10,37 +10,32 @@
 
 #include "printtree.h"
 
-template <class K, class V>
+template<class K, class V>
 AVLTree<K, V>::AVLTree()
-    : root(NULL), _out(&std::cout)
-{
-    
-}
+    : root(nullptr), _out(&std::cout) {}
 
-template <class K, class V>
+template<class K, class V>
 AVLTree<K, V>::AVLTree(const AVLTree& other)
-    : root(copy(other.root)), _out(&std::cout)
-{
+    : root(copy(other.root)), _out(&std::cout) {}
 
-}
-
-template <class K, class V>
+template<class K, class V>
 AVLTree<K, V>::~AVLTree()
 {
     clear(root);
 }
 
-template <class K, class V>
-vector<K> AVLTree<K,V>::getInorderTraversal()
+template<class K, class V>
+vector<K> AVLTree<K, V>::getInorderTraversal()
 {
     getInorderTraversal(root);
     return inorder;
 }
 
-template <class K, class V>
-void AVLTree<K,V>::getInorderTraversal(const Node* subRoot)
+template<class K, class V>
+void AVLTree<K, V>::getInorderTraversal(const Node* subRoot)
 {
-    if (subRoot == NULL) {
+    if (subRoot == nullptr)
+    {
         return;
     }
     getInorderTraversal(subRoot->left);
@@ -48,35 +43,37 @@ void AVLTree<K,V>::getInorderTraversal(const Node* subRoot)
     getInorderTraversal(subRoot->right);
 }
 
-template <class K, class V>
-vector<string> AVLTree<K,V>::getFunctionOrder() {
+template<class K, class V>
+vector<string> AVLTree<K, V>::getFunctionOrder()
+{
     return functionCalls;
 }
 
-template <class K, class V>
+template<class K, class V>
 const AVLTree<K, V>& AVLTree<K, V>::operator=(const AVLTree& rhs)
 {
-    if (this != &rhs) {
+    if (this != &rhs)
+    {
         clear(root);
         root = copy(rhs.root);
     }
     return *this;
 }
 
-template <class K, class V>
+template<class K, class V>
 void AVLTree<K, V>::clear()
 {
     clear(root);
-    root = NULL;
+    root = nullptr;
     functionCalls.clear();
     inorder.clear();
 }
 
-template <class K, class V>
-typename AVLTree<K, V>::Node* AVLTree<K, V>::copy(const Node* subRoot)
+template<class K, class V>
+typename AVLTree<K, V>::Node *AVLTree<K, V>::copy(const Node* subRoot)
 {
-    if (subRoot == NULL)
-        return NULL;
+    if (subRoot == nullptr)
+        return nullptr;
 
     // Copy this node and its children
     Node* newNode = new Node(subRoot->key, subRoot->value);
@@ -85,10 +82,10 @@ typename AVLTree<K, V>::Node* AVLTree<K, V>::copy(const Node* subRoot)
     return newNode;
 }
 
-template <class K, class V>
+template<class K, class V>
 void AVLTree<K, V>::clear(Node* subRoot)
 {
-    if (subRoot == NULL)
+    if (subRoot == nullptr)
         return;
 
     clear(subRoot->left);
@@ -96,7 +93,7 @@ void AVLTree<K, V>::clear(Node* subRoot)
     delete subRoot;
 }
 
-template <class K, class V>
+template<class K, class V>
 void AVLTree<K, V>::swap(Node*& first, Node*& second)
 {
     K tempkey = first->key;
@@ -109,17 +106,16 @@ void AVLTree<K, V>::swap(Node*& first, Node*& second)
 
 // class for generic printing
 
-template <typename Node>
+template<typename Node>
 class AVLTreeNodeDescriptor
-    : public GenericNodeDescriptor<AVLTreeNodeDescriptor<Node>>
+        : public GenericNodeDescriptor<AVLTreeNodeDescriptor<Node>>
 {
-  public:
-    AVLTreeNodeDescriptor(const Node* root) : subRoot(root)
-    {
-    }
+public:
+    AVLTreeNodeDescriptor(const Node* root) : subRoot(root) {}
+
     bool isNull() const
     {
-        return subRoot == NULL;
+        return subRoot == nullptr;
     }
 
     string key() const
@@ -133,41 +129,43 @@ class AVLTreeNodeDescriptor
     {
         return AVLTreeNodeDescriptor(subRoot->left);
     }
+
     AVLTreeNodeDescriptor right() const
     {
         return AVLTreeNodeDescriptor(subRoot->right);
     }
 
-  private:
+private:
     const Node* subRoot;
 };
 
-template <class K, class V>
+template<class K, class V>
 void AVLTree<K, V>::printFunctionOrder(ostream& out) const
 {
-    for (int i = 0; i < (int)functionCalls.size(); i++) {
+    for (int i = 0; i < (int) functionCalls.size(); i++)
+    {
         out << functionCalls[i] << endl;
     }
 }
 
-template <class K, class V>
+template<class K, class V>
 void AVLTree<K, V>::print(ostream& out, bool order) const
 {
-    if(order)
+    if (order)
         printFunctionOrder(out);
     printTree(AVLTreeNodeDescriptor<Node>(root), out);
 }
 
-template <class K, class V>
+template<class K, class V>
 int AVLTree<K, V>::heightOrNeg1(const Node* node) const
 {
-    if (node == NULL)
+    if (node == nullptr)
         return -1;
     else
         return node->height;
 }
 
-template <class K, class V>
+template<class K, class V>
 void AVLTree<K, V>::setOutput(ostream& newOut)
 {
     _out = &newOut;

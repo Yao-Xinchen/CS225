@@ -146,13 +146,13 @@ void testManyInsertions()
     tree.insert(23, "data for 23");
     tree.insert(93, "data for 93");
     tree.insert(31, "data for 31");
-    tree.insert( 3, "data for 3");
+    tree.insert(3, "data for 3");
     tree.insert(45, "data for 45");
     tree.insert(18, "data for 18");
     tree.insert(73, "data for 73");
     tree.insert(24, "data for 24");
     tree.insert(74, "data for 74");
-    tree.insert( 1, "data for 1");
+    tree.insert(1, "data for 1");
     tree.insert(71, "data for 71");
     tree.insert(82, "data for 82");
     tree.print();
@@ -180,13 +180,13 @@ void testManyRemovals()
     tree.insert(23, "data for 23");
     tree.insert(93, "data for 93");
     tree.insert(31, "data for 31");
-    tree.insert( 3, "data for 3");
+    tree.insert(3, "data for 3");
     tree.insert(45, "data for 45");
     tree.insert(18, "data for 18");
     tree.insert(73, "data for 73");
     tree.insert(24, "data for 24");
     tree.insert(74, "data for 74");
-    tree.insert( 1, "data for 1");
+    tree.insert(1, "data for 1");
     tree.insert(71, "data for 71");
     tree.insert(82, "data for 82");
     tree.remove(95);
@@ -203,9 +203,10 @@ int main(int argc, char** argv)
 {
     // Set up Colored Output (if 'color' parameter passed)
     bool is_colored
-        = (argc > 1 && tolower(argv[1][0]) == 'c') && isatty(STDOUT_FILENO);
+            = (argc > 1 && tolower(argv[1][0]) == 'c') && isatty(STDOUT_FILENO);
     colored_out coloroutput;
-    if (is_colored) {
+    if (is_colored)
+    {
         coloroutput.set_expected_file("soln_testavl.out");
         int status = coloroutput.start();
         if (status < 0)

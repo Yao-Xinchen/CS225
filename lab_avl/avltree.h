@@ -17,9 +17,9 @@
 #define AVLTREE_H
 
 #include <iostream>
-#include <vector>
 #include <sstream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -28,15 +28,16 @@ using namespace std;
  * @tparam K the type of key stored in the tree
  * @tparam V the type of value stored in the tree
  */
-template <class K, class V>
+template<class K, class V>
 class AVLTree
 {
-  private:
+private:
     /**
      * Node represents a tree node; that is, an element in a AVLTree.
      * It stores a key, value, and pointers to its left and right children.
      */
-    struct Node {
+    struct Node
+    {
         K key;
         V value;
         Node* left;
@@ -50,12 +51,10 @@ class AVLTree
          *  node will hold.
          */
         Node(const K& newKey, const V& newValue)
-            : key(newKey), value(newValue), left(NULL), right(NULL), height(0)
-        {
-        }
+            : key(newKey), value(newValue), left(NULL), right(NULL), height(0) {}
     };
 
-  public:
+public:
     /**
      * Constructor to create an empty tree.
      */
@@ -114,7 +113,7 @@ class AVLTree
      * Prints the AVLTree to a stream.
      * @param out The stream to print to (default is stdout)
      */
-    void print(ostream& out = cout, bool order=true) const;
+    void print(ostream& out = cout, bool order = true) const;
 
     /**
      * This function is used for grading.
@@ -129,11 +128,11 @@ class AVLTree
     vector<K> getInorderTraversal();
 
     /*
-    * Gets vector of function calls.
-    */
+     * Gets vector of function calls.
+     */
     vector<string> getFunctionOrder();
 
-  private:
+private:
     /**
      * The root of the tree.
      */
@@ -213,7 +212,7 @@ class AVLTree
      * Helper function for #operator= and AVLTree(const AVLTree &).
      * @param subRoot The current node in the recursion
      */
-    Node* copy(const Node* subRoot);
+    Node *copy(const Node* subRoot);
 
     /**
      * Private helper function for clear that clears beneath the parameter node.
@@ -236,6 +235,6 @@ class AVLTree
     vector<K> inorder;
 };
 
-#include "avltree_given.cpp"
 #include "avltree.cpp"
+#include "avltree_given.cpp"
 #endif
