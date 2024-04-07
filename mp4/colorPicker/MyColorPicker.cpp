@@ -3,6 +3,7 @@
 
 #include "ColorPicker.h"
 #include "MyColorPicker.h"
+#include <cmath>
 
 using namespace cs225;
 
@@ -14,7 +15,7 @@ MyColorPicker::MyColorPicker(const double amp, const double freq, const double h
  */
 HSLAPixel MyColorPicker::getColor(unsigned x, unsigned y)
 {
-    const auto lumi = 0.5 + amp * sin(freq * x + freq * y);
+    const auto lumi = 0.5 + amp * std::sin(freq * x + freq * y);
     const auto pixel = HSLAPixel(hue, 1.0, lumi);
     return pixel;
 }
