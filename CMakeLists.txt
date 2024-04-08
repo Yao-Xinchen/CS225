@@ -14,6 +14,7 @@ set(SUBDIR
         lab_trees
         lab_huffman
         lab_avl
+        lab_btree
         mp1
         mp2
         mp3
