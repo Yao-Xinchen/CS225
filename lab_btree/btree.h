@@ -23,16 +23,17 @@
  * @author Matt Joras
  * @date Winter 2013
  */
-template <class K, class V>
+template<class K, class V>
 class BTree
 {
-  private:
+private:
     /**
      * A fancy key-value pair which acts as elements in the BTree.
      * Can be compared with <, >, ==. Additionally they can be compared against
      * a K with <, > and == based on its key.
      * */
-    struct DataPair {
+    struct DataPair
+    {
         K key;
         V value;
 
@@ -41,9 +42,7 @@ class BTree
          * @param key The key of the pair.
          * @param value The value of the pair.
          */
-        DataPair(K key, V value) : key(key), value(value)
-        {
-        }
+        DataPair(K key, V value) : key(key), value(value) {}
 
         /**
          * Less than operator for a DataPair. The object is less than another
@@ -148,7 +147,8 @@ class BTree
      * two vectors, one with DataPairs representing the data, and one of
      * BTreeNode*s, representing the node's children.
      */
-    struct BTreeNode {
+    struct BTreeNode
+    {
         bool is_leaf;
         std::vector<DataPair> elements;
         std::vector<BTreeNode*> children;
@@ -168,9 +168,7 @@ class BTree
          * the elements and is_leaf information.
          */
         BTreeNode(const BTreeNode& other)
-            : is_leaf(other.is_leaf), elements(other.elements)
-        {
-        }
+            : is_leaf(other.is_leaf), elements(other.elements) {}
 
         /**
          * Printing operator for a BTreeNode. E.g. a node containing 4, 5, 6
@@ -191,25 +189,32 @@ class BTree
         {
             std::string node_str;
             node_str.reserve(2 * (4 * n.elements.size() + 1));
-            for (auto& elem : n.elements) {
+            for (auto& elem: n.elements)
+            {
                 std::stringstream temp;
                 temp << elem.key;
                 node_str += "| ";
                 node_str += temp.str();
                 node_str += " ";
             }
-            if (!n.elements.empty()) {
+            if (!n.elements.empty())
+            {
                 node_str += "|";
             }
             node_str += "\n";
-            for (auto& child : n.children) {
-                if (child == nullptr) {
+            for (auto& child: n.children)
+            {
+                if (child == nullptr)
+                {
                     node_str += "N   ";
-                } else {
+                }
+                else
+                {
                     node_str += "*   ";
                 }
             }
-            if (n.children.empty()) {
+            if (n.children.empty())
+            {
                 node_str += "no children";
             }
 
@@ -221,7 +226,7 @@ class BTree
     unsigned int order;
     BTreeNode* root;
 
-  public:
+public:
     /**
      * Constructs a default, order 64 BTree.
      */
@@ -281,7 +286,7 @@ class BTree
      */
     V find(const K& key) const;
 
-  private:
+private:
     /**
      * Private recursive version of the insert function.
      * @param subroot A reference of a pointer to the current BTreeNode.
@@ -342,11 +347,12 @@ class BTree
  * the sorted order of elements. If val occurs in elements, then this returns
  * the index of val in elements.
  */
-template <class T, class C>
+template<class T, class C>
 size_t insertion_idx(const std::vector<T>& elements, const C& val)
 {
     /* TODO Your code goes here! */
-    return 5;
+    auto it = std::lower_bound(elements.begin(), elements.end(), val);
+    return it - elements.begin();
 }
 
 #include "btree_given.cpp"
