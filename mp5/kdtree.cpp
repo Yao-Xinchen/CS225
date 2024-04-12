@@ -8,7 +8,7 @@
 
 using namespace std;
 
-template <int Dim>
+template<int Dim>
 bool KDTree<Dim>::smallerDimVal(const Point<Dim>& first,
                                 const Point<Dim>& second, int curDim) const
 {
@@ -19,7 +19,7 @@ bool KDTree<Dim>::smallerDimVal(const Point<Dim>& first,
     return false;
 }
 
-template <int Dim>
+template<int Dim>
 bool KDTree<Dim>::shouldReplace(const Point<Dim>& target,
                                 const Point<Dim>& currentBest,
                                 const Point<Dim>& potential) const
@@ -28,10 +28,10 @@ bool KDTree<Dim>::shouldReplace(const Point<Dim>& target,
      * @todo Implement this function!
      */
 
-     return false;
+    return false;
 }
 
-template <int Dim>
+template<int Dim>
 KDTree<Dim>::KDTree(const vector<Point<Dim>>& newPoints)
 {
     /**
@@ -39,30 +39,33 @@ KDTree<Dim>::KDTree(const vector<Point<Dim>>& newPoints)
      */
 }
 
-template <int Dim>
-KDTree<Dim>::KDTree(const KDTree& other) {
-  /**
-   * @todo Implement this function!
-   */
+template<int Dim>
+KDTree<Dim>::KDTree(const KDTree& other)
+{
+    /**
+     * @todo Implement this function!
+     */
 }
 
-template <int Dim>
-const KDTree<Dim>& KDTree<Dim>::operator=(const KDTree& rhs) {
-  /**
-   * @todo Implement this function!
-   */
+template<int Dim>
+const KDTree<Dim>& KDTree<Dim>::operator=(const KDTree& rhs)
+{
+    /**
+     * @todo Implement this function!
+     */
 
-  return *this;
+    return *this;
 }
 
-template <int Dim>
-KDTree<Dim>::~KDTree() {
-  /**
-   * @todo Implement this function!
-   */
+template<int Dim>
+KDTree<Dim>::~KDTree()
+{
+    /**
+     * @todo Implement this function!
+     */
 }
 
-template <int Dim>
+template<int Dim>
 Point<Dim> KDTree<Dim>::findNearestNeighbor(const Point<Dim>& query) const
 {
     /**
@@ -71,4 +74,3 @@ Point<Dim> KDTree<Dim>::findNearestNeighbor(const Point<Dim>& query) const
 
     return Point<Dim>();
 }
-

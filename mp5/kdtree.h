@@ -26,24 +26,24 @@ using std::endl;
  * KDTree class: implemented using Points in Dim dimensional space (given
  * by the template parameter).
  */
-template <int Dim>
+template<int Dim>
 class KDTree
 {
-  private:
+private:
     /**
      * Internal structure for a node of KDTree.
      * Contains left, right children pointers and a K-dimensional point
      */
     struct KDTreeNode
     {
-      Point<Dim> point;
-      KDTreeNode *left, *right;
+        Point<Dim> point;
+        KDTreeNode *left, *right;
 
-      KDTreeNode() : point(), left(NULL), right(NULL) {}
-      KDTreeNode(const Point<Dim> &point) : point(point), left(NULL), right(NULL) {}
+        KDTreeNode() : point(), left(NULL), right(NULL) {}
+        KDTreeNode(const Point<Dim>& point) : point(point), left(NULL), right(NULL) {}
     };
 
-  public:
+public:
     /**
      * Determines if Point a is smaller than Point b in a given dimension d.
      * If there is a tie, break it with Point::operator<().
@@ -167,7 +167,7 @@ class KDTree
      * @param rhs The right hand side of the assignment statement.
      * @return A reference for performing chained assignments.
      */
-    KDTree const &operator=(const KDTree& rhs);
+    KDTree const& operator=(const KDTree& rhs);
 
     /**
      * Destructor for KDTree.
@@ -244,17 +244,16 @@ class KDTree
                    colored_out::enable_t enable_bold = colored_out::COUT,
                    int modWidth = -1) const;
 
-  private:
-
+private:
     /** Internal representation, root and size **/
-    KDTreeNode *root;
+    KDTreeNode* root;
     size_t size;
 
     /** Helper function for grading */
-    int getPrintData(KDTreeNode * subroot) const;
+    int getPrintData(KDTreeNode* subroot) const;
 
     /** Helper function for grading */
-    void printTree(KDTreeNode * subroot, std::vector<std::string>& output,
+    void printTree(KDTreeNode* subroot, std::vector<std::string>& output,
                    int left, int top, int width, int currd) const;
 
     /**
