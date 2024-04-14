@@ -15,6 +15,7 @@
 #include <vector>
 #include "util/coloredout.h"
 #include "point.h"
+#include <functional>
 
 using std::vector;
 using std::string;
@@ -247,7 +248,7 @@ public:
 private:
     /** Internal representation, root and size **/
     KDTreeNode* root;
-    size_t size;
+    size_t size{};
 
     /** Helper function for grading */
     int getPrintData(KDTreeNode* subroot) const;
@@ -259,7 +260,55 @@ private:
     /**
      * @todo Add your helper functions here.
      */
+
+    /**
+     * Helper function for KDTree constructor.
+     * @param newPoints The vector of points to build your KDTree off of.
+     * @param a The left index of the vector.
+     * @param b The right index of the vector.
+     * @param dim The current dimension.
+     * @return The root of the KDTree.
+     */
+    KDTreeNode* buildTree(vector<Point<Dim>>& newPoints, int a, int b, int dim);
+
+    /**
+     * Helper function for findNearestNeighbor.
+     * @param subroot The current root of the KDTree.
+     * @param query The point we wish to find the closest neighbor to in the tree.
+     * @param dim The current dimension.
+     * @return The closest point to a in the KDTree.
+     */
+    Point<Dim> findNearestNeighbor(KDTreeNode* subroot, const Point<Dim>& query, int dim) const;
+
+    void destroy(KDTreeNode* subroot);
+
+    void copy(KDTreeNode* subroot, KDTreeNode* other);
 };
+
+/**
+ * Helper function for quickSelect.
+ * @param list The vector of points to build your KDTree off of.
+ * @param left The left index of the vector.
+ * @param right The right index of the vector.
+ * @param k The kth smallest element.
+ * @param cmp The comparison function, true if the first argument is smaller than the second one.
+ */
+template<typename T>
+T quickSelect(vector<T>& list, int left, int right, int k,
+                 std::function<bool(const T&, const T&)>& cmp);
+
+/**
+ * Helper function for partition.
+ * @param list The vector of points to build your KDTree off of.
+ * @param left The left index of the vector.
+ * @param right The right index of the vector.
+ * @param pivotIndex The index of the pivot.
+ * @param cmp The comparison function, true if the first argument is smaller than the second one.
+ * @return The index of the pivot.
+ */
+template<typename T>
+int partition(vector<T>& list, int left, int right, int pivotIndex,
+              std::function<bool(const T&, const T&)>& cmp);
 
 #include "kdtree.cpp"
 #include "kdtree_extras.cpp"
