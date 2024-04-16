@@ -29,7 +29,8 @@ LogfileParser::LogLine::LogLine(const string& line)
     iss >> url;
     string dte = "";
     string dline;
-    do {
+    do
+    {
         iss >> dline;
         dte += dline;
     } while (iss);
@@ -52,7 +53,8 @@ LogfileParser::LogfileParser(const string& fname) : whenVisitedTable(256)
     SCHashTable<string, bool> pageVisitedTable(256);
     ifstream infile(fname.c_str());
     string line;
-    while (infile.good()) {
+    while (infile.good())
+    {
         getline(infile, line);
 
         // if the line length is 0, move on to the next loop iteration
@@ -87,7 +89,7 @@ bool LogfileParser::hasVisited(const string& customer, const string& url) const
      */
 
     (void) customer; // prevent warnings... When you implement this function, remove this line.
-    (void) url;      // prevent warnings... When you implement this function, remove this line.
+    (void) url; // prevent warnings... When you implement this function, remove this line.
 
     return true; // replaceme
 }
@@ -110,7 +112,7 @@ time_t LogfileParser::dateVisited(const string& customer,
      */
 
     (void) customer; // prevent warnings... When you implement this function, remove this line.
-    (void) url;      // prevent warnings... When you implement this function, remove this line.
+    (void) url; // prevent warnings... When you implement this function, remove this line.
 
     return time_t(); // replaceme
 }

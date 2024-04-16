@@ -20,10 +20,10 @@
  * @date Spring 2011
  * @date Summer 2012
  */
-template <class K, class V>
+template<class K, class V>
 class SCHashTable : public HashTable<K, V>
 {
-  private:
+private:
     // so we can refer to hash, elems, and size directly, and use the
     // makeIterator fuction without having to scope it.
     using HashTable<K, V>::elems;
@@ -36,7 +36,7 @@ class SCHashTable : public HashTable<K, V>
     // this
     class SCIteratorImpl;
 
-  public:
+public:
     // we use HashTable's iterators here
     typedef typename HashTable<K, V>::iterator iterator;
 
@@ -72,10 +72,15 @@ class SCHashTable : public HashTable<K, V>
 
     // functions inherited from HashTable
     virtual void insert(const K& key, const V& value);
+
     virtual void remove(const K& key);
+
     virtual V find(const K& key) const;
+
     virtual bool keyExists(const K& key) const;
+
     virtual void clear();
+
     virtual V& operator[](const K& key);
 
     iterator begin() const
@@ -88,7 +93,7 @@ class SCHashTable : public HashTable<K, V>
         return makeIterator(new SCIteratorImpl(*this, size, true));
     }
 
-  private:
+private:
     /**
      * Storage for our SCHashTable.
      *
@@ -101,6 +106,7 @@ class SCHashTable : public HashTable<K, V>
     // inherited from HashTable
     virtual void resizeTable();
 };
+
 #include "sciterator.h"
 #include "schashtable.cpp"
 #endif

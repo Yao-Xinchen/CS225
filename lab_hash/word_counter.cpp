@@ -15,14 +15,14 @@ using std::istringstream;
 using std::cout;
 using std::endl;
 
-template <template <class K, class V> class Dict>
+template<template <class K, class V> class Dict>
 WordFreq<Dict>::WordFreq(const string& infile)
     : filename(infile)
 {
     /* nothing */
 }
 
-template <template <class K, class V> class Dict>
+template<template <class K, class V> class Dict>
 vector<pair<string, int>> WordFreq<Dict>::getWords(int threshold) const
 {
     TextFile infile(filename);

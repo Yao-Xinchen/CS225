@@ -29,7 +29,7 @@
  */
 class LogfileParser
 {
-  public:
+public:
     /**
      * Constructs a new LogfileParser from the name of a log file.
      *
@@ -68,7 +68,7 @@ class LogfileParser
      */
     std::vector<std::string> uniquePages() const;
 
-  private:
+private:
     /**
      * LogLine structure: Represents the information contained in a
      * single line of the logfile.
@@ -79,7 +79,7 @@ class LogfileParser
      */
     class LogLine
     {
-      public:
+    public:
         /**
          * Constructs a LogLine from a string (actual physical line
          * in the logfile).
@@ -89,8 +89,8 @@ class LogfileParser
         LogLine(const std::string& line);
 
         std::string customer; /**< The customer for this line, */
-        std::string url;      /**< The url for this line. */
-        time_t date;          /**< The date for this line. */
+        std::string url; /**< The url for this line. */
+        time_t date; /**< The date for this line. */
     };
 
     /**

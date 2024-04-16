@@ -19,10 +19,10 @@
  * @date Spring 2011
  * @date Summer 2012
  */
-template <class K, class V>
+template<class K, class V>
 class LPHashTable : public HashTable<K, V>
 {
-  private:
+private:
     // so we can refer to hash, elems, and size directly, and use the
     // makeIterator function without having to scope it.
     using HashTable<K, V>::elems;
@@ -35,7 +35,7 @@ class LPHashTable : public HashTable<K, V>
     // this
     class LPIteratorImpl;
 
-  public:
+public:
     // we use HashTable's iterators here
     typedef typename HashTable<K, V>::iterator iterator;
 
@@ -70,11 +70,17 @@ class LPHashTable : public HashTable<K, V>
     LPHashTable(const LPHashTable<K, V>& other);
 
     // functions inherited from HashTable
+
     virtual void insert(const K& key, const V& value);
+
     virtual void remove(const K& key);
+
     virtual V find(const K& key) const;
+
     virtual bool keyExists(const K& key) const;
+
     virtual void clear();
+
     virtual V& operator[](const K& key);
 
     iterator begin() const
@@ -87,7 +93,7 @@ class LPHashTable : public HashTable<K, V>
         return makeIterator(new LPIteratorImpl(*this, size));
     }
 
-  private:
+private:
     /**
      * Storage for our LPHashTable.
      *

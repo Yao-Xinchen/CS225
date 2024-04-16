@@ -26,10 +26,10 @@
  * @date Spring 2011
  * @date Summer 2012
  */
-template <template <class K, class V> class Dict>
+template<template <class K, class V> class Dict>
 class WordFreq
 {
-  public:
+public:
     /**
      * Constructs a WordFreq from the given filename.
      *
@@ -49,8 +49,9 @@ class WordFreq
      */
     std::vector<std::pair<std::string, int>> getWords(int threshold) const;
 
-  private:
+private:
     std::string filename; /**< Name of the file we are reading from. */
 };
+
 #include "word_counter.cpp"
 #endif

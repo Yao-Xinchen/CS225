@@ -31,7 +31,7 @@
 template <template <class K, class V> class Dict>
 class AnagramFinder
 {
-  public:
+public:
     /**
      * Constructs an AnagramFinder based on a filename to read
      * potential anagrams from.
@@ -66,7 +66,7 @@ class AnagramFinder
      */
     void writeAnagrams(const std::string& word, const std::string& output_file);
 
-  private:
+private:
     // indicates where to read data from
     bool file; /**< Indicates whether a file was used to build the
                     finder or not. */
