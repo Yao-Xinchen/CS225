@@ -18,11 +18,32 @@ Point<3> convertToLAB(HSLAPixel pixel)
 MosaicCanvas* mapTiles(SourceImage const& theSource,
                        vector<TileImage>& theTiles)
 {
-    /**
-     * @todo Implement this function!
-     */
+    using PT = Point<3>;
 
-    return NULL;
+    // create a vector of points and a map of points to tile images
+    vector<PT> points;
+    map<PT, int> tile_avg_map;
+    for (auto& tile : theTiles)
+    {
+        const auto avg = tile.getAverageColor();
+        auto avgPoint = convertToLAB(avg);
+        points.push_back(avgPoint);
+        tile_avg_map[avgPoint] = static_cast<int>(&tile - &theTiles[0]);
+    }
+
+    auto tree = KDTree<3>(points);
+    auto rows = theSource.getRows();
+    auto cols = theSource.getColumns();
+    auto canvas = new MosaicCanvas(rows, cols);
+    for (int row = 0; row < rows; ++row)
+    {
+        for (int col = 0; col < cols; ++col)
+        {
+            auto tile = get_match_at_idx(tree, tile_avg_map, theTiles, theSource, row, col);
+            canvas->setTile(row, col, tile);
+        }
+    }
+    return canvas;
 }
 
 TileImage* get_match_at_idx(const KDTree<3>& tree,

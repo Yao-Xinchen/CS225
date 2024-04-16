@@ -52,6 +52,7 @@ KDTree<Dim>::KDTree(const vector<Point<Dim>>& newPoints)
 template<int Dim>
 KDTree<Dim>::KDTree(const KDTree& other)
 {
+    root = nullptr; // make sure the root is null
     *this = other;
 }
 
@@ -153,7 +154,7 @@ void KDTree<Dim>::destroy(KDTreeNode* subroot)
 }
 
 template<int Dim>
-void KDTree<Dim>::copy(KDTreeNode* subroot, KDTreeNode* other)
+void KDTree<Dim>::copy(KDTreeNode* & subroot, const KDTreeNode* const& other)
 {
     if (other == nullptr) return;
     subroot = new KDTreeNode(other->point);

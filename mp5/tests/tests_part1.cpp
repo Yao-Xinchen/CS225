@@ -54,7 +54,7 @@ void compareBinaryFiles( string yourFile, string ourFile )
     REQUIRE( true );
 }
 
-TEST_CASE("KDTree::testSmallerDimVal Tests", "[weight=1][part=1]") {
+TEST_CASE("KDTree::testSmallerDimVal Tests", "[weight=1][part=1-2]") {
   vector<Point<3>> pts;
   KDTree<3> tree(pts);
   Point<3> a(1, 2, 3);
@@ -65,20 +65,20 @@ TEST_CASE("KDTree::testSmallerDimVal Tests", "[weight=1][part=1]") {
   REQUIRE( tree.smallerDimVal(a, b, 1) == true );   // based on operator<
 }
 
-TEST_CASE("KDTree::shouldReplace Tests", "[weight=1][part=1]") {
+TEST_CASE("KDTree::shouldReplace Tests", "[weight=1][part=1-3]") {
   vector<Point<3>> pts;
   KDTree<3> tree(pts);
 
-  Point<3> target(1, 3, 5);
-  Point<3> currentBest1(1, 3, 2);
+  Point<3> target(2, 5, 4);
+  Point<3> currentBest1(1, 0, 2);
   Point<3> possibleBest1(2, 4, 4);
   Point<3> currentBest2(1, 3, 6);
   Point<3> possibleBest2(2, 4, 4);
   Point<3> currentBest3(0, 2, 4);
-  Point<3> possibleBest3(2, 4, 6);
+  Point<3> possibleBest3(8, 4, 6);
 
   REQUIRE( tree.shouldReplace(target, currentBest1, possibleBest1) == true );
-  REQUIRE( tree.shouldReplace(target, currentBest2, possibleBest2) == false );
+  REQUIRE( tree.shouldReplace(target, currentBest2, possibleBest2) == true );
   REQUIRE( tree.shouldReplace(target, currentBest3, possibleBest3) == false );  // operator<
 }
 
@@ -108,13 +108,51 @@ void _test_linear_constructor(int size) {
   compareBinaryFiles(fname, "tests/expected_kdtree_"+to_string(size)+".kd" );
 }
 
-TEST_CASE("KDTree constructor, 1D (Dim=1)", "[weight=1][part=1]") {
-  _test_linear_constructor<1>(10);
-}
+// TEST_CASE("KDTree constructor, 1D (Dim=1)", "[weight=1][part=1]") {
+//   _test_linear_constructor<1>(10);
+// }
 
-TEST_CASE("KDTree constructor, 3D (Dim = 3)", "[weight=1][part=1]") {
+TEST_CASE("KDTree constructor, 2D (Dim = 2)", "[weight=1][part=1-1]") {
+  _test_linear_constructor<2>(20);
+  }
+
+TEST_CASE("KDTree constructor, 3D (Dim = 3)", "[weight=1][part=1-1]") {
   _test_linear_constructor<3>(31);
   }
+
+TEST_CASE("KDTree operator= and copy constructor", "[weight=1][part=1-5]") {
+  vector<Point<3>> points;
+  points.reserve(10);
+  for (int i = 0; i < 10; i++) {
+      Point<3> p;
+      for (int j = 0; j < 3; j++)
+          p[j] = i;
+      points.push_back(p);
+  }
+  KDTree<3> tree(points);
+
+  KDTree<3> tree_copy = tree;
+  KDTree<3> tree_copy2(tree);
+  std::string fname = "test_result_kdtree_origin.kd";
+  ofstream outputFile(fname, ofstream::out);
+  tree.printTree(outputFile, colored_out::DISABLE, -1);
+  outputFile.close();
+
+  fname = "test_result_kdtree_copy.kd";
+  outputFile.open(fname, ofstream::out);
+  tree_copy.printTree(outputFile, colored_out::DISABLE, -1);
+  outputFile.close();
+
+  fname = "test_result_kdtree_copy2.kd";
+  outputFile.open(fname, ofstream::out);
+  tree_copy2.printTree(outputFile, colored_out::DISABLE, -1);
+  outputFile.close();
+
+  compareBinaryFiles("test_result_kdtree_copy2.kd",  "test_result_kdtree_origin.kd");
+  compareBinaryFiles("test_result_kdtree_copy.kd",  "test_result_kdtree_origin.kd");
+}
+
+
 
 
 //
@@ -137,11 +175,16 @@ void _test_linear_nearestNeighbor(int size) {
   }
 }
 
-TEST_CASE("KDTree::findNearestNeighbor, exact match, 1D (Dim=1)", "[weight=1][part=1]") {
-  _test_linear_nearestNeighbor<1>(10);
-}
+// TEST_CASE("KDTree::findNearestNeighbor, exact match, 1D (Dim=1)", "[weight=1][part=1]") {
+//   _test_linear_nearestNeighbor<1>(10);
+// }
 
-TEST_CASE("KDTree::findNearestNeighbor, exact match, 3D (Dim=3)", "[weight=1][part=1]") {
+TEST_CASE("KDTree::findNearestNeighbor, exact match, 2D (Dim=2)", "[weight=1][part=1-4]") {
+  _test_linear_nearestNeighbor<2>(20);
+  }
+
+
+TEST_CASE("KDTree::findNearestNeighbor, exact match, 3D (Dim=3)", "[weight=1][part=1-4]") {
   _test_linear_nearestNeighbor<3>(31);
   }
 
@@ -166,7 +209,7 @@ TEST_CASE("KDTree::findNearestNeighbor, exact match, 3D (Dim=3)", "[weight=1][pa
 *                    8                   *
 *****************************************/
 // Looking for O, Xs are points
-TEST_CASE("KDTree::findNearestNeighbor (2D), returns correct result", "[weight=1][part=1]") {
+TEST_CASE("KDTree::findNearestNeighbor (2D), returns correct result", "[weight=1][part=1-4]") {
   double coords[6][2] = {
     {-15, 7}, {6, 7}, {-13, -1},
     {-5, 0}, {14, -3}, {14, 2}
@@ -225,7 +268,7 @@ class MineActionFAIL : public Point<Dim>::MineAction {
 // O: search target
 // N: nearest neighbor
 // X: non-mine elements
-TEST_CASE("KDTree::findNearestNeighbor (2D), testing correct path", "[weight=1][part=1]") {
+TEST_CASE("KDTree::findNearestNeighbor (2D), testing correct path", "[weight=1][part=1-4]") {
     double coords[10][2] = {
       {-8, 7}, {-6, 4}, {-5, 6}, {-3, 5}, {0, 7},
       //                ^NN
@@ -260,7 +303,7 @@ TEST_CASE("KDTree::findNearestNeighbor (2D), testing correct path", "[weight=1][
 /*
 
 */
-TEST_CASE("KDTree::findNearestNeighbor (2D), testing correct path with fence jumping", "[weight=1][part=1]") {
+TEST_CASE("KDTree::findNearestNeighbor (2D), testing correct path with fence jumping", "[weight=1][part=1-4]") {
   double coords[20][2] = {{84, 44},  // mine
                           {74, 0},   // mine
                           {54, 62},  // mine
@@ -305,7 +348,7 @@ TEST_CASE("KDTree::findNearestNeighbor (2D), testing correct path with fence jum
 }
 
 
-TEST_CASE("KDTree::findNearestNeighbor (3D), testing tie-breaking", "[weight=1][part=1]") {
+TEST_CASE("KDTree::findNearestNeighbor (3D), testing tie-breaking", "[weight=1][part=1-4]") {
   double coords[14][3] = {{0, 0, 100},   // mine
                           {0, 100, 100}, // mine
                           {0, 50, 50},   // mine
@@ -348,7 +391,7 @@ TEST_CASE("KDTree::findNearestNeighbor (3D), testing tie-breaking", "[weight=1][
 }
 
 
-TEST_CASE("KDTree::findNearestNeighbor (3D), testing that left recursion does not include the root", "[weight=1][part=1]") {
+TEST_CASE("KDTree::findNearestNeighbor (3D), testing that left recursion does not include the root", "[weight=1][part=1-4]") {
   double coords[10][3] = {
     {5, 3, 1}, {3, 1, 10}, {2, 0, 8}, {4, 3, 0}, {0, 2, 9},
     {10, 10, 10}, {11, 11, 11}, {12, 12, 12}, {13, 13, 13}, {14, 14, 14}

@@ -247,7 +247,7 @@ public:
 
 private:
     /** Internal representation, root and size **/
-    KDTreeNode* root;
+    KDTreeNode* root{nullptr};
     size_t size{};
 
     /** Helper function for grading */
@@ -280,9 +280,18 @@ private:
      */
     Point<Dim> findNearestNeighbor(KDTreeNode* subroot, const Point<Dim>& query, int dim) const;
 
+    /**
+     * Helper function for KDTree destructor.
+     * @param subroot The current root of the KDTree.
+     */
     void destroy(KDTreeNode* subroot);
 
-    void copy(KDTreeNode* subroot, KDTreeNode* other);
+    /**
+     * Helper function for KDTree copy constructor.
+     * @param subroot The current root of the KDTree.
+     * @param other The KDTree to copy.
+     */
+    void copy(KDTreeNode* & subroot, const KDTreeNode* const& other);
 };
 
 /**
@@ -295,7 +304,7 @@ private:
  */
 template<typename T>
 T quickSelect(vector<T>& list, int left, int right, int k,
-                 std::function<bool(const T&, const T&)>& cmp);
+              std::function<bool(const T&, const T&)>& cmp);
 
 /**
  * Helper function for partition.
