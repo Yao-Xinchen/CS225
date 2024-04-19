@@ -43,6 +43,13 @@ LogfileParser::LogLine::LogLine(const string& line)
     date = mktime(tme);
 }
 
+std::string LogfileParser::produce_key(const std::string& customer, const std::string& url)
+{
+    // add a backslash between the customer and the url
+    // to ensure that the key is unique
+    return customer + "\\" + url;
+}
+
 /**
  * Constructs a new LogfileParser from the name of a log file.
  *
@@ -63,14 +70,20 @@ LogfileParser::LogfileParser(const string& fname) : whenVisitedTable(256)
 
         // otherwise parse the line and update the hash tables and vector
         LogLine ll(line);
-        /**
-         * @todo Finish implementing this function.
-         *
-         * Given the LogLine above, you should be able to update the member
-         * variable hash table and any other hash tables necessary to solve
-         * this problem. This should also build the uniqueURLs member
-         * vector as well.
-         */
+        const auto key = produce_key(ll.customer, ll.url);
+
+        if (whenVisitedTable.keyExists(key))
+        { // if the key already exists, update the time if the new time is greater
+            if (ll.date > whenVisitedTable.find(key))
+                whenVisitedTable[key] = ll.date;
+        }
+        else whenVisitedTable[key] = ll.date; // otherwise, insert the new time
+
+        if (!pageVisitedTable.keyExists(ll.url))
+        { // if the url has not been visited before
+            uniqueURLs.push_back(ll.url);
+            pageVisitedTable[ll.url] = true;
+        }
     }
     infile.close();
 }
@@ -84,14 +97,8 @@ LogfileParser::LogfileParser(const string& fname) : whenVisitedTable(256)
  */
 bool LogfileParser::hasVisited(const string& customer, const string& url) const
 {
-    /**
-     * @todo Implement this function.
-     */
-
-    (void) customer; // prevent warnings... When you implement this function, remove this line.
-    (void) url; // prevent warnings... When you implement this function, remove this line.
-
-    return true; // replaceme
+    const auto key = produce_key(customer, url);
+    return whenVisitedTable.keyExists(key);
 }
 
 /**
@@ -107,14 +114,12 @@ bool LogfileParser::hasVisited(const string& customer, const string& url) const
 time_t LogfileParser::dateVisited(const string& customer,
                                   const string& url) const
 {
-    /**
-     * @todo Implement this function.
-     */
-
-    (void) customer; // prevent warnings... When you implement this function, remove this line.
-    (void) url; // prevent warnings... When you implement this function, remove this line.
-
-    return time_t(); // replaceme
+    const auto key = produce_key(customer, url);
+    // if the key exists, return the time
+    if (whenVisitedTable.keyExists(key))
+        return whenVisitedTable.find(key);
+    // otherwise, return the default time_t
+    return time_t();
 }
 
 /**

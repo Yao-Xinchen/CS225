@@ -109,5 +109,12 @@ private:
      * @note This vector **should not contain duplicates!**
      */
     std::vector<std::string> uniqueURLs;
+
+    /**
+     * Produces a key for the given customer and url.
+     * @param customer The customer name.
+     * @param url The url.
+     */
+    static std::string produce_key(const std::string& customer, const std::string& url);
 };
 #endif

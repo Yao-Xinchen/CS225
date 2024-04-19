@@ -26,13 +26,25 @@ template<template <class K, class V> class Dict>
 vector<pair<string, int>> WordFreq<Dict>::getWords(int threshold) const
 {
     TextFile infile(filename);
-    vector<pair<string, int>> ret;
-    /**
-     * @todo Implement this function.
-     * @see char_counter.cpp if you're having trouble.
-     */
+    Dict<string, int> freqs(0);
 
-    (void) threshold; // prevent warnings... When you implement this function, remove this line.
+    // read in all the words
+    while (infile.good())
+    {
+        auto word = infile.getNextWord();
+        if (freqs.keyExists(word))
+            ++freqs[word];
+        else
+            freqs[word] = 1;
+    }
 
+    // filter out the words that don't meet the threshold
+    vector<pair<string, int>> ret(0);
+    for (const auto& pair: freqs)
+    {
+        // pair is a pair<string, int>
+        if (pair.second >= threshold)
+            ret.push_back(pair);
+    }
     return ret;
 }

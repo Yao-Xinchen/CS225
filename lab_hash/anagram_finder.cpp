@@ -50,14 +50,31 @@ AnagramFinder<Dict>::AnagramFinder(const vector<string>& istrings)
 template<template <class K, class V> class Dict>
 bool AnagramFinder<Dict>::checkWord(const string& word, const string& test)
 {
-    /**
-     * @todo Implement this function! You should use the provided
-     * templated hashtable class Dict.
-     */
+    // if the lengths are different, they can't be anagrams
+    if (word.length() != test.length())
+        return false;
 
-    (void) word; // prevent warnings... When you implement this function, remove this line.
-    (void) test; // prevent warnings... When you implement this function, remove this line.
+    // count the frequencies of each character in word
+    Dict<char, int> freqs(0);
+    for (auto& c: word)
+    {
+        if (freqs.keyExists(c))
+            ++freqs[c];
+        else
+            freqs[c] = 1;
+    }
 
+    // check the frequencies of each character in test
+    for (size_t i = 0; i < test.length(); i++)
+    {
+        if (!freqs.keyExists(test[i]))
+            return false;
+        --freqs[test[i]];
+        if (freqs[test[i]] < 0)
+            return false;
+    }
+
+    // they are anagrams if they pass all tests
     return true;
 }
 
