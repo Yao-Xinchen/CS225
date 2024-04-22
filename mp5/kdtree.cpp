@@ -26,7 +26,7 @@ bool KDTree<Dim>::shouldReplace(const Point<Dim>& target,
 {
     // square of the distance
     auto dist_sq = [target](const Point<Dim>& p) {
-        auto dist = 0;
+        double dist = 0; // using int would cause bugs
         for (int i = 0; i < Dim; ++i)
             dist += (p[i] - target[i]) * (p[i] - target[i]);
         return dist;
