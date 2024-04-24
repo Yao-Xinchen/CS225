@@ -1,5 +1,5 @@
 /**
- * @file maptiles.h
+* @file maptiles.h
  *
  * mapTiles() function.
  * Developed for CS225 PhotoMosaic MP
@@ -31,7 +31,7 @@ using namespace cs225;
  * @param theTiles The tiles image to use in the mosaic
  */
 MosaicCanvas* mapTiles(SourceImage const& theSource,
-                       vector<TileImage> & theTiles);
+                       vector<TileImage>& theTiles);
 
 /**
  * Find the closest TileImage for a particular row and column.
@@ -48,8 +48,8 @@ MosaicCanvas* mapTiles(SourceImage const& theSource,
  * @returns the "nearest neighbor" tile
  */
 TileImage* get_match_at_idx(const KDTree<3>& tree,
-                                  map<Point<3>, int> tile_avg_map,
-                                  vector<TileImage>& theTiles,
-                                  const SourceImage& theSource, int row,
-                                  int col);
+                            map<Point<3>, int> tile_avg_map,
+                            vector<TileImage>& theTiles,
+                            const SourceImage& theSource, int row,
+                            int col);
 #endif // MAPTILES_H
