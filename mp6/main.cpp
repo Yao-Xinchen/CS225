@@ -14,7 +14,9 @@ using namespace cs225;
 
 void makePhotoMosaic(const string& inFile, const string& tileDir, int numTiles,
                      int pixelsPerTile, const string& outFile);
+
 vector<TileImage> getTiles(string tileDir);
+
 bool hasImageExtension(const string& fileName);
 
 namespace opts
@@ -24,12 +26,16 @@ namespace opts
 
 int main(int argc, const char** argv)
 {
+    auto start = std::chrono::system_clock::now();
+
     string inFile = "";
     string tileDir = "mp5_pngs/";
     string numTilesStr = "100";
     string pixelsPerTileStr = "50";
     string outFile = "mosaic.png";
 
+    auto parse_start = std::chrono::system_clock::now();
+    cout << "Parse start: " << (parse_start - start).count() << endl;
     OptionsParser optsparse;
     optsparse.addArg(inFile);
     optsparse.addArg(tileDir);
@@ -39,26 +45,39 @@ int main(int argc, const char** argv)
     optsparse.addOption("help", opts::help);
     optsparse.addOption("h", opts::help);
     optsparse.parse(argc, argv);
+    auto parse_end = std::chrono::system_clock::now();
+    cout << "Parse end: " << std::chrono::duration_cast<std::chrono::seconds>(parse_end - parse_start).count() << endl;
 
-    if (opts::help) {
+    if (opts::help)
+    {
         cout << "Usage: " << argv[0]
-             << " background_image.png tile_directory/ [number of tiles] "
+                << " background_image.png tile_directory/ [number of tiles] "
                 "[pixels per tile] [output_image.png]"
-             << endl;
+                << endl;
         return 0;
     }
 
-    if (inFile == "") {
+    if (inFile == "")
+    {
         cout << "Usage: " << argv[0]
-             << " background_image.png tile_directory/ [number of tiles] "
+                << " background_image.png tile_directory/ [number of tiles] "
                 "[pixels per tile] [output_image.png]"
-             << endl;
+                << endl;
         return 1;
     }
 
+    auto mosaic_start = std::chrono::system_clock::now();
+    cout << "Mosaic start: " << std::chrono::duration_cast<std::chrono::seconds>(mosaic_start - start).count() << endl;
     makePhotoMosaic(inFile, tileDir, lexical_cast<int>(numTilesStr),
                     lexical_cast<int>(pixelsPerTileStr), outFile);
+    auto mosaic_end = std::chrono::system_clock::now();
+    cout << "Mosaic end: " << std::chrono::duration_cast<std::chrono::seconds>(mosaic_end - mosaic_start).count() <<
+            endl;
 
+    auto end = std::chrono::system_clock::now();
+    auto elapsed_seconds = end - start;
+    cout << "Elapsed time: " << std::chrono::duration_cast<std::chrono::seconds>(elapsed_seconds).count() << "s" <<
+            endl;
     return 0;
 }
 
@@ -70,7 +89,8 @@ void makePhotoMosaic(const string& inFile, const string& tileDir, int numTiles,
     SourceImage source(inImage, numTiles);
     vector<TileImage> tiles = getTiles(tileDir);
 
-    if (tiles.empty()) {
+    if (tiles.empty())
+    {
         cerr << "ERROR: No tile images found in " << tileDir << endl;
         exit(2);
     }
@@ -79,7 +99,8 @@ void makePhotoMosaic(const string& inFile, const string& tileDir, int numTiles,
     MosaicCanvas* mosaic = mapTiles(source, tiles);
     cerr << endl;
 
-    if (mosaic == NULL) {
+    if (mosaic == NULL)
+    {
         cerr << "ERROR: Mosaic generation failed" << endl;
         exit(3);
     }
@@ -108,22 +129,24 @@ vector<TileImage> getTiles(string tileDir)
 
     vector<TileImage> images;
     set<HSLAPixel> avgColors;
-    for (size_t i = 0; i < imageFiles.size(); i++) {
+    for (size_t i = 0; i < imageFiles.size(); i++)
+    {
         cerr << "\rLoading Tile Images... ("
-             << (i + 1) << "/" << imageFiles.size()
-             << ")" << string(20, ' ') << "\r";
+                << (i + 1) << "/" << imageFiles.size()
+                << ")" << string(20, ' ') << "\r";
         cerr.flush();
         PNG png;
         png.readFromFile(imageFiles.at(i));
         TileImage next(png);
-        if (avgColors.count(next.getAverageColor()) == 0) {
+        if (avgColors.count(next.getAverageColor()) == 0)
+        {
             avgColors.insert(next.getAverageColor());
             images.push_back(next);
         }
     }
     cerr << "\rLoading Tile Images... ("
-         << imageFiles.size() << "/" << imageFiles.size()
-         << ")";
+            << imageFiles.size() << "/" << imageFiles.size()
+            << ")";
     cerr << "... " << images.size() << " unique images loaded" << endl;
     cerr.flush();
 

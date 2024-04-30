@@ -27,8 +27,9 @@ using namespace cs225;
  * into.  The image will then be processes to find the average color of each
  * region.
  */
-class SourceImage {
-  public:
+class SourceImage
+{
+public:
     /**
      * Default constructor
      *
@@ -68,7 +69,7 @@ class SourceImage {
      */
     int getColumns() const;
 
-  private:
+private:
     PNG backingImage;
     int resolution;
 

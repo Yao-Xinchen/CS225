@@ -27,7 +27,7 @@ using namespace cs225;
  */
 class MosaicCanvas
 {
-  public:
+public:
     static bool enableOutput;
 
     /**
@@ -91,9 +91,9 @@ class MosaicCanvas
      * @param pixelsPerTile pixels per Photomosaic tile
      * @return the Photomosaic as a PNG object
      */
-    PNG drawMosaic(int pixelsPerTile) ;
+    PNG drawMosaic(int pixelsPerTile);
 
-  private:
+private:
     /**
      * Number of image rows in the Mosaic
      */
@@ -110,6 +110,7 @@ class MosaicCanvas
     vector<TileImage*> myImages;
 
     TileImage& images(int x, int y);
+
     //const TileImage& images(int x, int y) const;
 
     static uint64_t divide(uint64_t a, uint64_t b);
@@ -119,12 +120,14 @@ inline TileImage& MosaicCanvas::images(int row, int col)
 {
     return *myImages[row * columns + col];
 }
+
 /**
 inline const TileImage& MosaicCanvas::images(int row, int col) const
 {
     return myImages[row * columns + col];
 }
 */
+
 inline uint64_t MosaicCanvas::divide(uint64_t a, uint64_t b)
 {
     return (a + b / 2) / b;

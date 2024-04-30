@@ -59,7 +59,7 @@ TileImage* get_match_at_idx(const KDTree<3>& tree,
     Point<3> nearestPoint = tree.findNearestNeighbor(avgPoint);
 
     // Check to ensure the point exists in the map
-    map<Point<3>, int>::iterator it = tile_avg_map.find(nearestPoint);
+    const auto it = tile_avg_map.find(nearestPoint);
     if (it == tile_avg_map.end())
         cerr << "Didn't find " << avgPoint << " / " << nearestPoint << endl;
 
