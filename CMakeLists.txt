@@ -17,6 +17,7 @@ set(SUBDIR
         lab_btree
         lab_hash
         lab_heaps
+        lab_dict
         mp1
         mp2
         mp3
