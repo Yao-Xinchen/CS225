@@ -33,14 +33,17 @@ PronounceDict::PronounceDict(const string& pronun_dict_filename)
 {
     ifstream pronun_dict_file(pronun_dict_filename);
     string line;
-    if (pronun_dict_file.is_open()) {
-        while (getline(pronun_dict_file, line)) {
+    if (pronun_dict_file.is_open())
+    {
+        while (getline(pronun_dict_file, line))
+        {
             /* Used to break the line by whitespace. The CMU Dict does this for
              * separating words from their pronunciations. */
             stringstream line_ss(line);
             istream_iterator<string> line_begin(line_ss);
             istream_iterator<string> line_end;
-            if (line[0] != '#' && *line_begin != ";;;") {
+            if (line[0] != '#' && *line_begin != ";;;")
+            {
                 /* Associate the word with the rest of the line
                  * (its pronunciation). */
                 istream_iterator<string> temp_itr = line_begin;
@@ -74,6 +77,15 @@ PronounceDict::PronounceDict(const map<string, vector<string>>& pronun_dict)
  */
 bool PronounceDict::homophones(const string& word1, const string& word2) const
 {
-    /* Your code goes here! */
-    return true;
+    string upper_word1 = word1;
+    string upper_word2 = word2;
+    std::transform(upper_word1.begin(), upper_word1.end(), upper_word1.begin(), ::toupper);
+    std::transform(upper_word2.begin(), upper_word2.end(), upper_word2.begin(), ::toupper);
+
+    if (dict.find(upper_word1) != dict.end()
+        && dict.find(upper_word2) != dict.end())
+    {
+        return dict.at(upper_word1) == dict.at(upper_word2);
+    }
+    return false;
 }
