@@ -8,30 +8,34 @@
 #include "maptiles.h"
 
 using namespace std;
+using color = Point<3>;
 
-Point<3> convertToLAB(HSLAPixel pixel)
+extern std::chrono::time_point<std::chrono::system_clock> start;
+
+color convertToLAB(HSLAPixel pixel)
 {
-    Point<3> result(pixel.h / 360, pixel.s, pixel.l);
+    color result(pixel.h / 360, pixel.s, pixel.l);
     return result;
 }
 
 MosaicCanvas* mapTiles(SourceImage const& theSource,
-                       vector<TileImage>& theTiles)
+    vector<TileImage>& theTiles)
 {
-    using PT = Point<3>;
-
     // create a vector of points and a map of points to tile images
-    vector<PT> points;
-    map<PT, int> tile_avg_map;
-    for (auto& tile : theTiles)
+    vector<color> tile_colors;
+    map<color, int> tile_avg_map; // [tile_color, tile_index]
+    for (auto& tile: theTiles)
     {
         const auto avg = tile.getAverageColor();
-        auto avgPoint = convertToLAB(avg);
-        points.push_back(avgPoint);
-        tile_avg_map[avgPoint] = static_cast<int>(&tile - &theTiles[0]);
+        auto avg_color = convertToLAB(avg);
+        tile_colors.push_back(avg_color);
+        tile_avg_map[avg_color] = static_cast<int>(&tile - &theTiles[0]);
     }
 
-    auto tree = KDTree<3>(points);
+    auto calc_avg_end = std::chrono::system_clock::now();
+    cout << "Calc avg end: " << std::chrono::duration_cast<std::chrono::seconds>(calc_avg_end - start).count() << endl;
+
+    auto tree = KDTree<3>(tile_colors);
     auto rows = theSource.getRows();
     auto cols = theSource.getColumns();
     auto canvas = new MosaicCanvas(rows, cols);
@@ -43,25 +47,29 @@ MosaicCanvas* mapTiles(SourceImage const& theSource,
             canvas->setTile(row, col, tile);
         }
     }
+
+    auto set_tile_end = std::chrono::system_clock::now();
+    cout << "Set tile end: " << std::chrono::duration_cast<std::chrono::seconds>(set_tile_end - start).count() << endl;
+
     return canvas;
 }
 
 TileImage* get_match_at_idx(const KDTree<3>& tree,
-                            map<Point<3>, int> tile_avg_map,
-                            vector<TileImage>& theTiles,
-                            const SourceImage& theSource, int row,
-                            int col)
+    map<color, int>& tile_avg_map,
+    vector<TileImage>& theTiles,
+    const SourceImage& theSource,
+    int row, int col)
 {
     // Create a tile which accurately represents the source region we'll be
     // using
     HSLAPixel avg = theSource.getRegionColor(row, col);
-    Point<3> avgPoint = convertToLAB(avg);
-    Point<3> nearestPoint = tree.findNearestNeighbor(avgPoint);
+    color region_avg = convertToLAB(avg);
+    color nearestPoint = tree.findNearestNeighbor(region_avg);
 
     // Check to ensure the point exists in the map
     const auto it = tile_avg_map.find(nearestPoint);
     if (it == tile_avg_map.end())
-        cerr << "Didn't find " << avgPoint << " / " << nearestPoint << endl;
+        cerr << "Didn't find " << region_avg << " / " << nearestPoint << endl;
 
     // Find the index
     int index = tile_avg_map[nearestPoint];

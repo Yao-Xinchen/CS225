@@ -48,7 +48,7 @@ MosaicCanvas* mapTiles(SourceImage const& theSource,
  * @returns the "nearest neighbor" tile
  */
 TileImage* get_match_at_idx(const KDTree<3>& tree,
-                            map<Point<3>, int> tile_avg_map,
+                            map<Point<3>, int>& tile_avg_map,
                             vector<TileImage>& theTiles,
                             const SourceImage& theSource, int row,
                             int col);

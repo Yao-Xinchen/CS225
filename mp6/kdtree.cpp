@@ -170,12 +170,7 @@ T quickSelect(vector<T>& list, int left, int right, int k,
     if (left == right) return list[left];
 
     // select a pivotIndex between left and right
-    auto pivotIndex = [left, right] {
-        std::random_device rd;
-        std::mt19937 gen(rd());
-        std::uniform_int_distribution<int> dis(left, right);
-        return dis(gen);
-    }();
+    auto pivotIndex = (left + right) / 2;
     pivotIndex = partition(list, left, right, pivotIndex, cmp);
 
     // pivot is in its final sorted position

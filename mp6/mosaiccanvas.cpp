@@ -82,18 +82,20 @@ PNG MosaicCanvas::drawMosaic(int pixelsPerTile)
     PNG mosaic(width, height);
 
     // Create list of drawable tiles
-    for (int row = 0; row < rows; row++) {
+    for (int row = 0; row < rows; row++)
+    {
         // if (enableOutput) {
         //     cerr << "\rDrawing Mosaic: resizing tiles ("
         //          << (row * columns + /*col*/ 0 + 1) << "/" << (rows * columns)
         //          << ")" << string(20, ' ') << "\r";
         //     cerr.flush();
         // }
-        for (int col = 0; col < columns; col++) {
-            int startX = divide(width  * col,       getColumns());
-            int endX   = divide(width  * (col + 1), getColumns());
-            int startY = divide(height * row,       getRows());
-            int endY   = divide(height * (row + 1), getRows());
+        for (int col = 0; col < columns; col++)
+        {
+            int startX = divide(width * col, getColumns());
+            int endX = divide(width * (col + 1), getColumns());
+            int startY = divide(height * row, getRows());
+            int endY = divide(height * (row + 1), getRows());
 
             // if (endX - startX != endY - startY)
             //     cerr << "Error: resolution not constant: x: " << (endX - startX)
