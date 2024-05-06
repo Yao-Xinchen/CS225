@@ -6,6 +6,7 @@
 #include <iostream>
 #include <map>
 #include "maptiles.h"
+#include <thread>
 
 using namespace std;
 using color = Point<3>;
@@ -18,7 +19,20 @@ color convertToLAB(HSLAPixel pixel)
     return result;
 }
 
-MosaicCanvas* mapTiles(SourceImage const& theSource,
+void setTiles(const KDTree<3>& tree, map<color, int>& tile_avg_map, vector<TileImage>& theTiles,
+    const SourceImage& theSource, MosaicCanvas* canvas, int startRow, int endRow)
+{
+    for (int row = startRow; row < endRow; ++row)
+    {
+        for (int col = 0; col < theSource.getColumns(); ++col)
+        {
+            auto tile = get_match_at_idx(tree, tile_avg_map, theTiles, theSource, row, col);
+            canvas->setTile(row, col, tile);
+        }
+    }
+}
+
+MosaicCanvas* mapTiles(const SourceImage& theSource,
     vector<TileImage>& theTiles)
 {
     // create a vector of points and a map of points to tile images
@@ -39,14 +53,17 @@ MosaicCanvas* mapTiles(SourceImage const& theSource,
     auto rows = theSource.getRows();
     auto cols = theSource.getColumns();
     auto canvas = new MosaicCanvas(rows, cols);
-    for (int row = 0; row < rows; ++row)
+    vector<thread> threads;
+    size_t numThreads = std::thread::hardware_concurrency();
+    size_t chunkSize = theSource.getRows() / numThreads;
+    for (size_t i = 0; i < numThreads; ++i)
     {
-        for (int col = 0; col < cols; ++col)
-        {
-            auto tile = get_match_at_idx(tree, tile_avg_map, theTiles, theSource, row, col);
-            canvas->setTile(row, col, tile);
-        }
+        size_t startRow = i * chunkSize;
+        size_t endRow = (i == numThreads - 1) ? theSource.getRows() : startRow + chunkSize;
+        threads.emplace_back(setTiles, ref(tree), ref(tile_avg_map), ref(theTiles), ref(theSource), canvas, startRow,
+            endRow);
     }
+    for (auto& th: threads) th.join();
 
     auto set_tile_end = std::chrono::system_clock::now();
     cout << "Set tile end: " << std::chrono::duration_cast<std::chrono::seconds>(set_tile_end - start).count() << endl;

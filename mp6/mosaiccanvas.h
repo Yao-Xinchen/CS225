@@ -85,6 +85,11 @@ public:
      */
     const TileImage& getTile(int row, int column);
 
+    void drawTiles(PNG& mosaic, int startRow, int endRow,
+        int width, int height,
+        int columns, int rows,
+        bool enableOutput);
+
     /**
      * Save the current MosaicCanvas as a file with
      * the following pixels per tile.

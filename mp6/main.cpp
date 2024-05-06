@@ -8,6 +8,9 @@
 #include "sourceimage.h"
 #include "util/util.h"
 
+#include <thread>
+#include <mutex>
+
 using namespace std;
 using namespace util;
 using namespace cs225;
@@ -112,13 +115,39 @@ void makePhotoMosaic(const string& inFile, const string& tileDir, int numTiles,
     }
 
     PNG result = mosaic->drawMosaic(pixelsPerTile);
-    cerr << "Saving Output Image... ";
+    cerr << "Saving Output Image... " << endl;
+    auto draw_end = std::chrono::system_clock::now();
+    cout << "Draw end: " << std::chrono::duration_cast<std::chrono::seconds>(draw_end - start).count() << endl;
     result.writeToFile(outFile);
     cerr << "Done" << endl;
     delete mosaic;
+    auto save_end = std::chrono::system_clock::now();
+    cout << "Save end: " << std::chrono::duration_cast<std::chrono::seconds>(save_end - start).count() << endl;
+}
 
-    auto draw_end = std::chrono::system_clock::now();
-    cout << "Draw end: " << std::chrono::duration_cast<std::chrono::seconds>(draw_end - start).count() << endl;
+std::mutex mtx; // mutex for critical section
+
+// Function to be run on each thread
+void loadImages(const vector<string>& imageFiles, size_t start, size_t end,
+    vector<TileImage>& images, set<HSLAPixel>& avgColors)
+{
+    for (size_t i = start; i < end; ++i)
+    {
+        cerr << "\rLoading Tile Images... ("
+                << (i + 1) << "/" << imageFiles.size()
+                << ")" << string(20, ' ') << "\r";
+        cerr.flush();
+        PNG png;
+        png.readFromFile(imageFiles.at(i));
+        TileImage next(png);
+        mtx.lock(); // entering critical section
+        if (avgColors.count(next.getAverageColor()) == 0)
+        {
+            avgColors.insert(next.getAverageColor());
+            images.push_back(next);
+        }
+        mtx.unlock(); // leaving critical section
+    }
 }
 
 vector<TileImage> getTiles(string tileDir)
@@ -138,21 +167,18 @@ vector<TileImage> getTiles(string tileDir)
 
     vector<TileImage> images;
     set<HSLAPixel> avgColors;
-    for (size_t i = 0; i < imageFiles.size(); i++)
+    vector<thread> threads;
+    size_t numThreads = std::thread::hardware_concurrency();
+    size_t chunkSize = imageFiles.size() / numThreads;
+
+    for (size_t i = 0; i < numThreads; ++i)
     {
-        // cerr << "\rLoading Tile Images... ("
-        //         << (i + 1) << "/" << imageFiles.size()
-        //         << ")" << string(20, ' ') << "\r";
-        // cerr.flush();
-        PNG png;
-        png.readFromFile(imageFiles.at(i));
-        TileImage next(png);
-        if (avgColors.count(next.getAverageColor()) == 0)
-        {
-            avgColors.insert(next.getAverageColor());
-            images.push_back(next);
-        }
+        size_t start = i * chunkSize;
+        size_t end = (i == numThreads - 1) ? imageFiles.size() : start + chunkSize;
+        threads.emplace_back(loadImages, ref(imageFiles), start, end, ref(images), ref(avgColors));
     }
+    for (auto& th: threads) th.join();
+
     cerr << "\rLoading Tile Images... ("
             << imageFiles.size() << "/" << imageFiles.size()
             << ")";
