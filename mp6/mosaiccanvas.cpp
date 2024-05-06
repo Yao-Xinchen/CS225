@@ -95,6 +95,7 @@ void MosaicCanvas::drawTiles(PNG& mosaic, int startRow, int endRow,
                 cerr << "Error: resolution not constant: x: " << (endX - startX)
                         << " y: " << (endY - startY) << endl;
 
+            std::lock_guard<std::mutex> lock(mosaic_mutex);
             images(row, col).paste(mosaic, startX, startY, endX - startX);
         }
     }

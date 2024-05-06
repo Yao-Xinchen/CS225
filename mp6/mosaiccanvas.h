@@ -119,6 +119,8 @@ private:
     //const TileImage& images(int x, int y) const;
 
     static uint64_t divide(uint64_t a, uint64_t b);
+
+    std::mutex mosaic_mutex;
 };
 
 inline TileImage& MosaicCanvas::images(int row, int col)

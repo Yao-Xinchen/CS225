@@ -11,8 +11,6 @@
 using namespace std;
 using color = Point<3>;
 
-extern std::chrono::time_point<std::chrono::system_clock> start;
-
 color convertToLAB(HSLAPixel pixel)
 {
     color result(pixel.h / 360, pixel.s, pixel.l);
@@ -46,9 +44,6 @@ MosaicCanvas* mapTiles(const SourceImage& theSource,
         tile_avg_map[avg_color] = static_cast<int>(&tile - &theTiles[0]);
     }
 
-    auto calc_avg_end = std::chrono::system_clock::now();
-    cout << "Calc avg end: " << std::chrono::duration_cast<std::chrono::seconds>(calc_avg_end - start).count() << endl;
-
     auto tree = KDTree<3>(tile_colors);
     auto rows = theSource.getRows();
     auto cols = theSource.getColumns();
@@ -64,9 +59,6 @@ MosaicCanvas* mapTiles(const SourceImage& theSource,
             endRow);
     }
     for (auto& th: threads) th.join();
-
-    auto set_tile_end = std::chrono::system_clock::now();
-    cout << "Set tile end: " << std::chrono::duration_cast<std::chrono::seconds>(set_tile_end - start).count() << endl;
 
     return canvas;
 }
