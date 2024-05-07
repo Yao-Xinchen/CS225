@@ -16,6 +16,7 @@
 #include <vector>
 #include "cs225/PNG.h"
 #include "tileimage.h"
+#include <mutex>
 
 using namespace std;
 using namespace cs225;
