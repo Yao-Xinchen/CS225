@@ -24,4 +24,4 @@ set(SOURCES
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES} ${UTIL} ${CS225} main.cpp)
-add_executable(${PROJECT_NAME}_tests ${SOURCES} ${UTIL} ${CS225} ${TESTS})
+add_executable(${PROJECT_NAME}_test ${SOURCES} ${UTIL} ${CS225} ${TESTS})
