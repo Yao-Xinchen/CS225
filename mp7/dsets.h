@@ -3,6 +3,8 @@
 #ifndef DSETS_H
 #define DSETS_H
 
+#include <vector>
+
 /**
  * @class DisjointSets
  *
@@ -51,8 +53,22 @@ public:
      */
     void setunion(int a, int b);
 
+    /**
+     * @brief This function should return the size of the set that the element belongs to.
+     *
+     * @param elem The element to be sized.
+     * @return The size of the set containing the element.
+     */
     int size(int elem);
+
+    /**
+     * @brief This function should return true if the DisjointSets object is empty, false otherwise.
+     * @return True if the DisjointSets object is empty, false otherwise.
+     */
+    bool empty() const { return elements.empty(); }
+
 private:
+    std::vector<int> elements;
 };
 
 #endif

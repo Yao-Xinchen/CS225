@@ -6,9 +6,17 @@
 #include <vector>
 #include "dsets.h"
 #include "cs225/PNG.h"
+#include "dsets.h"
+#include <iostream>
+#include <tuple>
 
 using namespace std;
 using namespace cs225;
+
+#define RIGHT 0
+#define DOWN 1
+#define LEFT 2
+#define UP 3
 
 /**
  * @class SquareMaze
@@ -98,7 +106,7 @@ public:
      *
      * @return A vector of directions taken to solve the maze.
      */
-    vector<int> solveMaze();
+    vector<int> solveMaze() const;
 
     /**
      * @brief Draws the maze without the solution.
@@ -131,7 +139,16 @@ public:
      *
      * @return a PNG of the solved SquareMaze.
      */
-    PNG* drawMazeWithSolution();
+    PNG* drawMazeWithSolution() const;
+
+private:
+    DisjointSets cells; ///< Two cells are connected if they are in the same set.
+
+    int width; ///< The width of the maze.
+    int height; ///< The height of the maze;
+
+    std::vector<bool> right_walls; ///< The right walls of the maze.
+    std::vector<bool> down_walls; ///< The down walls of the maze.
 };
 
 #endif // MAZE_H
