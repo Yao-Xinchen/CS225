@@ -19,6 +19,7 @@ set(SUBDIR
         lab_heaps
         lab_dict
         lab_graphs
+        lab_ml
         mp1
         mp2
         mp3
