@@ -25,8 +25,32 @@
  */
 int GraphTools::findMinWeight(Graph& graph)
 {
-    /* Your code here! */
-    return -1;
+    auto min_weight = std::numeric_limits<int>::max();
+    Edge min_edge;
+
+    // init all as unvisited
+    for (const auto& vertex: graph.getVertices())
+        graph.setVertexLabel(vertex, "UNEXPLORED");
+    for (const auto& edge: graph.getEdges())
+        graph.setEdgeLabel(edge.source, edge.dest, "UNEXPLORED");
+
+    // traverse graph
+    for (const auto& vertex: graph.getVertices())
+    {
+        for (const auto& neighbor: graph.getAdjacent(vertex))
+        {
+            const auto edge = graph.getEdge(vertex, neighbor);
+            if (edge.weight < min_weight)
+            {
+                min_weight = edge.weight;
+                min_edge = edge;
+            }
+        }
+    }
+
+    // label min edge
+    graph.setEdgeLabel(min_edge.source, min_edge.dest, "MIN");
+    return min_weight;
 }
 
 /**
@@ -52,8 +76,45 @@ int GraphTools::findMinWeight(Graph& graph)
  */
 int GraphTools::findShortestPath(Graph& graph, Vertex start, Vertex end)
 {
-    /* Your code here! */
-    return -1;
+    std::unordered_map<Vertex, Vertex> parent;
+    std::unordered_map<Vertex, int> distance;
+    std::queue<Vertex> to_visit;
+
+    // initialize distance
+    for (const auto& vertex: graph.getVertices())
+    {
+        distance[vertex] = std::numeric_limits<int>::max();
+    }
+
+    distance[start] = 0;
+    to_visit.push(start);
+
+    // traverse graph
+    while (!to_visit.empty())
+    {
+        auto current = to_visit.front();
+        to_visit.pop();
+
+        for (const auto& neighbor: graph.getAdjacent(current))
+        {
+            if (distance[neighbor] == std::numeric_limits<int>::max())
+            {
+                distance[neighbor] = distance[current] + 1;
+                parent[neighbor] = current;
+                to_visit.push(neighbor);
+            }
+        }
+    }
+
+    // label edges
+    auto current = end;
+    while (current != start)
+    {
+        graph.setEdgeLabel(current, parent[current], "MINPATH");
+        current = parent[current];
+    }
+
+    return distance[end];
 }
 
 /**
@@ -71,6 +132,29 @@ int GraphTools::findShortestPath(Graph& graph, Vertex start, Vertex end)
  */
 void GraphTools::findMST(Graph& graph)
 {
-    /* Your code here! */
-}
+    DisjointSets dsets;
+    auto edges = graph.getEdges();
 
+    // initialize disjoint sets
+    for (const auto& vertex: graph.getVertices())
+    {
+        dsets.addelements(static_cast<int>(vertex));
+    }
+
+    // sort edges
+    auto comp = [](const Edge& a, const Edge& b) { return a.weight < b.weight; };
+    std::sort(edges.begin(), edges.end(), comp);
+
+    // iterate over edges
+    for (const auto& edge: edges)
+    {
+        auto source = static_cast<int>(edge.source);
+        auto dest = static_cast<int>(edge.dest);
+        // if the edge doesn't create a cycle
+        if (dsets.find(source) != dsets.find(dest))
+        {
+            dsets.setunion(source, dest);
+            graph.setEdgeLabel(source, dest, "MST");
+        }
+    }
+}

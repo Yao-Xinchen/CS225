@@ -62,6 +62,14 @@ namespace PremadeGraphs
      * @return the graph of a few cities in Japan
      */
     Graph createJapanMap(bool isWeighted);
+
+    /**
+     * Creates a map of some Chinese cities.
+     * @param isWeighted - whether to show distance between
+     *  cities in miles.
+     * @return the graph of a few cities in China
+     */
+    Graph createChinaMap(bool isWeighted);
 }
 
 #endif

@@ -51,11 +51,20 @@ Graph PremadeGraphs::createUSMap(bool isWeighted)
     Graph g(isWeighted);
     size_t numCities = 8;
 
-    string labels[] = {"WashingtonDC", "Champaign", "Chicago",    "Cincinnati",
-                       "KansasCity",   "Nashville", "Pittsburgh", "StLouis"};
+    string labels[] = {
+        "WashingtonDC",
+        "Champaign",
+        "Chicago",
+        "Cincinnati",
+        "KansasCity",
+        "Nashville",
+        "Pittsburgh",
+        "StLouis"
+    };
 
     vector<Vertex> vertices(numCities);
-    for (size_t i = 0; i < numCities; ++i) {
+    for (size_t i = 0; i < numCities; ++i)
+    {
         vertices[i] = g.insertVertex(labels[i]);
         g.setVertexName(i, labels[i]);
     }
@@ -74,7 +83,8 @@ Graph PremadeGraphs::createUSMap(bool isWeighted)
     g.insertEdge(vertices[1], vertices[7]);
     g.insertEdge(vertices[3], vertices[7]);
 
-    if (isWeighted) {
+    if (isWeighted)
+    {
         g.setEdgeWeight(vertices[4], vertices[2], 315);
         g.setEdgeWeight(vertices[4], vertices[1], 347);
         g.setEdgeWeight(vertices[2], vertices[1], 126);
@@ -105,11 +115,22 @@ Graph PremadeGraphs::createEuropeMap(bool isWeighted)
     size_t numCities = 10;
 
     string labels[]
-        = {"Barcelona", "Berlin", "Helsinki", "London",    "Madrid",
-           "Milan",     "Paris",  "Prague",   "Stockholm", "Warsaw"};
+            = {
+                "Barcelona",
+                "Berlin",
+                "Helsinki",
+                "London",
+                "Madrid",
+                "Milan",
+                "Paris",
+                "Prague",
+                "Stockholm",
+                "Warsaw"
+            };
 
     vector<Vertex> vertices(numCities);
-    for (size_t i = 0; i < numCities; ++i) {
+    for (size_t i = 0; i < numCities; ++i)
+    {
         vertices[i] = g.insertVertex(labels[i]);
         g.setVertexName(i, labels[i]);
     }
@@ -133,7 +154,8 @@ Graph PremadeGraphs::createEuropeMap(bool isWeighted)
     g.insertEdge(vertices[1], vertices[2]);
     g.insertEdge(vertices[2], vertices[9]);
 
-    if (isWeighted) {
+    if (isWeighted)
+    {
         g.setEdgeWeight(vertices[4], vertices[3], 785);
         g.setEdgeWeight(vertices[4], vertices[0], 314);
         g.setEdgeWeight(vertices[0], vertices[3], 707);
@@ -168,11 +190,21 @@ Graph PremadeGraphs::createJapanMap(bool isWeighted)
     Graph g(isWeighted);
     size_t numCities = 9;
 
-    string labels[] = {"Hitachinaka", "Komoro", "Kyoto", "Nagano", "Nagoya",
-                       "Ome",         "Omiya",  "Osaka", "Tokyo"};
+    string labels[] = {
+        "Hitachinaka",
+        "Komoro",
+        "Kyoto",
+        "Nagano",
+        "Nagoya",
+        "Ome",
+        "Omiya",
+        "Osaka",
+        "Tokyo"
+    };
 
     vector<Vertex> vertices(numCities);
-    for (size_t i = 0; i < numCities; ++i) {
+    for (size_t i = 0; i < numCities; ++i)
+    {
         vertices[i] = g.insertVertex(labels[i]);
         g.setVertexName(i, labels[i]);
     }
@@ -193,7 +225,8 @@ Graph PremadeGraphs::createJapanMap(bool isWeighted)
     g.insertEdge(vertices[4], vertices[8]);
     g.insertEdge(vertices[4], vertices[5]);
 
-    if (isWeighted) {
+    if (isWeighted)
+    {
         g.setEdgeWeight(vertices[4], vertices[3], 124);
         g.setEdgeWeight(vertices[3], vertices[5], 85);
         g.setEdgeWeight(vertices[5], vertices[8], 24);
@@ -212,4 +245,32 @@ Graph PremadeGraphs::createJapanMap(bool isWeighted)
     }
 
     return g;
+}
+
+Graph PremadeGraphs::createChinaMap(bool isWeighted)
+{
+    Graph g(isWeighted);
+    size_t numCities = 10;
+
+    string labels[] = {
+        "Shanghai",
+        "Beijing",
+        "Guangzhou",
+        "Shenzhen",
+        "Tianjin",
+        "Chongqing",
+        "Chendu",
+        "Wuhan",
+        "Nanjing",
+        "Xian"
+    };
+
+    vector<Vertex> vertices(numCities);
+    for (size_t i = 0; i < numCities; ++i)
+    {
+        vertices[i] = g.insertVertex(labels[i]);
+        g.setVertexName(i, labels[i]);
+    }
+
+    // TODO: Add edges to the graph
 }
