@@ -7,6 +7,8 @@
 
 #include "graph_tools.h"
 
+#include <limits>
+
 /**
  * Finds the minimum edge weight in the Graph graph.
  * THIS FUNCTION IS GRADED.

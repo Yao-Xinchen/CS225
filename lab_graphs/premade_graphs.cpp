@@ -22,6 +22,8 @@ Vertex PremadeGraphs::getStartVertex(string mapType)
         return 4;
     if (mapType == "europe")
         return 3;
+    if (mapType == "china")
+        return 0;
     return 4;
 }
 
@@ -37,6 +39,8 @@ Vertex PremadeGraphs::getEndVertex(string mapType)
         return 0;
     if (mapType == "europe")
         return 7;
+    if (mapType == "china")
+        return 8;
     return 0;
 }
 
@@ -259,10 +263,10 @@ Graph PremadeGraphs::createChinaMap(bool isWeighted)
         "Shenzhen",
         "Tianjin",
         "Chongqing",
-        "Chendu",
+        "Chengdu",
         "Wuhan",
-        "Nanjing",
-        "Xian"
+        "Suzhou",
+        "Nanjing"
     };
 
     vector<Vertex> vertices(numCities);
@@ -272,5 +276,36 @@ Graph PremadeGraphs::createChinaMap(bool isWeighted)
         g.setVertexName(i, labels[i]);
     }
 
-    // TODO: Add edges to the graph
+    g.insertEdge(vertices[0], vertices[2]);
+    g.insertEdge(vertices[4], vertices[0]);
+    g.insertEdge(vertices[5], vertices[0]);
+    g.insertEdge(vertices[9], vertices[0]);
+    g.insertEdge(vertices[1], vertices[2]);
+    g.insertEdge(vertices[1], vertices[8]);
+    g.insertEdge(vertices[2], vertices[3]);
+    g.insertEdge(vertices[2], vertices[6]);
+    g.insertEdge(vertices[3], vertices[4]);
+    g.insertEdge(vertices[3], vertices[6]);
+    g.insertEdge(vertices[4], vertices[5]);
+    g.insertEdge(vertices[4], vertices[9]);
+    g.insertEdge(vertices[5], vertices[8]);
+
+    if (isWeighted)
+    {
+        g.setEdgeWeight(vertices[0], vertices[2], 665);
+        g.setEdgeWeight(vertices[4], vertices[0], 632);
+        g.setEdgeWeight(vertices[5], vertices[0], 906);
+        g.setEdgeWeight(vertices[9], vertices[0], 162);
+        g.setEdgeWeight(vertices[1], vertices[2], 1142);
+        g.setEdgeWeight(vertices[1], vertices[8], 627);
+        g.setEdgeWeight(vertices[2], vertices[3], 73);
+        g.setEdgeWeight(vertices[2], vertices[6], 772);
+        g.setEdgeWeight(vertices[3], vertices[4], 1211);
+        g.setEdgeWeight(vertices[3], vertices[6], 817);
+        g.setEdgeWeight(vertices[4], vertices[5], 857);
+        g.setEdgeWeight(vertices[4], vertices[9], 528);
+        g.setEdgeWeight(vertices[5], vertices[8], 793);
+    }
+
+    return g;
 }

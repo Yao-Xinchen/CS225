@@ -109,6 +109,8 @@ int main(int argc, char* argv[])
         graph = new Graph(PremadeGraphs::createEuropeMap(weighted));
     else if (type == "japan")
         graph = new Graph(PremadeGraphs::createJapanMap(weighted));
+    else if (type == "china")
+        graph = new Graph(PremadeGraphs::createChinaMap(weighted));
     else if (type == "random" && argc == 5) {
         std::istringstream(argv[3]) >> numVertices;
         std::istringstream(argv[4]) >> seed;
