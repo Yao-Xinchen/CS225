@@ -1,8 +1,3 @@
-/**
- * @file NimLearner.cpp
- * CS 225 - Fall 2017
- */
-
 #include "NimLearner.h"
 
 
@@ -23,8 +18,41 @@
  *
  * @param startingTokens The number of starting tokens in the game of Nim.
  */
-NimLearner::NimLearner(unsigned startingTokens) : g_(true) {
+NimLearner::NimLearner(unsigned startingTokens) : g_(true)
+{
+    len = startingTokens;
 
+    // create vertices
+    for (uint i = 0; i <= startingTokens; i++)
+    {
+        auto p1 = g_.insertVertex("p1-" + std::to_string(i));
+        auto p2 = g_.insertVertex("p2-" + std::to_string(i));
+        p1s.push_back(p1);
+        p2s.push_back(p2);
+    }
+    startingVertex_ = p1s[startingTokens];
+
+    // create edges
+    for (uint i = 1; i <= startingTokens; i++)
+    { // p1-i to p2-(i-1)
+        g_.insertEdge(p1s[i], p2s[i - 1]);
+        g_.setEdgeWeight(p1s[i], p2s[i - 1], 0);
+    }
+    for (uint i = 2; i <= startingTokens; i++)
+    { // p1-i to p2-(i-2)
+        g_.insertEdge(p1s[i], p2s[i - 2]);
+        g_.setEdgeWeight(p1s[i], p2s[i - 2], 0);
+    }
+    for (uint i = 1; i <= startingTokens; i++)
+    { // p2-i to p1-(i-1)
+        g_.insertEdge(p2s[i], p1s[i - 1]);
+        g_.setEdgeWeight(p2s[i], p1s[i - 1], 0);
+    }
+    for (uint i = 2; i <= startingTokens; i++)
+    { // p2-i to p1-(i-2)
+        g_.insertEdge(p2s[i], p1s[i - 2]);
+        g_.setEdgeWeight(p2s[i], p1s[i - 2], 0);
+    }
 }
 
 /**
@@ -36,10 +64,19 @@ NimLearner::NimLearner(unsigned startingTokens) : g_(true) {
  *
  * @returns A random path through the state space graph.
  */
-std::vector<Edge> NimLearner::playRandomGame() const {
-  vector<Edge> path;
-
-  return path;
+std::vector<Edge> NimLearner::playRandomGame() const
+{
+    std::vector<Edge> path;
+    Vertex currentVertex = startingVertex_;
+    while (true)
+    {
+        auto neighbors = g_.getAdjacent(currentVertex);
+        if (neighbors.empty()) break;
+        auto next = neighbors[rand() % neighbors.size()];
+        path.push_back(g_.getEdge(currentVertex, next));
+        currentVertex = next;
+    }
+    return path;
 }
 
 
@@ -59,8 +96,17 @@ std::vector<Edge> NimLearner::playRandomGame() const {
  *
  * @param path A path through the a game of Nim to learn.
  */
-void NimLearner::updateEdgeWeights(const std::vector<Edge> & path) {
-
+void NimLearner::updateEdgeWeights(const std::vector<Edge>& path)
+{
+    const auto winner = path.back().dest;
+    // if player 1 wins, reward player 1 and punish player 2
+    auto reward = g_.getVertexLabel(winner)[1] == '2' ? 1 : -1;
+    for (const auto& edge : path)
+    {
+        const auto weight = g_.getEdgeWeight(edge.source, edge.dest);
+        g_.setEdgeWeight(edge.source, edge.dest, weight + reward);
+        reward *= -1;
+    }
 }
 
 
@@ -69,6 +115,7 @@ void NimLearner::updateEdgeWeights(const std::vector<Edge> & path) {
  *
  * @returns A constant reference to the state space graph.
  */
-const Graph & NimLearner::getGraph() const {
-  return g_;
+const Graph& NimLearner::getGraph() const
+{
+    return g_;
 }

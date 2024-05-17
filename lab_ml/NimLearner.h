@@ -75,6 +75,10 @@ public:
 private:
   Graph g_;
   Vertex startingVertex_;
+
+  unsigned len;
+  std::vector<Vertex> p1s;
+  std::vector<Vertex> p2s;
 };
 
 #endif
